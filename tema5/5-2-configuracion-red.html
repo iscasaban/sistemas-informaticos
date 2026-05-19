@@ -85,7 +85,7 @@
   </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
   <p class="section-title">5.2 Configuración de red</p>
   <p class="section-sub">Parámetros esenciales para conectar un dispositivo a la red correctamente.</p>
@@ -228,6 +228,14 @@ static 8.8.8.8</div>
     <strong>💡 Recuerda:</strong> Sustituye <code>eth0</code> por el nombre real de tu interfaz de red. Para conocerlo, ejecuta <code>ip a</code> antes de editar el archivo YAML.
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

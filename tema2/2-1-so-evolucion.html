@@ -226,6 +226,7 @@
 </header>
 
 <div class="content">
+<div id="breadcrumb-container"></div>
 
   <!-- ══════════════════════════════
        INTRODUCCIÓN
@@ -413,6 +414,14 @@
     </div>
   </div>
 
+  <div id="navegacion-container"></div>
 </div><!-- /content -->
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

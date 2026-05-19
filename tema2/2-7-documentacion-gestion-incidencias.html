@@ -296,6 +296,7 @@
 </header>
 
 <div class="content">
+<div id="breadcrumb-container"></div>
 
   <div class="note">
     <strong>¿Por qué documentar?</strong> Una buena documentación garantiza que las instalaciones y resoluciones de problemas sean <strong>eficientes, repetibles y consultables</strong> en el futuro.
@@ -594,6 +595,14 @@
     <strong>💡 Recuerda:</strong> Una documentación bien estructurada no solo resuelve problemas más rápido, sino que sirve como <strong>recurso de aprendizaje y referencia futura</strong> para todo el equipo.
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

@@ -255,6 +255,7 @@
 </header>
 
 <div class="content">
+<div id="breadcrumb-container"></div>
 
   <div class="note">
     <strong>Nota:</strong> El proceso está pensado para <strong>Windows 10</strong>. Las versiones posteriores son muy similares. Siempre haz <strong>copia de seguridad</strong> antes de comenzar.
@@ -453,6 +454,14 @@
     </div>
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

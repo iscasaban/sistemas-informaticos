@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo 3 - Examen Sistemas Informáticos</title>
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="../ESTILOS_EXAMENES.css">
+</head>
+<body>
+<div class="wrap">
+    <!-- Cabecera -->
+    <div class="exam-header">
+        <h1 class="exam-title">Modelo de Examen 3</h1>
+        <div class="exam-meta">
+            <div class="exam-meta-item">
+                <strong>Preguntas:</strong> 36
+            </div>
+            <div class="exam-meta-item">
+                <strong>Duración:</strong> 90 minutos
+            </div>
+            <div class="exam-meta-item">
+                <strong>Dificultad:</strong> Media-Alta
+            </div>
+        </div>
+    </div>
+
+    <!-- Información -->
+    <div class="exam-info">
+        <div class="exam-info-title">Instrucciones</div>
+        <div class="exam-info-text">
+            Responde todas las preguntas. Cada pregunta tiene una única respuesta correcta.
+            Al finalizar, verifica tus respuestas y obtén tu calificación.
+        </div>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: 0%"></div>
+    </div>
+    <div class="progress-text">Pregunta respondida: 0 de 36</div>
+
+    <!-- Formulario -->
+    <form class="exam-form" id="exam-form"></form>
+
+    <!-- Botones de acción -->
+    <div class="exam-actions">
+        <button type="button" class="btn-submit" id="btn-submit">Enviar Examen</button>
+        <button type="button" class="btn-reset" id="btn-reset">Reiniciar Examen</button>
+    </div>
+
+    <!-- Resultados -->
+    <div class="exam-results" id="exam-results"></div>
+</div>
+
+<!-- Scripts -->
+<script>
+    // Datos de preguntas para Modelo 3
+    const preguntasExamen = [
+        // ========================================
+        // TEMA 1: Explotación de sistemas (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Cuáles de las siguientes fases forman el ciclo de instrucción?",
+            opciones: [
+                "Fase de desarrollo y fase de búsqueda",
+                "Fase de búsqueda y fase de ejecución",
+                "Fase de creación y fase de desarrollo",
+                "Fase de creación y fase de ejecución"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "El mapa lógico de la red nos mostrará una representación gráfica real de los componentes.",
+            opciones: ["Verdadero", "Falso"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuál de las siguientes aplicaciones recupera archivos eliminados?",
+            opciones: ["TeamViewer", "BitLocker", "Recuva", "CCleaner"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué tipo de escaneo realizan muchas aplicaciones de recuperación?",
+            opciones: [
+                "Barrido por red",
+                "Escaneo rápido y profundo",
+                "Comprobación de DNS",
+                "Análisis de puertos"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuál de las siguientes aplicaciones permite desfragmentar un disco?",
+            opciones: ["Disk Drill", "Defraggler", "KeePass", "Google Slides"],
+            respuesta: 1
+        },
+        {
+            texto: "Una función avanzada en herramientas profesionales como R-Studio es:",
+            opciones: [
+                "Desfragmentación automática",
+                "Sincronización en la nube",
+                "Recuperación en configuraciones RAID",
+                "Chat en tiempo real integrado"
+            ],
+            respuesta: 2
+        },
+
+        // ========================================
+        // TEMA 2: Sistemas operativos (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué tipo de software incluye los sistemas operativos?",
+            opciones: [
+                "Software de aplicación",
+                "Software de desarrollo",
+                "Software de sistema",
+                "Software de utilidades"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Cuál de estas aplicaciones es un procesador de textos?",
+            opciones: ["Teams", "Microsoft Access", "Google Docs", "Trello"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué aplicación permite crear presentaciones con diapositivas?",
+            opciones: ["FileMaker", "Google Slides", "Slack", "WinRAR"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuál de las siguientes herramientas es un sistema de gestión de proyectos?",
+            opciones: ["Dropbox", "Zoom", "KeePass", "Asana"],
+            respuesta: 3
+        },
+        {
+            texto: "¿Cuál de estas opciones es un antivirus?",
+            opciones: ["Trello", "FileZilla", "Norton", "Malwarebytes"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué función realiza un firewall?",
+            opciones: [
+                "Recuperar particiones dañadas",
+                "Controlar el tráfico de red según reglas",
+                "Editar documentos colaborativos",
+                "Desfragmentar el disco"
+            ],
+            respuesta: 1
+        },
+
+        // ========================================
+        // TEMA 3: Redes y Protocolos (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Cuál es una característica clave de los administradores de contraseñas?",
+            opciones: [
+                "No requieren autenticación",
+                "Solo funcionan en sistemas Windows",
+                "Almacenamiento cifrado y generación de claves fuertes",
+                "Permiten compartir contraseñas sin cifrado"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué aspecto de seguridad destaca en el software de cifrado como BitLocker?",
+            opciones: [
+                "Trabajan exclusivamente en la nube",
+                "Protege datos en reposo mediante cifrado de disco",
+                "Solo cifra imágenes",
+                "No requiere claves de cifrado"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Mediante qué herramienta del panel de control podemos desinstalar software en Windows 10?",
+            opciones: [
+                "Borrar programas",
+                "Herramientas administrativas",
+                "Cuentas de usuario",
+                "Programas y características"
+            ],
+            respuesta: 3
+        },
+        {
+            texto: "¿Qué tipo de permisos permite realizar cualquier acción sobre un archivo?",
+            opciones: ["Modificar", "Lectura", "Control total", "Ejecución"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué herramienta de Windows gestiona los registros del sistema?",
+            opciones: ["BitLocker", "Firewall", "Visor de eventos", "Editor del registro"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué utilidad permite cifrar discos para proteger información en caso de robo?",
+            opciones: ["BitLocker", "OneDrive", "Configuración de usuarios", "Defender"],
+            respuesta: 0
+        },
+
+        // ========================================
+        // TEMA 4: Gestión de la información (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué tipo de inicio en un servicio de Windows hace que se ejecute al arrancar?",
+            opciones: ["Manual", "Automático", "Programado", "Retardado"],
+            respuesta: 1
+        },
+        {
+            texto: "¿En qué sección del Visor de eventos se registran accesos de usuario y cambios de seguridad?",
+            opciones: ["Configuración", "Aplicaciones", "Sistema", "Seguridad"],
+            respuesta: 3
+        },
+        {
+            texto: "¿Qué herramienta avanzada permite analizar en profundidad el rendimiento del sistema?",
+            opciones: [
+                "Monitor de rendimiento",
+                "Administrador de tareas",
+                "Firewall",
+                "BitLocker"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué herramienta gráfica utiliza Ubuntu para gestionar redes de forma predeterminada?",
+            opciones: ["Netconfig", "NetworkManager", "NetWizard", "UbuntuConnect"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Dónde se encuentran los archivos de configuración de Netplan en Ubuntu?",
+            opciones: ["/etc/network/", "/etc/netplan/", "/etc/config/net/", "/etc/netfiles/"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué parámetro debe cambiarse a 'manual' en la configuración gráfica para IP estática?",
+            opciones: ["Autoconnect", "Device type", "Método", "Protocol"],
+            respuesta: 2
+        },
+
+        // ========================================
+        // TEMA 5: Configuración de sistemas (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué comando se usa para aplicar los cambios de Netplan?",
+            opciones: [
+                "sudo netplan reload",
+                "sudo netplan apply",
+                "sudo netplan start",
+                "sudo netplan set"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuál de las siguientes herramientas permite monitorizar interfaces en tiempo real?",
+            opciones: ["nload", "wget", "traceroute", "nano"],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué comando muestra el estado de conexiones gestionadas por NetworkManager?",
+            opciones: [
+                "nmcli dev status",
+                "nmcli list con",
+                "nm show devices",
+                "netstat -nm"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "¿Cuál de estos archivos se modifica para configurar rutas persistentes en Ubuntu?",
+            opciones: [
+                "/etc/routes.conf",
+                "/etc/ubuntu/netroute",
+                "/etc/sys/netroutes",
+                "/etc/netplan/01-netcfg.yaml"
+            ],
+            respuesta: 3
+        },
+        {
+            texto: "¿Dónde se puede crear un nuevo usuario en Windows 10?",
+            opciones: [
+                "Panel de control > Sistema > Hardware",
+                "Configuración > Cuentas > Familia y otras personas",
+                "Administrador de tareas > Usuarios",
+                "Panel de control > Dispositivos"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué grupo de usuarios tiene control total del sistema en Windows 10?",
+            opciones: ["Usuarios", "Invitados", "Administradores", "Lectores"],
+            respuesta: 2
+        },
+
+        // ========================================
+        // TEMA 6: Recursos en red (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué tipo de cuenta permite acceso temporal con permisos muy limitados?",
+            opciones: ["Invitado", "Estándar", "Administrador", "Visitante"],
+            respuesta: 0
+        },
+        {
+            texto: "¿Cómo se accede rápidamente a la consola de servicios?",
+            opciones: [
+                "Ejecutando services.msc",
+                "Desde el menú Inicio > Seguridad",
+                "Desde Administrador de tareas > Rendimiento",
+                "Desde el Panel de control > Red"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué comando se utiliza para crear un nuevo usuario desde la terminal en Ubuntu?",
+            opciones: [
+                "sudo useradd nombre_usuario",
+                "sudo adduser nombre_usuario",
+                "sudo newuser nombre_usuario",
+                "sudo createuser nombre_usuario"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué comando crea un nuevo grupo en Ubuntu?",
+            opciones: [
+                "sudo mdgroup nombre_grupo",
+                "sudo mkgroup nombre_grupo",
+                "sudo groupadd nombre_grupo",
+                "sudo creategroup nombre_grupo"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué grupo otorga privilegios administrativos en Ubuntu?",
+            opciones: ["adm", "sudo", "users", "otros"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué comando se usa para asignar un usuario a un grupo?",
+            opciones: [
+                "sudo chmod",
+                "sudo usermod -aG grupo usuario",
+                "sudo chown",
+                "sudo addgroup usuario"
+            ],
+            respuesta: 1
+        }
+    ];
+
+    // Verificar que tengamos exactamente 36 preguntas
+    if (preguntasExamen.length !== 36) {
+        console.error(`Error: Se esperaban 36 preguntas, pero hay ${preguntasExamen.length}`);
+    }
+</script>
+<script src="../examen.js"></script>
+</body>
+</html>

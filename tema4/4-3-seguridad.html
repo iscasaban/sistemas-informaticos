@@ -41,7 +41,7 @@
   </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
   <p class="section-title">4.3 Seguridad de un sistema operativo</p>
   <p class="section-sub">Proteger la información, garantizar la estabilidad y evitar accesos no autorizados</p>
@@ -231,6 +231,14 @@
   </div>
 
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

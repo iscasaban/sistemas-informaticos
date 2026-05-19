@@ -23,7 +23,7 @@
   </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
   <p class="section-title">5.3 Monitorización de redes</p>
   <p class="section-sub">Supervisar el estado y rendimiento de la red para detectar problemas antes de que afecten a los usuarios.</p>
@@ -151,6 +151,14 @@
     </table>
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

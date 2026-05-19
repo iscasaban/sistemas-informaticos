@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelo 1 - Examen Sistemas Informáticos</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <link rel="stylesheet" href="../ESTILOS_EXAMENES.css">
+</head>
+<body>
+<div class="wrap">
+  <!-- Cabecera -->
+  <div class="exam-header">
+    <h1 class="exam-title">Modelo de Examen 1</h1>
+    <div class="exam-meta">
+      <div class="exam-meta-item">
+        <strong>Preguntas:</strong> 36
+      </div>
+      <div class="exam-meta-item">
+        <strong>Duración:</strong> 90 minutos
+      </div>
+      <div class="exam-meta-item">
+        <strong>Dificultad:</strong> Media
+      </div>
+    </div>
+  </div>
+
+  <!-- Información -->
+  <div class="exam-info">
+    <div class="exam-info-title">Instrucciones</div>
+    <div class="exam-info-text">
+      Responde todas las preguntas. Cada pregunta tiene una única respuesta correcta.
+      Al finalizar, verifica tus respuestas y obtén tu calificación.
+    </div>
+  </div>
+
+  <!-- Barra de progreso -->
+  <div class="progress-bar">
+    <div class="progress-fill" style="width: 0%"></div>
+  </div>
+  <div class="progress-text">Pregunta respondida: 0 de 36</div>
+
+  <!-- Formulario -->
+  <form class="exam-form" id="exam-form"></form>
+
+  <!-- Botones de acción -->
+  <div class="exam-actions">
+    <button type="button" class="btn-submit" id="btn-submit">Enviar Examen</button>
+    <button type="button" class="btn-reset" id="btn-reset">Reiniciar Examen</button>
+  </div>
+
+  <!-- Resultados -->
+  <div class="exam-results" id="exam-results"></div>
+</div>
+
+<!-- Scripts -->
+<script>
+  // Datos de preguntas para Modelo 1
+  const preguntasExamen = [
+    // ========================================
+    // TEMA 1: Explotación de sistemas (6 preguntas)
+    // ========================================
+    {
+      texto: "¿Cuál de los siguientes dispositivos es volátil?",
+      opciones: ["SSD", "RAM", "DVD", "Pendrive"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Qué elemento de un ordenador envía señales al resto de los elementos para indicar cuál es el que debe ponerse en funcionamiento en cada momento?",
+      opciones: ["Unidad aritmético-lógica", "Unidad de control", "Bus de datos", "Memoria principal"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Cuál es el uso principal del comando ping?",
+      opciones: ["Configurar direcciones IP", "Verificar la conectividad entre dos dispositivos", "Analizar la ruta de paquetes", "Mostrar la resolución DNS"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Qué tipo de paquetes envía el comando ping?",
+      opciones: ["TCP", "ARP", "UDP", "ICMP"],
+      respuesta: 3
+    },
+    {
+      texto: "¿Cómo se denomina el proceso de autocomprobación de arranque del ordenador?",
+      opciones: ["UEFI", "BIOS", "POST", "CMOS"],
+      respuesta: 2
+    },
+    {
+      texto: "Los sistemas informáticos están compuestos por elementos físicos y lógicos. ¿Cómo se denominan los elementos lógicos?",
+      opciones: ["Hardware", "Software", "Firmware", "Ninguna respuesta es correcta"],
+      respuesta: 1
+    },
+
+    // ========================================
+    // TEMA 2: Sistemas operativos (6 preguntas)
+    // ========================================
+    {
+      texto: "La memoria principal es conocida como memoria central o memoria RAM.",
+      opciones: ["Verdadero", "Falso"],
+      respuesta: 0
+    },
+    {
+      texto: "¿Cuáles de las siguientes opciones son funciones que desempeña un sistema operativo?",
+      opciones: [
+        "Administración de cableado, administración de recursos, administración de la memoria",
+        "Administración de procesos, administración de recursos, administración de la memoria y recuperación de errores",
+        "Administración de la fuente de alimentación, instalación de programas, administración de memoria",
+        "Configuración de hardware, administración de conexiones, gestión de la red"
+      ],
+      respuesta: 1
+    },
+    {
+      texto: "¿Qué función del sistema operativo se encarga de determinar el orden de ejecución de los procesos?",
+      opciones: ["Interfaz gráfica", "Planificación de procesos", "Control de acceso", "Gestión de dispositivos"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Cuál fue uno de los primeros sistemas operativos para ordenadores personales?",
+      opciones: ["MS-DOS", "Unix", "Android", "iOS"],
+      respuesta: 0
+    },
+    {
+      texto: "Las versiones LTS se caracterizan por:",
+      opciones: [
+        "Incluir las últimas funciones experimentales",
+        "Ser versiones beta sin soporte",
+        "Ofrecer soporte prolongado y alta estabilidad",
+        "Usarse solo en dispositivos móviles"
+      ],
+      respuesta: 2
+    },
+    {
+      texto: "¿Cuál es la principal función de un sistema operativo?",
+      opciones: [
+        "Ejecutar únicamente programas de usuario",
+        "Diseñar aplicaciones",
+        "Actuar como intermediario entre el hardware y el software",
+        "Controlar únicamente el hardware"
+      ],
+      respuesta: 2
+    },
+
+    // ========================================
+    // TEMA 3: Redes y Protocolos (6 preguntas)
+    // ========================================
+    {
+      texto: "¿De qué tipo es una red de conexión bluetooth?",
+      opciones: ["WAN", "PAN", "LAN", "MAN"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Qué topología se suele utilizar en redes locales o LAN donde todos los nodos están conectados a través de un switch central?",
+      opciones: ["Topología en anillo", "Topología en estrella", "Topología en malla", "Topología en bus"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Qué tipo de conexión es la que se establece entre un reloj inteligente y un teléfono móvil?",
+      opciones: ["LAN", "PAN", "MAN", "Ninguna de las anteriores"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Qué tipo de IP asigna automáticamente un servidor DHCP?",
+      opciones: ["IP multicast", "IP dinámica", "IP pública", "IP fija"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Cuál de los siguientes enunciados describe correctamente el modelo TCP/IP?",
+      opciones: [
+        "Es un estándar de encriptación que garantiza que los datos viajen de forma segura",
+        "Es un protocolo exclusivo de Microsoft Windows",
+        "Es un modelo teórico de 7 capas utilizado únicamente para estandarizar hardware",
+        "Es un conjunto de protocolos que permite la comunicación entre sistemas, dividido en varias capas funcionales"
+      ],
+      respuesta: 3
+    },
+    {
+      texto: "¿Qué función principal cumple el protocolo TCP?",
+      opciones: [
+        "Asignar direcciones IP dinámicamente",
+        "Determinar la ruta más corta en la red",
+        "Garantizar la entrega fiable de datos",
+        "Convertir nombres de dominio en direcciones IP"
+      ],
+      respuesta: 2
+    },
+
+    // ========================================
+    // TEMA 4: Gestión de la información (6 preguntas)
+    // ========================================
+    {
+      texto: "¿En qué tipo de partición instalaremos un sistema operativo?",
+      opciones: ["Extendida", "Primaria", "Secundaria", "Esclava"],
+      respuesta: 1
+    },
+    {
+      texto: "Los directorios o también conocidos como ficheros son conjuntos de datos ordenados en los que almacenamos información.",
+      opciones: ["Verdadero", "Falso"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Cuál de las siguientes opciones es utilizada como comando para desplazarnos por los directorios del sistema?",
+      opciones: ["dir", "cd", "ls -s", "md"],
+      respuesta: 1
+    },
+    {
+      texto: "¿En qué carpeta del sistema almacena Windows la instalación de los programas?",
+      opciones: ["etc", "Archivos de programa", "Documents and settings", "bin"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Qué sistema de archivos utiliza Windows 10?",
+      opciones: ["Fat32", "NTFS", "Ext3", "Ext2"],
+      respuesta: 1
+    },
+    {
+      texto: "Los sistemas de ficheros están sometidos a constantes procesos de creación, borrado y modificación de archivos que provocará que los ficheros se fragmenten.",
+      opciones: ["Falso", "Verdadero"],
+      respuesta: 1
+    },
+
+    // ========================================
+    // TEMA 5: Configuración de sistemas (6 preguntas)
+    // ========================================
+    {
+      texto: "¿Qué muestra el comando tracert?",
+      opciones: [
+        "Los DNS configurados en el sistema",
+        "Cada salto que realiza un paquete hasta el destino",
+        "Solo la IP del destino",
+        "El tiempo de concesión DHCP"
+      ],
+      respuesta: 1
+    },
+    {
+      texto: "¿Para qué se utiliza ipconfig /release?",
+      opciones: [
+        "Renovar la dirección IP",
+        "Liberar la dirección IP actual",
+        "Probar conectividad con DNS",
+        "Mostrar estadísticas ICMP"
+      ],
+      respuesta: 1
+    },
+    {
+      texto: "¿Qué comando de Windows se utiliza para ver la configuración completa de red?",
+      opciones: ["tracert", "ping", "ipconfig /all", "nslookup"],
+      respuesta: 2
+    },
+    {
+      texto: "¿En qué sección del Visor de eventos se deben revisar errores de red?",
+      opciones: ["Aplicación", "Servicios en segundo plano", "Sistema", "Seguridad"],
+      respuesta: 2
+    },
+    {
+      texto: "Para agregar una conexión VPN gráficamente en Windows, debes ir a:",
+      opciones: [
+        "Configuración > Dispositivos > Red",
+        "Panel de control > Firewall",
+        "Configuración > Red e Internet > VPN",
+        "Configuración > Sistema > Pantalla"
+      ],
+      respuesta: 2
+    },
+    {
+      texto: "¿Qué protocolo permite transferencia segura mediante cifrado?",
+      opciones: ["FTP", "SMB", "FTPS", "SFTP"],
+      respuesta: 3
+    },
+
+    // ========================================
+    // TEMA 6: Recursos en red (6 preguntas)
+    // ========================================
+    {
+      texto: "¿Qué características deberíamos aplicar en las contraseñas de administrador para ofrecer mayor seguridad?",
+      opciones: [
+        "4 caracteres máximo y mantener siempre la misma",
+        "8 caracteres mínimo, no usar términos obvios, renovar periódicamente y usar símbolos",
+        "Solo el usuario Administrador puede modificarla",
+        "Solo caracteres numéricos y 8 caracteres máximo"
+      ],
+      respuesta: 1
+    },
+    {
+      texto: "En un sistema Linux, ¿a qué hace referencia el primer grupo de tres caracteres en la representación de permisos?",
+      opciones: ["El grupo de usuarios", "El propietario del fichero", "Todos los usuarios", "Ninguna de las respuestas es correcta"],
+      respuesta: 1
+    },
+    {
+      texto: "¿Cuál de la siguientes opciones agrupa las características que nos ofrece el protocolo LDAP?",
+      opciones: [
+        "Acreditación, búsqueda de datos, centralización e replicación de base de datos",
+        "Asignación de velocidad, búsqueda de datos y protección en USB",
+        "Protección en USB, acreditación y replicación de base de datos",
+        "Necesita memoria RAM superior a 4GB"
+      ],
+      respuesta: 0
+    },
+    {
+      texto: "¿Qué son las unidades organizativas en Active Directory?",
+      opciones: [
+        "Un método de comunicación entre dominios",
+        "Contenedores de objetos que permiten organizarlos jerárquicamente en el dominio",
+        "Conjuntos de dominios que poseen una raíz común",
+        "Un repositorio donde se guarda la información de usuarios, grupos y recursos"
+      ],
+      respuesta: 1
+    },
+    {
+      texto: "En servicios como Active Directory, podemos generar diferentes usuarios para un dominio y asignarles diferentes permisos y roles.",
+      opciones: ["Falso", "Verdadero"],
+      respuesta: 1
+    },
+    {
+      texto: "Las variables de entorno nos permiten definir características comunes que podremos aplicar a diferentes usuarios.",
+      opciones: ["Falso", "Verdadero"],
+      respuesta: 1
+    }
+  ];
+
+  // Verificar que tengamos exactamente 36 preguntas
+  if (preguntasExamen.length !== 36) {
+    console.error(`Error: Se esperaban 36 preguntas, pero hay ${preguntasExamen.length}`);
+  }
+</script>
+<script src="../examen.js"></script>
+</body>
+</html>

@@ -258,6 +258,7 @@
 </header>
 
 <div class="content">
+<div id="breadcrumb-container"></div>
 
     <!-- DEFINICIÓN -->
     <div class="note">
@@ -483,6 +484,14 @@
         <strong>En resumen:</strong> La virtualización mejora la eficiencia, reduce costes y facilita la gestión. Sus ventajas superan con creces los desafíos, convirtiéndola en una tecnología <strong>esencial en cualquier infraestructura moderna</strong>.
     </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
     <p class="section-title">5.8 Seguridad en las comunicaciones</p>
     <p class="section-sub">Cortafuegos, cifrado y protocolos seguros para proteger el tráfico de red.</p>
@@ -185,6 +185,14 @@ sudo iptables -A INPUT -p tcp --dport 22
         <strong>🛡️ Regla de oro:</strong> Usa siempre <strong>cortafuegos + cifrado + autenticación fuerte</strong>. Ninguna medida por sí sola es suficiente.
     </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

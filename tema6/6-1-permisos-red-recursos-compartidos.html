@@ -23,7 +23,7 @@
   </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
   <p class="section-title">6.1 Permisos de red y recursos compartidos</p>
   <p class="section-sub">Controla quién accede a carpetas, impresoras y equipos remotos en la red.</p>
@@ -186,6 +186,14 @@
     </table>
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

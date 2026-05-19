@@ -132,7 +132,7 @@
     </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
     <p class="section-title">3.5 Tareas automáticas</p>
     <p class="section-sub">Programar tareas repetitivas para que se ejecuten solas, sin intervención manual</p>
@@ -301,6 +301,14 @@
         </table>
     </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

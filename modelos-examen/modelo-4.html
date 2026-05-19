@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo 4 - Examen Sistemas Informáticos</title>
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="../ESTILOS_EXAMENES.css">
+</head>
+<body>
+<div class="wrap">
+    <!-- Cabecera -->
+    <div class="exam-header">
+        <h1 class="exam-title">Modelo de Examen 4</h1>
+        <div class="exam-meta">
+            <div class="exam-meta-item">
+                <strong>Preguntas:</strong> 36
+            </div>
+            <div class="exam-meta-item">
+                <strong>Duración:</strong> 90 minutos
+            </div>
+            <div class="exam-meta-item">
+                <strong>Dificultad:</strong> Media-Alta
+            </div>
+        </div>
+    </div>
+
+    <!-- Información -->
+    <div class="exam-info">
+        <div class="exam-info-title">Instrucciones</div>
+        <div class="exam-info-text">
+            Responde todas las preguntas. Cada pregunta tiene una única respuesta correcta.
+            Al finalizar, verifica tus respuestas y obtén tu calificación.
+        </div>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: 0%"></div>
+    </div>
+    <div class="progress-text">Pregunta respondida: 0 de 36</div>
+
+    <!-- Formulario -->
+    <form class="exam-form" id="exam-form"></form>
+
+    <!-- Botones de acción -->
+    <div class="exam-actions">
+        <button type="button" class="btn-submit" id="btn-submit">Enviar Examen</button>
+        <button type="button" class="btn-reset" id="btn-reset">Reiniciar Examen</button>
+    </div>
+
+    <!-- Resultados -->
+    <div class="exam-results" id="exam-results"></div>
+</div>
+
+<!-- Scripts -->
+<script>
+    // Datos de preguntas para Modelo 4
+    const preguntasExamen = [
+        // ========================================
+        // TEMA 1: Explotación de sistemas (6 preguntas)
+        // ========================================
+        {
+            texto: "CCleaner se utiliza principalmente para:",
+            opciones: [
+                "Cifrar discos",
+                "Usar FTP",
+                "Limpiar archivos temporales",
+                "Crear copias RAID"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "En la documentación de incidencias, el paso 'Prevención futura' sirve para:",
+            opciones: [
+                "Analizar causas raíz y evitar que el problema se repita",
+                "Reiniciar el sistema",
+                "Instalar actualizaciones",
+                "Cambiar el hardware"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "A la hora de cambiar equipos informáticos, ¿cuál corresponde a la regla de las 3 erres?",
+            opciones: [
+                "Reparar un electrodoméstico en lugar de comprar uno nuevo",
+                "Separar los residuos para su reciclaje",
+                "Usar bolsas de tela en lugar de plástico",
+                "Todas las anteriores son correctas"
+            ],
+            respuesta: 3
+        },
+        {
+            texto: "¿Cuál de las siguientes opciones es un software válido para crear instalaciones desatendidas en Ubuntu?",
+            opciones: ["Kickstart", "InstallDes", "Brasero", "Wine"],
+            respuesta: 0
+        },
+        {
+            texto: "Las instalaciones desatendidas siempre tendrán que ser basadas en un sistema limpio.",
+            opciones: ["Verdadero", "Falso"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuál de las siguientes opciones son programas útiles para realizar administración remota?",
+            opciones: [
+                "TeamViewer, Ultra VNC y Putty",
+                "ConP2p, Putty y Gimp",
+                "AR WP2, TeamViewer y Putty",
+                "Gimp, Ultra VNC y ConP2p"
+            ],
+            respuesta: 0
+        },
+
+        // ========================================
+        // TEMA 2: Sistemas operativos (6 preguntas)
+        // ========================================
+        {
+            texto: "Una ventaja del trabajo colaborativo es:",
+            opciones: [
+                "Necesita obligatoriamente trabajo presencial",
+                "Permite colaboración en tiempo real",
+                "No permite control de versiones",
+                "Evita el uso de la nube"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuál de estas opciones es un antivirus? (puede haber más de una correcta)",
+            opciones: ["Trello", "FileZilla", "Norton", "Gimp"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué comando se utiliza para crear un nuevo usuario desde la terminal en Ubuntu?",
+            opciones: [
+                "sudo useradd nombre_usuario",
+                "sudo adduser nombre_usuario",
+                "sudo newuser nombre_usuario",
+                "sudo createuser nombre_usuario"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué comando permite cambiar los permisos de un archivo?",
+            opciones: ["chown", "chmod", "ls -l", "cat"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Dónde se almacenan los logs del sistema en Ubuntu?",
+            opciones: ["/var/log/", "/opt/logs/", "/etc/logs/", "/usr/log/"],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué comando activa el cortafuegos UFW?",
+            opciones: [
+                "sudo firewall enable",
+                "sudo ufw enable",
+                "sudo activate ufw",
+                "sudo enable firewall"
+            ],
+            respuesta: 1
+        },
+
+        // ========================================
+        // TEMA 3: Redes y Protocolos (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué comando muestra los permisos de un archivo o carpeta?",
+            opciones: ["showperm", "chmod -v", "ls -l", "cat"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué comando muestra los procesos activos en tiempo real?",
+            opciones: ["monitor", "ps", "top", "logcat"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué herramienta gráfica de Ubuntu permite ver el uso de CPU y memoria en tiempo real?",
+            opciones: ["FirewallID", "GNOME System Monitor", "htop", "BitLocker"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuál es el objetivo principal de realizar copias de seguridad?",
+            opciones: [
+                "Desinstalar programas innecesarios",
+                "Acelerar el sistema operativo",
+                "Proteger los datos frente a pérdidas o daños",
+                "Liberar espacio en disco"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Por qué es importante almacenar las copias de seguridad en otro lugar?",
+            opciones: [
+                "Para reducir el tamaño de los archivos",
+                "Para ahorrar energía",
+                "Para protegerse frente a desastres en el sitio original",
+                "Para aumentar la velocidad de la red"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué herramienta de Ubuntu permite realizar backups con interfaz gráfica?",
+            opciones: ["Cron", "Bash", "Deja Dup", "Rclone"],
+            respuesta: 2
+        },
+
+        // ========================================
+        // TEMA 4: Gestión de la información (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué herramienta en Ubuntu permite montar automáticamente particiones al inicio?",
+            opciones: ["cron", "/etc/fstab", "top", "journalctl"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué beneficio principal tiene la automatización de tareas?",
+            opciones: [
+                "Aumenta el uso de recursos",
+                "Ahorra tiempo y reduce errores humanos",
+                "Requiere más intervención manual",
+                "Elimina la necesidad de hacer backups"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué utilidad de Windows permite hacer copias de seguridad automáticas?",
+            opciones: [
+                "Historial de archivos",
+                "Monitor de sistema",
+                "Administrador de discos",
+                "Administrador de tareas"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué herramienta de Windows permite programar tareas automáticas?",
+            opciones: [
+                "Monitor del sistema",
+                "Administrador de tareas",
+                "Programador de tareas",
+                "Panel de control"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué tipo de script se puede ejecutar con el Programador de tareas en Windows?",
+            opciones: [
+                "Archivos de texto",
+                "Imágenes",
+                "Scripts de PowerShell, .bat o programas",
+                "Solo archivos ejecutables"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué comando de Linux permite programar tareas recurrentes?",
+            opciones: ["sleep", "cron", "time", "at"],
+            respuesta: 1
+        },
+
+        // ========================================
+        // TEMA 5: Configuración de sistemas (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué comando en Bash permite finalizar un proceso?",
+            opciones: ["end", "kill", "exit", "stop"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué comando de PowerShell permite listar archivos de un directorio?",
+            opciones: [
+                "Get-Files",
+                "List-Dir",
+                "Get-ChildItem",
+                "Dir-Info"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Cómo se denomina la herramienta de Windows que permite gestionar discos?",
+            opciones: [
+                "Gestor y formateador de discos",
+                "Administración de discos",
+                "Herramienta de Windows de discos",
+                "Patrocinador de discos"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué comando de PowerShell permite listar los procesos activos?",
+            opciones: [
+                "Stop-Process",
+                "List-Process",
+                "ps",
+                "Get-Process"
+            ],
+            respuesta: 3
+        },
+        {
+            texto: "¿Qué comando en PowerShell permite crear un nuevo usuario local?",
+            opciones: [
+                "Set-User",
+                "Create-User",
+                "Add-User",
+                "New-LocalUser"
+            ],
+            respuesta: 3
+        },
+        {
+            texto: "¿Qué extensión tienen los scripts en Bash?",
+            opciones: [".ps1", ".exe", ".bat", ".sh"],
+            respuesta: 3
+        },
+
+        // ========================================
+        // TEMA 6: Recursos en red (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué atajo abre directamente la Configuración en Windows?",
+            opciones: [
+                "Ctrl + Alt + Supr",
+                "Ctrl + Shift + Esc",
+                "Win + I",
+                "Alt + Tab"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué herramienta gráfica en Ubuntu permite supervisar recursos del sistema?",
+            opciones: [
+                "Administrador de tareas",
+                "Monitor del sistema",
+                "GNOME",
+                "Panel de control"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué comando de Bash se utiliza para cambiar de directorio?",
+            opciones: ["cd", "ls", "pwd", "mv"],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué archivo debe editarse para configurar un recurso compartido mediante Samba?",
+            opciones: [
+                "/var/samba/config",
+                "/etc/network/interfaces",
+                "/etc/ssh/sshd_config",
+                "/etc/samba/smb.conf"
+            ],
+            respuesta: 3
+        },
+        {
+            texto: "¿Cuál de los siguientes comandos añade un usuario al sistema de autenticación de Samba?",
+            opciones: [
+                "sudo smbpasswd -a usuario",
+                "sudo samba-adduser usuario",
+                "sudo useradd -S usuario",
+                "sudo addgroup samba usuario"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué herramienta en Ubuntu proporciona un cortafuegos simplificado basado en iptables?",
+            opciones: [
+                "FirewallID",
+                "Netfilter",
+                "AppArmor",
+                "UFW (Uncomplicated Firewall)"
+            ],
+            respuesta: 3
+        }
+    ];
+
+    // Verificar que tengamos exactamente 36 preguntas
+    if (preguntasExamen.length !== 36) {
+        console.error(`Error: Se esperaban 36 preguntas, pero hay ${preguntasExamen.length}`);
+    }
+</script>
+<script src="../examen.js"></script>
+</body>
+</html>

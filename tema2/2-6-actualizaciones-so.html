@@ -296,6 +296,7 @@
 </header>
 
 <div class="content">
+<div id="breadcrumb-container"></div>
 
   <div class="note">
     <strong>Idea clave:</strong> Mantener el SO actualizado es <strong>fundamental</strong> para garantizar seguridad, estabilidad y compatibilidad. No hacerlo expone el equipo a ataques y problemas graves.
@@ -518,6 +519,14 @@
     </table>
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

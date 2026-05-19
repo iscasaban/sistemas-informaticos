@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo 2 - Examen Sistemas Informáticos</title>
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="../ESTILOS_EXAMENES.css">
+</head>
+<body>
+<div class="wrap">
+    <!-- Cabecera -->
+    <div class="exam-header">
+        <h1 class="exam-title">Modelo de Examen 2</h1>
+        <div class="exam-meta">
+            <div class="exam-meta-item">
+                <strong>Preguntas:</strong> 36
+            </div>
+            <div class="exam-meta-item">
+                <strong>Duración:</strong> 90 minutos
+            </div>
+            <div class="exam-meta-item">
+                <strong>Dificultad:</strong> Media
+            </div>
+        </div>
+    </div>
+
+    <!-- Información -->
+    <div class="exam-info">
+        <div class="exam-info-title">Instrucciones</div>
+        <div class="exam-info-text">
+            Responde todas las preguntas. Cada pregunta tiene una única respuesta correcta.
+            Al finalizar, verifica tus respuestas y obtén tu calificación.
+        </div>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: 0%"></div>
+    </div>
+    <div class="progress-text">Pregunta respondida: 0 de 36</div>
+
+    <!-- Formulario -->
+    <form class="exam-form" id="exam-form"></form>
+
+    <!-- Botones de acción -->
+    <div class="exam-actions">
+        <button type="button" class="btn-submit" id="btn-submit">Enviar Examen</button>
+        <button type="button" class="btn-reset" id="btn-reset">Reiniciar Examen</button>
+    </div>
+
+    <!-- Resultados -->
+    <div class="exam-results" id="exam-results"></div>
+</div>
+
+<!-- Scripts -->
+<script>
+    // Datos de preguntas para Modelo 2
+    const preguntasExamen = [
+        // ========================================
+        // TEMA 1: Explotación de sistemas (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué es un sistema informático?",
+            opciones: [
+                "Un sistema que procesa información interrelacionando diferentes hardwares",
+                "Un sistema que almacena información de diferentes softwares",
+                "Un sistema que almacena y procesa información interrelacionando el hardware y el software",
+                "Ninguna respuesta es correcta"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué bus se encarga de llevar los datos e instrucciones entre los distintos componentes del ordenador?",
+            opciones: ["Bus de direcciones", "Bus de datos", "Bus de control", "Bus de sistema"],
+            respuesta: 1
+        },
+        {
+            texto: "El ciclo de instrucción está formado por la fase de búsqueda y la fase de ejecución.",
+            opciones: ["Falso", "Verdadero"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué tipo de cable necesitarías para conectar un ordenador a un switch a través del puerto RJ45?",
+            opciones: ["Fibra óptica", "Todas las respuestas son correctas", "Par trenzado directo", "Coaxial"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Cuál es la principal diferencia entre FTP y SFTP?",
+            opciones: [
+                "FTP usa puertos aleatorios siempre",
+                "SFTP opera sobre SSH y cifra la transferencia",
+                "FTP es más rápido que SFTP",
+                "SFTP no requiere autenticación"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "Google Drive es un ejemplo de:",
+            opciones: [
+                "Servicio de almacenamiento cloud",
+                "Compresor de archivos",
+                "Editor de vídeo",
+                "Protocolo seguro SSH"
+            ],
+            respuesta: 0
+        },
+
+        // ========================================
+        // TEMA 2: Sistemas operativos (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué sucede si un sistema operativo no se actualiza?",
+            opciones: [
+                "Funciona más rápido",
+                "Se vuelve inmune a malware",
+                "Puede ser vulnerable a ataques",
+                "Mejora su estabilidad"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Cuál de las siguientes opciones describe mejor la interfaz de línea de comandos (CLI)?",
+            opciones: [
+                "Utiliza ventanas e iconos",
+                "Solo funciona con Linux",
+                "Interactúa con el sistema mediante comandos escritos",
+                "Se usa solo en sistemas antiguos"
+            ],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué permite la virtualización de servidores?",
+            opciones: [
+                "Crear redes inalámbricas",
+                "Ejecutar múltiples SO en un solo servidor físico",
+                "Ejecutar un único sistema operativo más rápido",
+                "Instalar múltiples tarjetas gráficas"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "El hipervisor tipo 1 se caracteriza por:",
+            opciones: [
+                "Necesitar máquinas virtuales previas",
+                "Requerir interfaz gráfica",
+                "Ejecutarse sobre otro sistema operativo",
+                "Ejecutarse directamente sobre el hardware"
+            ],
+            respuesta: 3
+        },
+        {
+            texto: "Tener el sistema operativo actualizado a sus últimas versiones mejorará y perfilará sus funcionalidades.",
+            opciones: ["Falso", "Verdadero"],
+            respuesta: 1
+        },
+        {
+            texto: "Para un funcionamiento óptimo de los registros, debemos realizar regularmente un mantenimiento y limpieza.",
+            opciones: ["Falso", "Verdadero"],
+            respuesta: 1
+        },
+
+        // ========================================
+        // TEMA 3: Redes y Protocolos (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Qué clase de red tiene como máscara el valor 255.255.0.0?",
+            opciones: ["Clase A", "Clase B", "Clase C", "Clase D"],
+            respuesta: 1
+        },
+        {
+            texto: "En las direcciones de clase A, ¿cuántos bloques de enteros de 4 bytes dedicaremos a identificar los equipos?",
+            opciones: ["1", "2", "3", "4"],
+            respuesta: 2
+        },
+        {
+            texto: "¿En qué directorio de Linux encontraremos la configuración de la red?",
+            opciones: ["dev/network/config", "bin/network/interfaces", "etc/network/interfaces", "etc/config/network"],
+            respuesta: 2
+        },
+        {
+            texto: "¿Qué información muestra el comando 'dir' en Windows?",
+            opciones: [
+                "Mostrar el contenido del directorio",
+                "Analiza el disco principal del sistema",
+                "Muestra una lista con las tareas programadas",
+                "Muestra una lista de los procesos activos"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué acción realiza el comando 'ls' en Linux?",
+            opciones: [
+                "Nos ofrece un editor de texto para crear ficheros",
+                "Mostrar el contenido del directorio",
+                "Devuelve información detallada de la red",
+                "Eleva los privilegios a root"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué característica de los servicios de almacenamiento en la nube aporta ventaja en entornos colaborativos?",
+            opciones: [
+                "Implementan únicamente sincronización local",
+                "Ofrecen control de versiones y acceso multiusuario con permisos",
+                "Requieren que todos tengan el mismo sistema operativo",
+                "Incluyen cifrado que impide compartición externa"
+            ],
+            respuesta: 1
+        },
+
+        // ========================================
+        // TEMA 4: Gestión de la información (6 preguntas)
+        // ========================================
+        {
+            texto: "Una unidad física de disco no se puede dividir en varias particiones.",
+            opciones: ["Verdadero", "Falso"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuál de las siguientes opciones son funciones que desempeña un sistema operativo?",
+            opciones: [
+                "Administración de cableado, administración de recursos, administración de la memoria",
+                "Administración de procesos, administración de recursos, administración de memoria y recuperación de errores",
+                "Administración de cableado, administración de recursos, gestión de la alimentación",
+                "Ninguna de las opciones es correcta"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "¿Qué tipos de licencias se pueden adquirir de forma gratuita y con permisos para su redistribución?",
+            opciones: [
+                "Shareware y freeware",
+                "Comercial y shareware",
+                "Software libre y comercial",
+                "Freeware y software libre"
+            ],
+            respuesta: 3
+        },
+        {
+            texto: "Las máquinas virtuales nos permiten incrementar el hardware instalado de forma que podremos mejorar prestaciones.",
+            opciones: ["Verdadero", "Falso"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuál de las siguientes opciones reúne herramientas que nos brinda el sistema operativo Windows?",
+            opciones: [
+                "Administración de equipos, administrador de discos y programador de tareas",
+                "Generador de eventos, programador de tareas y referenciador de registros",
+                "Publicador de contenido, administrador de equipos y administrador de discos",
+                "Referenciador de registros, administrador de discos y generador de eventos"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "El monitor de rendimiento de Windows permite generar informes para elaborar estadísticas.",
+            opciones: ["Falso", "Verdadero"],
+            respuesta: 1
+        },
+
+        // ========================================
+        // TEMA 5: Configuración de sistemas (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Cuál de las siguientes opciones son variables de entorno por defecto en Windows?",
+            opciones: ["%TMP%", "%Windows%", "%Documentos%", "%C:%"],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué comando utilizaremos para gestionar los usuarios en Samba?",
+            opciones: ["adduser", "addsmbuser", "smbuserpass", "smbpasswd"],
+            respuesta: 3
+        },
+        {
+            texto: "Las directivas de grupo se utilizan con mayor frecuencia en redes de dimensiones modestas que en grandes redes.",
+            opciones: ["Verdadero", "Falso"],
+            respuesta: 1
+        },
+        {
+            texto: "Las plantillas nos permiten asignar directivas más estrictas, aunque tienen desventaja en su aplicación.",
+            opciones: ["Verdadero", "Falso"],
+            respuesta: 1
+        },
+        {
+            texto: "¿Cuáles de las siguientes características debería contemplar una guía de instalación?",
+            opciones: [
+                "Guía de referencia rápida, errores y soluciones y capturas de pantalla",
+                "Nivel alto de conceptos y capturas, pensado solo para expertos",
+                "Bibliografía, guía de errores y soluciones y guía de referencia",
+                "Capturas de pantalla y bibliografía"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "¿Cuál de las siguientes opciones es un software válido para crear instalaciones desatendidas en Ubuntu?",
+            opciones: ["InstallDes", "Kickstart", "Brasero", "Wine"],
+            respuesta: 1
+        },
+
+        // ========================================
+        // TEMA 6: Recursos en red (6 preguntas)
+        // ========================================
+        {
+            texto: "¿Cuál de las siguientes opciones agrupa características del protocolo LDAP?",
+            opciones: [
+                "Acreditación de usuarios, búsqueda de datos, centralización y replicación",
+                "Asignación de velocidad, búsqueda de datos y protección en USB",
+                "Protección en USB, acreditación de usuarios y replicación",
+                "Necesita memoria RAM superior a 4GB"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué son las unidades organizativas en Active Directory?",
+            opciones: [
+                "Contenedores de objetos que permiten organizarlos jerárquicamente",
+                "Un método de comunicación entre dominios, árboles y bosques",
+                "Conjuntos de dominios que poseen una raíz común",
+                "Un repositorio donde se guarda información de usuarios y grupos"
+            ],
+            respuesta: 0
+        },
+        {
+            texto: "¿Qué estructura define que hay una serie de equipos clientes conectados a un equipo servidor que proporciona servicios?",
+            opciones: [
+                "Hay una serie de equipos servidores conectados a un cliente",
+                "Estructura cliente-servidor",
+                "Hay equipos clientes que proporcionan servicios",
+                "Ninguna de las anteriores es correcta"
+            ],
+            respuesta: 1
+        },
+        {
+            texto: "Los recursos lógicos son elementos administrados por el dominio.",
+            opciones: ["Falso", "Verdadero"],
+            respuesta: 1
+        },
+        {
+            texto: "En un dominio no tenemos la posibilidad de administrar servicios como FTP o correo electrónico.",
+            opciones: ["Verdadero", "Falso"],
+            respuesta: 1
+        },
+        {
+            texto: "Samba es un software de licencia comercial y suele implementarse en equipos Windows.",
+            opciones: ["Verdadero", "Falso"],
+            respuesta: 1
+        }
+    ];
+
+    // Verificar que tengamos exactamente 36 preguntas
+    if (preguntasExamen.length !== 36) {
+        console.error(`Error: Se esperaban 36 preguntas, pero hay ${preguntasExamen.length}`);
+    }
+</script>
+<script src="../examen.js"></script>
+</body>
+</html>

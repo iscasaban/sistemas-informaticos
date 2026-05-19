@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
     <p class="section-title">6.6 Gestión de dominios</p>
     <p class="section-sub">Administración centralizada de usuarios, equipos y políticas en una red empresarial.</p>
@@ -203,6 +203,14 @@ logon drive = H:</div>
         </table>
     </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

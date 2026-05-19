@@ -235,6 +235,7 @@
 </header>
 
 <div class="content">
+<div id="breadcrumb-container"></div>
 
   <div class="note">
     <strong>Idea clave:</strong> Los SO se pueden clasificar de <strong>muchas formas distintas</strong> según el tipo de hardware, cuántos usuarios los usan, qué tareas hacen, cómo interactúan con el usuario, su modo de uso y su licencia.
@@ -537,6 +538,14 @@
     </div>
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

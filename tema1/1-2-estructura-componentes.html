@@ -15,8 +15,7 @@
   </style>
 </head>
 <body>
-<div class="wrap">
-
+<div class="wrap"><div id="breadcrumb-container"></div>
   <p class="section-title">1.2 Estructura y componentes</p>
   <p class="section-sub">Los elementos físicos de un sistema informático y cómo trabajan juntos.</p>
 
@@ -186,7 +185,14 @@
       </div>
     </div>
   </div>
-
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

@@ -301,6 +301,7 @@
 </header>
 
 <div class="content">
+<div id="breadcrumb-container"></div>
 
   <div class="note">
     <strong>¿Por qué Ubuntu?</strong> Es la distribución más accesible para iniciarse en Linux. Código abierto, gratuita y con una gran comunidad de soporte.
@@ -629,6 +630,14 @@
     <strong>💡 Recuerda:</strong> Ubuntu permite <strong>probar el sistema sin instalar</strong> (<em>Try Ubuntu</em>) antes de comprometerse con la instalación. Ideal para comprobar compatibilidad de hardware.
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

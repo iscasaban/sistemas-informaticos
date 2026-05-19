@@ -32,7 +32,7 @@
   </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
   <p class="section-title">5.6 Redes cableadas e inalámbricas</p>
   <p class="section-sub">Gestión de conexiones Ethernet (cableadas) y Wi-Fi (inalámbricas) en Windows y Ubuntu.</p>
@@ -153,6 +153,14 @@ password "Contraseña"</div>
     </div>
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

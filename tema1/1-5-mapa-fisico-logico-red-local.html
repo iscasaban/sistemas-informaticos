@@ -26,7 +26,7 @@
   </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
   <p class="section-title">1.5 Mapa físico y lógico de una red local</p>
   <p class="section-sub">Dos formas complementarias de documentar y entender la infraestructura de una red LAN.</p>
@@ -158,6 +158,14 @@
     <strong>💡 Clave:</strong> ambos mapas son <strong>complementarios</strong>, no excluyentes. El físico asegura una infraestructura bien organizada; el lógico permite gestionar eficazmente el flujo de datos.
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>

@@ -23,7 +23,7 @@
   </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap"><div id="breadcrumb-container"></div>
 
   <p class="section-title">1.3 Normas de seguridad y prevención de riesgos laborales</p>
   <p class="section-sub">Marco legal y buenas prácticas para un entorno de trabajo informático seguro y saludable.</p>
@@ -137,6 +137,14 @@
     </table>
   </div>
 
+  <div id="navegacion-container"></div>
 </div>
+<script src="../navegacion.js"></script>
+<script src="../componentes-nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    inicializarNavegacion();
+  });
+</script>
 </body>
 </html>
