@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.3 Monitorización de Redes</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .type-gui { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#E6F4EA;color:#1E6B2E; }
+    .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+    .metric-list { display:flex;flex-direction:column;gap:6px;margin-top:6px; }
+    .metric-item { display:flex;align-items:flex-start;gap:8px; }
+    .metric-icon { font-size:14px;flex-shrink:0;margin-top:1px; }
+    .metric-text { font-size:13px;color:var(--color-text-secondary);line-height:1.4; }
+    .metric-text strong { color:var(--color-text-primary); }
+    .tool-card { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 12px;margin-bottom:8px; }
+    .tool-card:last-child { margin-bottom:0; }
+    .tool-header { display:flex;align-items:center;gap:8px;margin-bottom:4px; }
+    .tool-name { font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-mono),monospace; }
+    .tool-use { font-size:12px;color:var(--color-text-secondary); }
+    .tool-access { font-size:12px;color:var(--color-text-secondary);margin-top:3px; }
+    .tool-access code { font-family:var(--font-mono),monospace;font-size:11px;background:var(--color-bg);border:0.5px solid var(--color-border);border-radius:3px;padding:1px 5px;color:var(--color-text-primary); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">5.3 Monitorización de redes</p>
+  <p class="section-sub">Supervisar el estado y rendimiento de la red para detectar problemas antes de que afecten a los usuarios.</p>
+
+  <!-- Qué monitorizar -->
+  <p class="table-section-title">¿Qué debemos monitorizar?</p>
+  <div class="cols" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="metric-list">
+        <div class="metric-item"><div class="metric-icon">📊</div><div class="metric-text"><strong>Rendimiento:</strong> ancho de banda, latencia, jitter, pérdida de paquetes.</div></div>
+        <div class="metric-item"><div class="metric-icon">🟢</div><div class="metric-text"><strong>Disponibilidad (uptime):</strong> routers, switches, servidores activos.</div></div>
+        <div class="metric-item"><div class="metric-icon">🔍</div><div class="metric-text"><strong>Detección de fallos:</strong> conexiones caídas, enlaces críticos.</div></div>
+        <div class="metric-item"><div class="metric-icon">🔒</div><div class="metric-text"><strong>Seguridad:</strong> accesos no autorizados, tráfico anómalo (IDS/IPS).</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="metric-list">
+        <div class="metric-item"><div class="metric-icon">📶</div><div class="metric-text"><strong>Análisis de tráfico:</strong> qué apps o dispositivos consumen más ancho de banda.</div></div>
+        <div class="metric-item"><div class="metric-icon">📅</div><div class="metric-text"><strong>Historial:</strong> tendencias a lo largo del tiempo para planificación.</div></div>
+        <div class="metric-item"><div class="metric-icon">🔔</div><div class="metric-text"><strong>Alertas:</strong> notificaciones automáticas cuando se superan umbrales críticos.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Windows -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-win" style="margin-right:8px;">Windows</span> Herramientas de monitorización
+  </p>
+  <div class="cols">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Herramientas integradas</span><span class="type-gui">GUI</span></div>
+      <div class="tool-card">
+        <div class="tool-header"><span class="tool-name">Administrador de tareas</span></div>
+        <div class="tool-use">Monitorización básica del rendimiento de red en tiempo real.</div>
+        <div class="tool-access">Acceso: <code>Ctrl + Shift + Esc</code> → pestaña <strong>Rendimiento</strong></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><span class="tool-name">Monitor de recursos</span></div>
+        <div class="tool-use">Procesos usando la red, conexiones TCP activas, latencias.</div>
+        <div class="tool-access">Acceso: Administrador de tareas → Rendimiento → <strong>Abrir monitor de recursos</strong></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><span class="tool-name">Visor de eventos</span></div>
+        <div class="tool-use">Logs de conectividad, caídas de red, problemas DNS y seguridad.</div>
+        <div class="tool-access">Acceso: <code>Win + X</code> → <strong>Visor de eventos</strong></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Herramientas de terceros</span></div>
+      <div class="tool-card">
+        <div class="tool-header"><span class="tool-name">SolarWinds NPM</span></div>
+        <div class="tool-use">Monitorización avanzada: análisis de tráfico en profundidad, informes detallados de rendimiento.</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><span class="tool-name">Wireshark</span></div>
+        <div class="tool-use">Captura y análisis de paquetes de red. Útil para resolver problemas complejos de red y seguridad.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ubuntu -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-lin" style="margin-right:8px;">Ubuntu</span> Herramientas de monitorización
+  </p>
+  <div class="cols">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Línea de comandos</span><span class="type-cli">CLI</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">ifconfig</code><span class="cmd-desc">Estado de interfaces (clásico)</span></div>
+        <div class="cmd-row"><code class="cmd">ip a</code><span class="cmd-desc">Interfaces de red (moderno)</span></div>
+        <div class="cmd-row"><code class="cmd">netstat</code><span class="cmd-desc">Conexiones activas y estadísticas</span></div>
+        <div class="cmd-row"><code class="cmd">ss -tuln</code><span class="cmd-desc">Sockets y puertos activos (más rápido)</span></div>
+        <div class="cmd-row"><code class="cmd">nload</code><span class="cmd-desc">Ancho de banda en tiempo real</span></div>
+        <div class="cmd-row"><code class="cmd">sudo iftop</code><span class="cmd-desc">Tráfico de red por host</span></div>
+        <div class="cmd-row"><code class="cmd">sudo wireshark</code><span class="cmd-desc">Captura y análisis de paquetes</span></div>
+      </div>
+      <div class="topic" style="margin-top:12px;">
+        <div class="topic-label">Instalar herramientas</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">sudo apt install nload</code></div>
+          <div class="cmd-row"><code class="cmd">sudo apt install iftop</code></div>
+          <div class="cmd-row"><code class="cmd">sudo apt install wireshark</code></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Interfaz gráfica</span><span class="type-gui">GUI</span></div>
+      <div class="tool-card">
+        <div class="tool-header"><span class="tool-name">Monitor del Sistema</span></div>
+        <div class="tool-use">Gráficos en tiempo real de uso de red, tráfico entrante/saliente y procesos activos en la red.</div>
+        <div class="tool-access">Acceso: Menú de aplicaciones → <strong>Monitor del Sistema</strong></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><span class="tool-name">Wireshark (GUI)</span></div>
+        <div class="tool-use">Captura y análisis de paquetes con interfaz visual intuitiva. Ideal para resolver problemas complejos.</div>
+        <div class="tool-access">Acceso: Menú aplicaciones → <strong>Wireshark</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tabla comparativa -->
+  <p class="table-section-title">Comparativa rápida de herramientas CLI en Ubuntu</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Herramienta</th>
+        <th>Para qué sirve</th>
+        <th>Necesita instalación</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">ip a</code> / <code style="font-family:var(--font-mono),monospace;font-size:12px;">ifconfig</code></td><td>Ver estado de interfaces</td><td><span class="tag-cat">No</span></td></tr>
+      <tr><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">ss</code> / <code style="font-family:var(--font-mono),monospace;font-size:12px;">netstat</code></td><td>Ver conexiones y puertos</td><td><span class="tag-cat">No</span></td></tr>
+      <tr><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">nload</code></td><td>Ancho de banda en tiempo real</td><td><span class="tag-cat">Sí</span></td></tr>
+      <tr><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">iftop</code></td><td>Tráfico por host</td><td><span class="tag-cat">Sí</span></td></tr>
+      <tr><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">wireshark</code></td><td>Análisis profundo de paquetes</td><td><span class="tag-cat">Sí</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tema 2.2 – Clasificación de los sistemas operativos</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    :root {
+      --purple:        #7c3aed;
+      --purple-light:  #ede9fe;
+      --blue:          #1d4ed8;
+      --blue-light:    #dbeafe;
+      --green:         #15803d;
+      --green-light:   #dcfce7;
+      --orange:        #c2410c;
+      --orange-light:  #ffedd5;
+      --teal:          #0f766e;
+      --teal-light:    #ccfbf1;
+      --pink:          #be185d;
+      --pink-light:    #fce7f3;
+      --gray-50:       #f8fafc;
+      --gray-100:      #f1f5f9;
+      --gray-200:      #e2e8f0;
+      --gray-700:      #334155;
+      --gray-900:      #0f172a;
+      --radius:        10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .page-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 60%, #7c3aed 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+    .page-header .label {
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #c4b5fd;
+      margin-bottom: .4rem;
+    }
+    .page-header h1 { font-size: 1.6rem; font-weight: 700; }
+    .page-header p  { font-size: .9rem; color: #ddd6fe; margin-top: .4rem; }
+
+    /* CONTENIDO */
+    .content { max-width: 860px; margin: 0 auto; padding: 1.8rem 1rem 3rem; }
+
+    /* SECTION TITLE */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 2rem 0 1rem;
+    }
+    .section-title .num {
+      background: var(--purple);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .25rem .55rem;
+      border-radius: 6px;
+    }
+    .section-title h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    /* NOTA */
+    .note {
+      border-left: 4px solid var(--purple);
+      background: var(--purple-light);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: .9rem 1.1rem;
+      font-size: .87rem;
+      margin-bottom: 1.2rem;
+    }
+    .note strong { color: var(--purple); }
+
+    /* CARD BASE */
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .8rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    /* CRITERIO HEADER */
+    .criterio-header {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .6rem .9rem;
+      border-radius: 8px;
+      margin-bottom: .8rem;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    /* TABLA COMPARATIVA */
+    .tabla {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .84rem;
+    }
+    .tabla th {
+      background: var(--gray-100);
+      padding: .55rem .8rem;
+      text-align: left;
+      font-weight: 700;
+      color: var(--gray-900);
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .tabla td {
+      padding: .5rem .8rem;
+      border-bottom: 1px solid var(--gray-100);
+      vertical-align: top;
+    }
+    .tabla tr:last-child td { border-bottom: none; }
+    .tabla tr:hover td { background: var(--gray-50); }
+
+    /* BADGE */
+    .badge {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .15rem .5rem;
+      border-radius: 999px;
+      margin-right: .25rem;
+      margin-bottom: .2rem;
+      vertical-align: middle;
+    }
+    .badge-blue   { background: var(--blue-light);   color: var(--blue); }
+    .badge-green  { background: var(--green-light);  color: var(--green); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+    .badge-teal   { background: var(--teal-light);   color: var(--teal); }
+    .badge-pink   { background: var(--pink-light);   color: var(--pink); }
+
+    /* GRID 2 COLUMNAS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media(max-width:600px){ .grid-2{ grid-template-columns:1fr; } }
+
+    /* MINI CARD dentro de grid */
+    .mini-card {
+      background: var(--gray-50);
+      border-radius: 8px;
+      border: 1px solid var(--gray-200);
+      padding: .9rem 1rem;
+    }
+    .mini-card h4 {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .4rem;
+    }
+    .mini-card p, .mini-card li {
+      font-size: .8rem;
+      color: #475569;
+    }
+    .mini-card ul { padding-left: 1rem; }
+
+    /* COLOR STRIPS para criterios */
+    .strip-blue   { border-left: 4px solid var(--blue);   background: var(--blue-light); }
+    .strip-green  { border-left: 4px solid var(--green);  background: var(--green-light); }
+    .strip-orange { border-left: 4px solid var(--orange); background: var(--orange-light); }
+    .strip-teal   { border-left: 4px solid var(--teal);   background: var(--teal-light); }
+    .strip-pink   { border-left: 4px solid var(--pink);   background: var(--pink-light); }
+    .strip-purple { border-left: 4px solid var(--purple); background: var(--purple-light); }
+
+    /* RESUMEN VISUAL FINAL */
+    .mapa-mental {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      justify-content: center;
+      margin-top: .5rem;
+    }
+    .mapa-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: .7rem .9rem;
+      min-width: 120px;
+      text-align: center;
+      flex: 1;
+    }
+    .mapa-item .mapa-icon { font-size: 1.4rem; margin-bottom: .3rem; }
+    .mapa-item .mapa-label { font-size: .75rem; font-weight: 700; color: var(--gray-900); margin-bottom: .2rem; }
+    .mapa-item .mapa-val   { font-size: .7rem; color: #64748b; }
+  </style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="label">Sistemas Informáticos · Tema 2</div>
+  <h1>2.2 Clasificación de los Sistemas Operativos</h1>
+  <p>Cómo se clasifican según distintos criterios clave</p>
+</header>
+
+<div class="content">
+
+  <div class="note">
+    <strong>Idea clave:</strong> Los SO se pueden clasificar de <strong>muchas formas distintas</strong> según el tipo de hardware, cuántos usuarios los usan, qué tareas hacen, cómo interactúan con el usuario, su modo de uso y su licencia.
+  </div>
+
+  <!-- ═══════════════════════════════
+       TABLA RESUMEN GENERAL
+  ══════════════════════════════════ -->
+  <div class="card">
+    <h3>📊 Tabla comparativa general</h3>
+    <table class="tabla">
+      <thead>
+      <tr>
+        <th>Criterio</th>
+        <th>Tipos</th>
+        <th>Ejemplos</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><strong>Tipo de ordenador</strong></td>
+        <td>Escritorio · Servidor · Móvil · Tiempo real · Mainframe</td>
+        <td>
+          <span class="badge badge-blue">Windows</span>
+          <span class="badge badge-green">Ubuntu</span>
+          <span class="badge badge-orange">Android</span>
+          <span class="badge badge-teal">FreeRTOS</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Nº de usuarios</strong></td>
+        <td>Monousuario · Multiusuario</td>
+        <td>
+          <span class="badge badge-blue">MS-DOS</span>
+          <span class="badge badge-green">Linux</span>
+          <span class="badge badge-blue">Windows Server</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Nº de tareas</strong></td>
+        <td>Monotarea · Multitarea</td>
+        <td>
+          <span class="badge badge-blue">MS-DOS</span>
+          <span class="badge badge-blue">Windows</span>
+          <span class="badge badge-green">macOS</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Interfaz</strong></td>
+        <td>CLI · GUI</td>
+        <td>
+          <span class="badge badge-orange">Bash / MS-DOS</span>
+          <span class="badge badge-blue">Windows</span>
+          <span class="badge badge-green">Ubuntu GNOME</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Modo de uso</strong></td>
+        <td>Tiempo compartido · Tiempo real · Distribuido</td>
+        <td>
+          <span class="badge badge-green">Unix</span>
+          <span class="badge badge-teal">VxWorks</span>
+          <span class="badge badge-pink">Google Fuchsia</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Licencia</strong></td>
+        <td>Código abierto · Código cerrado</td>
+        <td>
+          <span class="badge badge-green">Linux / Android</span>
+          <span class="badge badge-blue">Windows / iOS</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════
+       CRITERIO 1: TIPO DE ORDENADOR
+  ══════════════════════════════════ -->
+  <div class="card">
+    <div class="criterio-header strip-blue">🖥️ &nbsp;Criterio 1 — Según el tipo de ordenador</div>
+    <div class="grid-2">
+      <div class="mini-card">
+        <h4>🏠 Escritorio</h4>
+        <p>Para PC doméstico u oficina.</p>
+        <p style="margin-top:.3rem">
+          <span class="badge badge-blue">Windows</span>
+          <span class="badge badge-blue">macOS</span>
+          <span class="badge badge-green">Ubuntu</span>
+        </p>
+      </div>
+      <div class="mini-card">
+        <h4>🗄️ Servidor</h4>
+        <p>Gestiona recursos para múltiples usuarios en red.</p>
+        <p style="margin-top:.3rem">
+          <span class="badge badge-blue">Windows Server</span>
+          <span class="badge badge-green">CentOS</span>
+          <span class="badge badge-green">Red Hat</span>
+        </p>
+      </div>
+      <div class="mini-card">
+        <h4>📱 Móvil</h4>
+        <p>Diseñado para smartphones y tablets.</p>
+        <p style="margin-top:.3rem">
+          <span class="badge badge-green">Android</span>
+          <span class="badge badge-orange">iOS</span>
+        </p>
+      </div>
+      <div class="mini-card">
+        <h4>⏱️ Tiempo real (RTOS)</h4>
+        <p>Respuesta inmediata y predecible. Sistemas embebidos.</p>
+        <p style="margin-top:.3rem">
+          <span class="badge badge-teal">FreeRTOS</span>
+          <span class="badge badge-teal">VxWorks</span>
+          <span class="badge badge-teal">QNX</span>
+        </p>
+      </div>
+    </div>
+    <div class="mini-card" style="margin-top:.8rem">
+      <h4>🏢 Mainframe</h4>
+      <p>Grandes sistemas empresariales con alta disponibilidad y procesamiento masivo. Ej.: <span class="badge badge-purple">z/OS (IBM)</span></p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       CRITERIO 2 + 3
+  ══════════════════════════════════ -->
+  <div class="grid-2">
+
+    <div class="card">
+      <div class="criterio-header strip-green">👤 Criterio 2 — Nº de usuarios</div>
+      <div class="mini-card" style="margin-bottom:.6rem">
+        <h4>1️⃣ Monousuario</h4>
+        <p>Un solo usuario a la vez.</p>
+        <p style="margin-top:.3rem"><span class="badge badge-blue">MS-DOS</span></p>
+      </div>
+      <div class="mini-card">
+        <h4>👥 Multiusuario</h4>
+        <p>Varios usuarios simultáneos compartiendo recursos.</p>
+        <p style="margin-top:.3rem">
+          <span class="badge badge-green">Unix</span>
+          <span class="badge badge-green">Linux</span>
+          <span class="badge badge-blue">Windows Server</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="criterio-header strip-orange">📋 Criterio 3 — Nº de tareas</div>
+      <div class="mini-card" style="margin-bottom:.6rem">
+        <h4>1️⃣ Monotarea</h4>
+        <p>Solo una tarea a la vez.</p>
+        <p style="margin-top:.3rem"><span class="badge badge-blue">MS-DOS</span></p>
+      </div>
+      <div class="mini-card">
+        <h4>📦 Multitarea</h4>
+        <p>Múltiples procesos ejecutándose a la vez. Gestiona el tiempo de CPU.</p>
+        <p style="margin-top:.3rem">
+          <span class="badge badge-blue">Windows</span>
+          <span class="badge badge-blue">macOS</span>
+          <span class="badge badge-green">Linux</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════
+       CRITERIO 4: INTERFAZ
+  ══════════════════════════════════ -->
+  <div class="card">
+    <div class="criterio-header strip-teal">🖱️ &nbsp;Criterio 4 — Según la interfaz de usuario</div>
+    <div class="grid-2">
+      <div class="mini-card">
+        <h4><span class="badge badge-orange">CLI</span> Línea de comandos</h4>
+        <ul>
+          <li>El usuario escribe comandos en una terminal.</li>
+          <li>Más técnica pero muy potente.</li>
+          <li>Preferida por usuarios avanzados.</li>
+        </ul>
+        <p style="margin-top:.5rem">Ej.: <span class="badge badge-blue">MS-DOS</span> <span class="badge badge-green">Bash (Unix/Linux)</span></p>
+      </div>
+      <div class="mini-card">
+        <h4><span class="badge badge-green">GUI</span> Interfaz gráfica</h4>
+        <ul>
+          <li>Ventanas, iconos y menús visuales.</li>
+          <li>Más intuitiva y accesible.</li>
+          <li>Estándar en sistemas modernos.</li>
+        </ul>
+        <p style="margin-top:.5rem">Ej.: <span class="badge badge-blue">Windows</span> <span class="badge badge-blue">macOS</span> <span class="badge badge-green">Ubuntu (GNOME/KDE)</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       CRITERIO 5: MODO DE USO
+  ══════════════════════════════════ -->
+  <div class="card">
+    <div class="criterio-header strip-pink">⚙️ &nbsp;Criterio 5 — Según el modo de uso</div>
+    <table class="tabla">
+      <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Descripción</th>
+        <th>Ejemplos</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><strong>Tiempo compartido</strong></td>
+        <td>Múltiples usuarios comparten CPU. Cada uno cree tener su propio procesador.</td>
+        <td><span class="badge badge-green">Unix</span> <span class="badge badge-green">Linux</span> Multics</td>
+      </tr>
+      <tr>
+        <td><strong>Tiempo real</strong></td>
+        <td>Respuesta predecible y rápida. Crítico en sistemas de precisión.</td>
+        <td><span class="badge badge-teal">RTLinux</span> <span class="badge badge-teal">VxWorks</span> <span class="badge badge-teal">QNX</span></td>
+      </tr>
+      <tr>
+        <td><strong>Distribuido</strong></td>
+        <td>Varios ordenadores independientes que parecen uno solo al usuario.</td>
+        <td><span class="badge badge-pink">Google Fuchsia</span> Plan 9</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════
+       CRITERIO 6: LICENCIA
+  ══════════════════════════════════ -->
+  <div class="card">
+    <div class="criterio-header strip-purple">📄 &nbsp;Criterio 6 — Según la licencia</div>
+    <div class="grid-2">
+      <div class="mini-card">
+        <h4>🔓 Código abierto <em>(Open Source)</em></h4>
+        <ul>
+          <li>Código fuente público.</li>
+          <li>Cualquiera puede ver, modificar y distribuir.</li>
+          <li>Comunidad activa de desarrollo.</li>
+        </ul>
+        <p style="margin-top:.5rem">
+          <span class="badge badge-green">Linux</span>
+          <span class="badge badge-green">FreeBSD</span>
+          <span class="badge badge-green">Android (AOSP)</span>
+        </p>
+      </div>
+      <div class="mini-card">
+        <h4>🔒 Código cerrado <em>(Privativo)</em></h4>
+        <ul>
+          <li>Código fuente no disponible al público.</li>
+          <li>Propiedad de una empresa.</li>
+          <li>Requiere licencia de uso.</li>
+        </ul>
+        <p style="margin-top:.5rem">
+          <span class="badge badge-blue">Windows</span>
+          <span class="badge badge-blue">macOS</span>
+          <span class="badge badge-orange">iOS</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       MAPA MENTAL RESUMEN
+  ══════════════════════════════════ -->
+  <div class="card">
+    <h3>🗺️ Resumen — 6 criterios de clasificación</h3>
+    <div class="mapa-mental">
+      <div class="mapa-item">
+        <div class="mapa-icon">🖥️</div>
+        <div class="mapa-label">Tipo de<br>ordenador</div>
+        <div class="mapa-val">Escritorio · Servidor · Móvil · RTOS · Mainframe</div>
+      </div>
+      <div class="mapa-item">
+        <div class="mapa-icon">👤</div>
+        <div class="mapa-label">Nº usuarios</div>
+        <div class="mapa-val">Monousuario · Multiusuario</div>
+      </div>
+      <div class="mapa-item">
+        <div class="mapa-icon">📋</div>
+        <div class="mapa-label">Nº tareas</div>
+        <div class="mapa-val">Monotarea · Multitarea</div>
+      </div>
+      <div class="mapa-item">
+        <div class="mapa-icon">🖱️</div>
+        <div class="mapa-label">Interfaz</div>
+        <div class="mapa-val">CLI · GUI</div>
+      </div>
+      <div class="mapa-item">
+        <div class="mapa-icon">⚙️</div>
+        <div class="mapa-label">Modo de uso</div>
+        <div class="mapa-val">T. compartido · T. real · Distribuido</div>
+      </div>
+      <div class="mapa-item">
+        <div class="mapa-icon">📄</div>
+        <div class="mapa-label">Licencia</div>
+        <div class="mapa-val">Código abierto · Código cerrado</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

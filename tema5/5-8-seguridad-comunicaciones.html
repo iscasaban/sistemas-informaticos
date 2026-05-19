@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.8 Seguridad en las Comunicaciones</title>
+    <link rel="stylesheet" href="../estilos.css">
+    <style>
+        .type-gui { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#E6F4EA;color:#1E6B2E; }
+        .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+        .code-block { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 14px;font-family:var(--font-mono),monospace;font-size:12px;color:var(--color-text-primary);white-space:pre;overflow-x:auto;line-height:1.7;margin-top:6px; }
+        .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+        .steps { display:flex;flex-direction:column;gap:6px; }
+        .step { display:flex;gap:9px;align-items:flex-start; }
+        .step-num { font-size:11px;font-weight:600;min-width:18px;height:18px;border-radius:50%;background:var(--accent-purple);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px; }
+        .step-text { font-size:13px;color:var(--color-text-secondary);line-height:1.4; }
+        .step-text strong { color:var(--color-text-primary); }
+        .pillar-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px; }
+        .pillar { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px;text-align:center; }
+        .pillar-icon { font-size:22px;margin-bottom:4px; }
+        .pillar-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:2px; }
+        .pillar-desc { font-size:11px;color:var(--color-text-secondary); }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <p class="section-title">5.8 Seguridad en las comunicaciones</p>
+    <p class="section-sub">Cortafuegos, cifrado y protocolos seguros para proteger el tráfico de red.</p>
+
+    <!-- Pilares de seguridad -->
+    <div class="pillar-grid">
+        <div class="pillar">
+            <div class="pillar-icon">🔥</div>
+            <div class="pillar-name">Cortafuegos</div>
+            <div class="pillar-desc">Filtra tráfico entrante y saliente por reglas.</div>
+        </div>
+        <div class="pillar">
+            <div class="pillar-icon">🔒</div>
+            <div class="pillar-name">Cifrado (VPN/TLS)</div>
+            <div class="pillar-desc">Protege los datos en tránsito de interceptaciones.</div>
+        </div>
+        <div class="pillar">
+            <div class="pillar-icon">🔑</div>
+            <div class="pillar-name">Acceso seguro (SSH)</div>
+            <div class="pillar-desc">Conexiones remotas autenticadas con clave pública.</div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Windows seguridad -->
+    <p class="table-section-title" style="margin-bottom:12px;">
+        <span class="badge badge-win" style="margin-right:8px;">Windows</span> Herramientas de seguridad
+    </p>
+
+    <div class="cols">
+        <!-- Firewall Windows -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">Cortafuegos Windows Defender</span><span class="type-gui">GUI</span></div>
+            <div class="topic">
+                <div class="topic-label">Acceso</div>
+                <div class="step-text" style="font-size:13px;color:var(--color-text-secondary);">Configuración → Actualización y seguridad → <strong>Seguridad de Windows → Firewall y protección de red</strong></div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">Crear regla para bloquear un puerto</div>
+                <div class="steps">
+                    <div class="step"><div class="step-num">1</div><div class="step-text">Abre <strong>Firewall con seguridad avanzada</strong></div></div>
+                    <div class="step"><div class="step-num">2</div><div class="step-text">Reglas de entrada → <strong>Nueva regla</strong></div></div>
+                    <div class="step"><div class="step-num">3</div><div class="step-text">Selecciona <strong>Puerto</strong> e indica el número</div></div>
+                    <div class="step"><div class="step-num">4</div><div class="step-text">Acción: <strong>Bloquear la conexión</strong> → Guardar</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><span class="card-title">TLS/SSL y RDP seguro</span><span class="type-cli">CLI / GUI</span></div>
+            <div class="topic">
+                <div class="topic-label">Habilitar TLS 1.2 (Editor del Registro)</div>
+                <div class="code-block">Ruta: HKEY_LOCAL_MACHINE\SYSTEM\
+                    CurrentControlSet\Control\
+                    SecurityProviders\SCHANNEL\
+                    Protocols\TLS 1.2\Server
+                    Valor: DWORD Enabled = 1</div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">RDP seguro con autenticación NLA</div>
+                <div class="steps">
+                    <div class="step"><div class="step-num">1</div><div class="step-text">Sistema → <strong>Configuración de escritorio remoto</strong></div></div>
+                    <div class="step"><div class="step-num">2</div><div class="step-text">Habilita <strong>Autenticación a nivel de red (NLA)</strong></div></div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">VPN para cifrar tráfico</div>
+                <div class="step-text" style="font-size:13px;color:var(--color-text-secondary);">Configuración → Red e Internet → <strong>VPN</strong> → Agregar conexión.</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Ubuntu seguridad -->
+    <p class="table-section-title" style="margin-bottom:12px;">
+        <span class="badge badge-lin" style="margin-right:8px;">Ubuntu</span> Herramientas de seguridad
+    </p>
+
+    <div class="cols">
+        <!-- UFW Ubuntu -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">UFW — Cortafuegos</span><span class="type-cli">CLI</span></div>
+            <div class="topic">
+                <div class="topic-label">Comandos básicos</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo ufw allow ssh</code><span class="cmd-desc">Permitir SSH (puerto 22)</span></div>
+                    <div class="cmd-row"><code class="cmd">sudo ufw enable</code><span class="cmd-desc">Activar el cortafuegos</span></div>
+                    <div class="cmd-row"><code class="cmd">sudo ufw status</code><span class="cmd-desc">Ver reglas activas</span></div>
+                    <div class="cmd-row"><code class="cmd">sudo ufw deny 80</code><span class="cmd-desc">Bloquear puerto 80</span></div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">iptables — reglas avanzadas</div>
+                <div class="code-block">sudo iptables -P INPUT DROP
+sudo iptables -A INPUT -p tcp --dport 22
+-j ACCEPT</div>
+                <div class="script-note" style="margin-top:6px;font-size:12px;"><strong>Efecto:</strong> bloquea todo el tráfico entrante excepto SSH.</div>
+            </div>
+        </div>
+
+        <!-- SSH y TLS Ubuntu -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">OpenSSH y TLS/SSL</span><span class="type-cli">CLI</span></div>
+            <div class="topic">
+                <div class="topic-label">Instalar y configurar OpenSSH</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo apt install openssh-server</code></div>
+                    <div class="cmd-row"><code class="cmd">sudo nano /etc/ssh/sshd_config</code></div>
+                </div>
+                <div class="code-block" style="margin-top:6px;"># Líneas a añadir/modificar:
+                    PermitRootLogin no
+                    PasswordAuthentication no</div>
+                <div class="cmd-list" style="margin-top:6px;">
+                    <div class="cmd-row"><code class="cmd">sudo systemctl restart ssh</code></div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">Conectarse con clave pública</div>
+                <div class="code-block">ssh -i /ruta/clave_privada usuario@servidor</div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">Certificados SSL con Certbot (TLS)</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo apt install certbot python3-certbot-nginx</code></div>
+                    <div class="cmd-row"><code class="cmd">sudo certbot --nginx</code></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Tabla resumen -->
+    <p class="table-section-title">Comparativa: seguridad en Windows vs Ubuntu</p>
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr><th>Herramienta</th><th>Windows</th><th>Ubuntu</th></tr>
+            </thead>
+            <tbody>
+            <tr><td>Cortafuegos GUI</td><td>Windows Defender Firewall</td><td>—</td></tr>
+            <tr><td>Cortafuegos CLI</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">netsh advfirewall</code></td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">ufw</code> / <code style="font-family:var(--font-mono),monospace;font-size:12px;">iptables</code></td></tr>
+            <tr><td>Acceso remoto seguro</td><td>RDP con NLA</td><td>SSH con clave pública</td></tr>
+            <tr><td>Cifrado en tránsito</td><td>TLS/SSL, VPN</td><td>TLS/SSL, OpenVPN, WireGuard</td></tr>
+            <tr><td>Certificados SSL</td><td>IIS + cert. manual</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">certbot</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="script-note" style="margin-top:20px;">
+        <strong>🛡️ Regla de oro:</strong> Usa siempre <strong>cortafuegos + cifrado + autenticación fuerte</strong>. Ninguna medida por sí sola es suficiente.
+    </div>
+
+</div>
+</body>
+</html>

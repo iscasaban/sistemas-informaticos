@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.2 Gestión de sistemas mediante entornos gráficos</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    .tool-item {
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 0.5px solid var(--color-border);
+    }
+    .tool-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .tool-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+    .tool-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+    .tool-access {
+      font-family: var(--font-mono),monospace;
+      font-size: 11px;
+      background: var(--color-bg-secondary);
+      border: 0.5px solid var(--color-border);
+      border-radius: 4px;
+      padding: 2px 7px;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+    .tool-desc {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+      margin-top: 3px;
+    }
+    .example-note {
+      background: var(--color-bg-secondary);
+      border-left: 3px solid #1D9E75;
+      border-radius: 0;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      margin-top: 6px;
+    }
+    .example-note strong {
+      color: var(--color-text-primary);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <p class="section-title">3.2 Gestión de sistemas mediante entornos gráficos</p>
+  <p class="section-sub">Herramientas visuales para administrar el sistema sin usar la terminal</p>
+
+  <div class="cols">
+
+    <!-- Windows -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows</span>
+        <span class="card-title">Herramientas gráficas</span>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-row">
+          <span class="tool-name">🗂 Panel de control</span>
+        </div>
+        <div class="tool-desc">Gestión de dispositivos, red, energía y hardware. Acceso desde el menú de inicio.</div>
+        <div class="example-note"><strong>Ejemplo:</strong> activar o desactivar el Firewall de Windows Defender</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-row">
+          <span class="tool-name">⚙️ Configuración</span>
+          <span class="tool-access">Win + I</span>
+        </div>
+        <div class="tool-desc">Personalización, cuentas de usuario, privacidad y permisos de apps.</div>
+        <div class="example-note"><strong>Ejemplo:</strong> conectarse a una red Wi-Fi</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-row">
+          <span class="tool-name">📊 Administrador de tareas</span>
+          <span class="tool-access">Ctrl + Shift + Esc</span>
+        </div>
+        <div class="tool-desc">Supervisar procesos activos y uso de CPU, memoria y disco.</div>
+        <div class="example-note"><strong>Ejemplo:</strong> finalizar un programa que no responde</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-row">
+          <span class="tool-name">🔌 Administrador de dispositivos</span>
+        </div>
+        <div class="tool-desc">Gestionar hardware: instalar, actualizar controladores y diagnosticar problemas.</div>
+        <div class="example-note"><strong>Ejemplo:</strong> actualizar el controlador de red</div>
+      </div>
+    </div>
+
+    <!-- Ubuntu -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Herramientas gráficas (GNOME)</span>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-row">
+          <span class="tool-name">⚙️ Configuración del sistema</span>
+        </div>
+        <div class="tool-desc">Gestiona dispositivos de hardware, controladores y periféricos del sistema.</div>
+        <div class="example-note"><strong>Ejemplo:</strong> actualizar un controlador de red</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-row">
+          <span class="tool-name">📊 Monitor del sistema</span>
+        </div>
+        <div class="tool-desc">Supervisa uso de CPU, memoria y disco. Permite finalizar apps que no responden.</div>
+        <div class="example-note"><strong>Ejemplo:</strong> cerrar un proceso que consume demasiados recursos</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-row">
+          <span class="tool-name">🔄 Gestor de actualizaciones</span>
+        </div>
+        <div class="tool-desc">Instala actualizaciones de software y sistema. Aparece automáticamente o búscalo como "Actualizaciones de software".</div>
+        <div class="example-note"><strong>Ejemplo:</strong> aplicar actualizaciones disponibles</div>
+      </div>
+
+      <div class="tool-item">
+        <div class="tool-row">
+          <span class="tool-name">💾 Utilidad de discos</span>
+        </div>
+        <div class="tool-desc">Administra particiones, monta o desmonta discos. Búscalo como "Discos" en el menú.</div>
+        <div class="example-note"><strong>Ejemplo:</strong> crear y formatear una nueva partición</div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Tabla comparativa -->
+  <p class="table-section-title">Tabla comparativa de herramientas gráficas</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Función</th>
+        <th>Windows</th>
+        <th>Ubuntu (GNOME)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="tag-cat">Configuración general</span></td>
+        <td>Configuración <span class="cmd">Win + I</span></td>
+        <td>Configuración del sistema</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Supervisar procesos</span></td>
+        <td>Administrador de tareas <span class="cmd">Ctrl+Shift+Esc</span></td>
+        <td>Monitor del sistema</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Gestión de hardware</span></td>
+        <td>Administrador de dispositivos</td>
+        <td>Configuración del sistema</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Red y conectividad</span></td>
+        <td>Panel de control → Red e Internet</td>
+        <td>Configuración → Red</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Actualizaciones</span></td>
+        <td>Configuración → Windows Update</td>
+        <td>Gestor de actualizaciones</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Gestión de discos</span></td>
+        <td>Administrador de discos <span class="cmd">diskmgmt.msc</span></td>
+        <td>Utilidad de discos (Discos)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Firewall / seguridad</span></td>
+        <td>Panel de control → Sistema y seguridad</td>
+        <td>Configuración → Privacidad</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

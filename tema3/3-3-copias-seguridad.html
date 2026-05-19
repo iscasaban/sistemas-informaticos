@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.3 Copias de seguridad</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .reason-card {
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+    }
+    .reason-icon { font-size: 18px; margin-bottom: 4px; }
+    .reason-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+    .reason-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+
+    .aspects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .aspect {
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+    }
+    .aspect-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; }
+    .aspect-text { font-size: 12px; color: var(--color-text-primary); line-height: 1.4; }
+
+    .method {
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 0.5px solid var(--color-border);
+    }
+    .method:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .method-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+    .method-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+
+    .tip {
+      background: var(--color-bg-secondary);
+      border-left: 3px solid #378ADD;
+      border-radius: 0;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      margin-top: 6px;
+    }
+    .tip strong { color: var(--color-text-primary); font-weight: 500; }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">3.3 Copias de seguridad</p>
+  <p class="section-sub">Duplicar datos en una ubicación segura para poder recuperarlos si algo falla</p>
+
+  <!-- Por qué son importantes -->
+  <p class="section-label">¿Por qué son importantes?</p>
+  <div class="reasons-grid">
+    <div class="reason-card">
+      <div class="reason-icon">🛡️</div>
+      <div class="reason-title">Prevenir pérdidas</div>
+      <div class="reason-desc">Fallos técnicos, errores humanos o malware pueden borrar datos</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">🏢</div>
+      <div class="reason-title">Continuidad del negocio</div>
+      <div class="reason-desc">Reduce el tiempo de inactividad ante un incidente</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">⚖️</div>
+      <div class="reason-title">Requisitos legales</div>
+      <div class="reason-desc">Algunas regulaciones obligan a conservar ciertos datos</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">🔐</div>
+      <div class="reason-title">Defensa ante ransomware</div>
+      <div class="reason-desc">Permite restaurar sin pagar el rescate a los atacantes</div>
+    </div>
+  </div>
+
+  <!-- Aspectos clave -->
+  <p class="section-label">Aspectos clave al hacer un backup</p>
+  <div class="aspects-grid">
+    <div class="aspect">
+      <div class="aspect-label">⏱ Frecuencia</div>
+      <div class="aspect-text">Según qué tan seguido cambian los datos: diaria, semanal o en tiempo real</div>
+    </div>
+    <div class="aspect">
+      <div class="aspect-label">💾 Medio</div>
+      <div class="aspect-text">Disco externo, cinta, servidor de red o nube</div>
+    </div>
+    <div class="aspect">
+      <div class="aspect-label">📍 Ubicación</div>
+      <div class="aspect-text">Siempre fuera del sitio principal (nube o ubicación remota)</div>
+    </div>
+    <div class="aspect">
+      <div class="aspect-label">🔒 Seguridad</div>
+      <div class="aspect-text">Cifrado, controles de acceso y protección física</div>
+    </div>
+    <div class="aspect">
+      <div class="aspect-label">🤖 Automatización</div>
+      <div class="aspect-text">Reduce errores humanos y garantiza regularidad</div>
+    </div>
+    <div class="aspect">
+      <div class="aspect-label">✅ Verificación</div>
+      <div class="aspect-text">Probar periódicamente que los datos se pueden restaurar</div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Métodos por SO -->
+  <div class="cols">
+
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows</span>
+        <span class="card-title">Métodos de copia de seguridad</span>
+      </div>
+
+      <div class="method">
+        <div class="method-name">1. Historial de archivos</div>
+        <div class="method-desc">Panel de control → Sistema y seguridad → Historial de archivos. Selecciona unidad, activa y personaliza carpetas y frecuencia.</div>
+        <div class="tip"><strong>Restaurar:</strong> Historial de archivos → Restaurar archivos personales</div>
+      </div>
+
+      <div class="method">
+        <div class="method-name">2. Copia de seguridad y restauración</div>
+        <div class="method-desc">Panel de control → Copia de seguridad y restauración (Windows 7). Permite elegir qué respaldar y programar copias automáticas.</div>
+        <div class="tip"><strong>Restaurar:</strong> botón "Restaurar mis archivos"</div>
+      </div>
+
+      <div class="method">
+        <div class="method-name">3. OneDrive (nube)</div>
+        <div class="method-desc">Inicia sesión con cuenta Microsoft. Selecciona carpetas a sincronizar. Los archivos quedan accesibles desde cualquier dispositivo.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Métodos de copia de seguridad</span>
+      </div>
+
+      <div class="method">
+        <div class="method-name">1. Deja Dup (gráfico)</div>
+        <div class="method-desc">App "Copias de seguridad". Elige destino (local, externo o Google Drive), carpetas y frecuencia.</div>
+        <div class="tip">Instalar: <span class="cmd">sudo apt install deja-dup</span></div>
+      </div>
+
+      <div class="method">
+        <div class="method-name">2. rsync (terminal)</div>
+        <div class="method-desc">Sincroniza carpetas origen → destino. Con <code class="cmd">--delete</code> elimina archivos que ya no existen en el origen.</div>
+        <div class="tip">Automatizar con cron: <span class="cmd">0 2 * * * rsync -av ...</span></div>
+      </div>
+
+      <div class="method">
+        <div class="method-name">3. Rclone (nube)</div>
+        <div class="method-desc">Soporta Google Drive, Dropbox y más. Se configura con <span class="cmd">rclone config</span> y sincroniza con <span class="cmd">rclone sync</span>.</div>
+        <div class="tip">Instalar: <span class="cmd">sudo apt install rclone</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Tabla comparativa -->
+  <p class="table-section-title">Tabla comparativa de métodos</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Método</th>
+        <th>Windows</th>
+        <th>Ubuntu</th>
+        <th>Tipo</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="tag-cat">Gráfico local</span></td>
+        <td>Historial de archivos</td>
+        <td>Deja Dup</td>
+        <td>Disco externo / red</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Gráfico integrado</span></td>
+        <td>Copia y restauración (Win 7)</td>
+        <td>—</td>
+        <td>Disco externo</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Terminal / script</span></td>
+        <td>PowerShell + Programador tareas</td>
+        <td>rsync + cron</td>
+        <td>Local o red</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Nube</span></td>
+        <td>OneDrive</td>
+        <td>Rclone (Drive, Dropbox…)</td>
+        <td>Acceso desde cualquier dispositivo</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

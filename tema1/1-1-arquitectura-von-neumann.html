@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.1 Arquitectura Von Neumann</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .steps { display:flex;flex-direction:column;gap:7px; }
+    .step { display:flex;gap:10px;align-items:flex-start; }
+    .step-num { font-size:11px;font-weight:600;min-width:20px;height:20px;border-radius:50%;background:var(--accent-purple);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px; }
+    .step-text { font-size:13px;color:var(--color-text-secondary);line-height:1.45; }
+    .step-text strong { color:var(--color-text-primary); }
+    .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+    .comp-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px; }
+    .comp-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px;text-align:center; }
+    .comp-icon { font-size:20px;margin-bottom:4px; }
+    .comp-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:3px; }
+    .comp-desc { font-size:11px;color:var(--color-text-secondary);line-height:1.4; }
+    .cycle-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px; }
+    .cycle-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px;text-align:center;position:relative; }
+    .cycle-num { font-size:18px;font-weight:700;color:var(--accent-purple);margin-bottom:2px; }
+    .cycle-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:3px; }
+    .cycle-en { font-size:11px;font-style:italic;color:var(--color-text-secondary);margin-bottom:4px; }
+    .cycle-desc { font-size:11px;color:var(--color-text-secondary);line-height:1.4; }
+    .arrow { display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--accent-purple);padding-top:10px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">1.1 Arquitectura Von Neumann</p>
+  <p class="section-sub">Propuesta por John von Neumann en 1945. Modelo base de casi todos los ordenadores modernos.</p>
+
+  <div class="script-note" style="margin-bottom:20px;">
+    <strong>Idea clave:</strong> datos e instrucciones se almacenan en la <strong>misma memoria</strong>. Esto permite que los programas puedan modificarse durante su ejecución.
+  </div>
+
+  <!-- Componentes principales -->
+  <p class="table-section-title">Componentes principales</p>
+  <div class="comp-grid">
+    <div class="comp-item">
+      <div class="comp-icon">🧠</div>
+      <div class="comp-name">CPU</div>
+      <div class="comp-desc">Ejecuta instrucciones. Se divide en <strong>Unidad de Control (CU)</strong> y <strong>ALU</strong>.</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-icon">💾</div>
+      <div class="comp-name">Memoria</div>
+      <div class="comp-desc">Almacena datos e instrucciones. Organizada en celdas con <strong>direcciones</strong>.</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-icon">⌨️</div>
+      <div class="comp-name">Entrada / Salida</div>
+      <div class="comp-desc">Comunica el sistema con el exterior. Teclado, pantalla, discos…</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-icon">🔌</div>
+      <div class="comp-name">Bus de comunicación</div>
+      <div class="comp-desc">Canal que conecta CPU, memoria y dispositivos E/S.</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-icon">🎛️</div>
+      <div class="comp-name">Unidad de Control (CU)</div>
+      <div class="comp-desc">Interpreta y ejecuta las instrucciones del programa.</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-icon">➕</div>
+      <div class="comp-name">ALU</div>
+      <div class="comp-desc">Realiza operaciones matemáticas (suma, resta) y lógicas (AND, OR).</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ciclo de instrucción -->
+  <p class="table-section-title">Ciclo de instrucción (cómo funciona)</p>
+  <div class="cycle-grid">
+    <div class="cycle-item">
+      <div class="cycle-num">1</div>
+      <div class="cycle-name">Búsqueda</div>
+      <div class="cycle-en">Fetch</div>
+      <div class="cycle-desc">La CPU lee una instrucción desde la dirección de memoria indicada.</div>
+    </div>
+    <div class="cycle-item">
+      <div class="cycle-num">2</div>
+      <div class="cycle-name">Decodificación</div>
+      <div class="cycle-en">Decode</div>
+      <div class="cycle-desc">La Unidad de Control interpreta la instrucción y decide qué hacer.</div>
+    </div>
+    <div class="cycle-item">
+      <div class="cycle-num">3</div>
+      <div class="cycle-name">Ejecución</div>
+      <div class="cycle-en">Execute</div>
+      <div class="cycle-desc">Se realiza el cálculo, movimiento de datos o comunicación con E/S.</div>
+    </div>
+    <div class="cycle-item">
+      <div class="cycle-num">4</div>
+      <div class="cycle-name">Almacenamiento</div>
+      <div class="cycle-en">Store</div>
+      <div class="cycle-desc">Los resultados se guardan en memoria o se envían a un dispositivo de salida.</div>
+    </div>
+  </div>
+
+  <div class="script-note" style="margin-bottom:20px;">
+    🔁 Este ciclo se repite para <strong>cada instrucción</strong> del programa, de forma continua.
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ventajas e inconvenientes -->
+  <div class="cols">
+    <div class="card">
+      <div class="card-header"><span class="card-title">✅ Ventajas</span></div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-text"><strong>Simplicidad:</strong> estructura unificada, diseño de hardware menos complejo.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-text"><strong>Flexibilidad:</strong> los programas se pueden almacenar, modificar y ejecutar desde la misma memoria.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">✓</div>
+          <div class="step-text"><strong>Economía:</strong> memoria compartida para datos e instrucciones reduce costes de hardware.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">⚠️ Limitaciones</span></div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">!</div>
+          <div class="step-text"><strong>Cuello de botella:</strong> CPU y memoria comparten un único canal de comunicación → ralentiza sistemas de alto rendimiento.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">!</div>
+          <div class="step-text"><strong>Riesgo de corrupción:</strong> datos e instrucciones comparten espacio de memoria → un error puede sobrescribir instrucciones.</div>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🚀 Optimizaciones modernas</span></div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">→</div>
+          <div class="step-text"><strong>Memoria caché:</strong> reduce el cuello de botella guardando datos de uso frecuente cerca de la CPU.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">→</div>
+          <div class="step-text"><strong>Arquitecturas paralelas:</strong> varios núcleos o CPUs procesan múltiples instrucciones a la vez.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tabla resumen -->
+  <p class="table-section-title">Resumen: partes de la CPU</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr><th>Componente</th><th>Función</th></tr>
+      </thead>
+      <tbody>
+      <tr><td><strong>Unidad de Control (CU)</strong></td><td>Interpreta y coordina la ejecución de instrucciones</td></tr>
+      <tr><td><strong>ALU</strong></td><td>Realiza operaciones matemáticas y lógicas</td></tr>
+      <tr><td><strong>Registros</strong></td><td>Memoria ultrarrápida interna que guarda datos temporales</td></tr>
+      <tr><td><strong>Contador de programa</strong></td><td>Guarda la dirección de la próxima instrucción a ejecutar</td></tr>
+      <tr><td><strong>Interrupciones</strong></td><td>Pausan la CPU para atender eventos externos (teclado, red…)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

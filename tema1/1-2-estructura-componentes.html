@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.2 Estructura y componentes</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+    .comp-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:20px; }
+    .comp-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 12px; }
+    .comp-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:3px;display:flex;align-items:center;gap:6px; }
+    .comp-desc { font-size:12px;color:var(--color-text-secondary);line-height:1.4; }
+    .comp-tag { font-size:10px;font-weight:500;padding:1px 7px;border-radius:99px;background:var(--tag-bg);color:var(--tag-text); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">1.2 Estructura y componentes</p>
+  <p class="section-sub">Los elementos físicos de un sistema informático y cómo trabajan juntos.</p>
+
+  <hr class="divider">
+
+  <!-- Placa base -->
+  <p class="table-section-title">🔩 Placa base</p>
+  <div class="script-note" style="margin-bottom:12px;">
+    La <strong>columna vertebral</strong> del ordenador. Conecta y permite la comunicación entre todos los componentes.
+  </div>
+
+  <div class="cols" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Formatos (tamaños)</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+          <tr><th>Formato</th><th>Tamaño</th><th>Uso típico</th></tr>
+          </thead>
+          <tbody>
+          <tr><td><strong>ATX</strong></td><td>Grande</td><td>PC de escritorio estándar</td></tr>
+          <tr><td><strong>Micro-ATX</strong></td><td>Mediano</td><td>Ordenadores compactos</td></tr>
+          <tr><td><strong>Mini-ITX</strong></td><td>Pequeño</td><td>Sistemas con expansión limitada</td></tr>
+          <tr><td><strong>E-ATX</strong></td><td>Muy grande</td><td>Servidores y estaciones de trabajo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">Componentes clave de la placa base</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">Zócalo del procesador</code><span class="cmd-desc">Ranura donde se instala la CPU</span></div>
+        <div class="cmd-row"><code class="cmd">Ranuras RAM</code><span class="cmd-desc">Slots para los módulos de memoria</span></div>
+        <div class="cmd-row"><code class="cmd">Chipset</code><span class="cmd-desc">Gestiona la comunicación entre CPU, RAM y periféricos</span></div>
+        <div class="cmd-row"><code class="cmd">Conectores de expansión</code><span class="cmd-desc">Para tarjetas gráficas, de red, de sonido…</span></div>
+        <div class="cmd-row"><code class="cmd">Puertos E/S</code><span class="cmd-desc">USB, HDMI, Ethernet, audio…</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CPU -->
+  <p class="table-section-title">🧠 Procesador (CPU)</p>
+  <div class="script-note" style="margin-bottom:12px;">
+    El <strong>cerebro del sistema</strong>. Ejecuta instrucciones y realiza cálculos. Arquitecturas modernas: <strong>x86</strong> (Intel/AMD) y <strong>ARM</strong> (móviles).
+  </div>
+
+  <div class="comp-grid">
+    <div class="comp-item">
+      <div class="comp-name">🎛️ Unidad de Control (CU)</div>
+      <div class="comp-desc">Interpreta y ejecuta las instrucciones del programa.</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">➕ ALU</div>
+      <div class="comp-desc">Operaciones matemáticas (suma, resta) y lógicas (AND, OR).</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">📌 Registros</div>
+      <div class="comp-desc">Memoria ultrarrápida dentro de la CPU para datos temporales.</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">🔢 Contador de programa</div>
+      <div class="comp-desc">Guarda la dirección de la próxima instrucción a ejecutar.</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">📋 Set de instrucciones</div>
+      <div class="comp-desc">Conjunto de operaciones básicas que puede realizar la CPU.</div>
+    </div>
+    <div class="comp-item">
+      <div class="comp-name">🔔 Interrupciones</div>
+      <div class="comp-desc">Pausan la CPU para atender eventos externos (teclado, red…).</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Memoria -->
+  <p class="table-section-title">💾 Memoria interna</p>
+  <div class="table-wrap" style="margin-bottom:20px;">
+    <table>
+      <thead>
+      <tr><th>Tipo</th><th>Característica</th><th>Volatilidad</th><th>Ejemplos</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><strong>RAM</strong></td>
+        <td>Almacenamiento temporal de datos en uso</td>
+        <td><span class="tag-cat">Volátil</span></td>
+        <td>DDR4, DDR5, LPDDR</td>
+      </tr>
+      <tr>
+        <td><strong>ROM / xPROM</strong></td>
+        <td>Datos permanentes (firmware, BIOS)</td>
+        <td><span class="tag-cat">No volátil</span></td>
+        <td>ROM, EPROM, EEPROM</td>
+      </tr>
+      <tr>
+        <td><strong>Caché</strong></td>
+        <td>Memoria ultrarrápida integrada en la CPU</td>
+        <td><span class="tag-cat">Volátil</span></td>
+        <td>L1, L2, L3</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="script-note" style="margin-bottom:20px;">
+    <strong>💡 Volátil</strong> = se borra al apagar el equipo &nbsp;·&nbsp; <strong>No volátil</strong> = los datos persisten sin corriente.
+  </div>
+
+  <hr class="divider">
+
+  <!-- E/S y almacenamiento -->
+  <div class="cols">
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">🔌 Interfaces de Entrada/Salida</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">Entrada</code><span class="cmd-desc">Reciben datos: teclado, ratón, escáner</span></div>
+        <div class="cmd-row"><code class="cmd">Salida</code><span class="cmd-desc">Envían datos: monitor, impresora, altavoces</span></div>
+        <div class="cmd-row"><code class="cmd">Combinado (E/S)</code><span class="cmd-desc">Bidireccional: USB, red Ethernet</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🔧 Adaptadores de conexión</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">Red</code><span class="cmd-desc">Ethernet, Wi-Fi</span></div>
+        <div class="cmd-row"><code class="cmd">Vídeo</code><span class="cmd-desc">HDMI, DisplayPort</span></div>
+        <div class="cmd-row"><code class="cmd">Almacenamiento</code><span class="cmd-desc">SATA, M.2</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">🗄️ Discos y almacenamiento</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+          <tr><th>Tipo</th><th>Tecnología</th><th>Velocidad</th></tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><strong>HDD</strong></td>
+            <td>Platos magnéticos</td>
+            <td><span class="tag-cat">Lenta</span></td>
+          </tr>
+          <tr>
+            <td><strong>SSD</strong></td>
+            <td>Memoria flash (sin partes móviles)</td>
+            <td><span class="tag-cat">Rápida</span></td>
+          </tr>
+          <tr>
+            <td><strong>NVMe</strong></td>
+            <td>SSD por interfaz PCIe</td>
+            <td><span class="tag-cat">Muy rápida</span></td>
+          </tr>
+          <tr>
+            <td><strong>SSHD</strong></td>
+            <td>HDD + SSD (híbrido)</td>
+            <td><span class="tag-cat">Intermedia</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="script-note" style="margin-top:10px;">
+        <strong>HDD:</strong> más barato y mayor capacidad &nbsp;·&nbsp; <strong>SSD:</strong> más rápido pero más caro por GB.
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

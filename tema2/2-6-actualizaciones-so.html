@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tema 2.6 – Actualizaciones de los SO</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    :root {
+      --purple:       #7c3aed;
+      --purple-light: #ede9fe;
+      --blue:         #1d4ed8;
+      --blue-light:   #dbeafe;
+      --green:        #15803d;
+      --green-dark:   #14532d;
+      --green-light:  #dcfce7;
+      --orange:       #c2410c;
+      --orange-light: #ffedd5;
+      --red:          #b91c1c;
+      --red-light:    #fee2e2;
+      --yellow:       #92400e;
+      --yellow-light: #fef3c7;
+      --teal:         #0f766e;
+      --teal-light:   #ccfbf1;
+      --gray-50:      #f8fafc;
+      --gray-100:     #f1f5f9;
+      --gray-200:     #e2e8f0;
+      --gray-700:     #334155;
+      --gray-900:     #0f172a;
+      --radius:       10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .page-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 60%, #7c3aed 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+    .page-header .label {
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #c4b5fd;
+      margin-bottom: .4rem;
+    }
+    .page-header h1 { font-size: 1.6rem; font-weight: 700; }
+    .page-header p  { font-size: .9rem; color: #ddd6fe; margin-top: .4rem; }
+
+    .content { max-width: 860px; margin: 0 auto; padding: 1.8rem 1rem 3rem; }
+
+    /* NOTAS */
+    .note {
+      border-left: 4px solid var(--purple);
+      background: var(--purple-light);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: .9rem 1.1rem;
+      font-size: .87rem;
+      margin-bottom: 1.2rem;
+    }
+    .note strong { color: var(--purple); }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .8rem;
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 1.8rem 0 .8rem;
+    }
+    .section-title .num {
+      background: var(--purple);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .25rem .55rem;
+      border-radius: 6px;
+    }
+    .section-title h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    /* GRID 2 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media(max-width:600px){ .grid-2{ grid-template-columns:1fr; } }
+
+    /* POR QUÉ ACTUALIZAR — iconos */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px,1fr));
+      gap: .8rem;
+    }
+    .why-item {
+      border-radius: var(--radius);
+      padding: .9rem 1rem;
+      text-align: center;
+      border: 1px solid;
+    }
+    .why-item .wi-icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .why-item h4 { font-size: .85rem; font-weight: 700; margin-bottom: .25rem; }
+    .why-item p  { font-size: .77rem; }
+    .wi-sec  { background: #fee2e2; border-color: #fca5a5; }
+    .wi-sec h4 { color: var(--red); }
+    .wi-sec p  { color: #991b1b; }
+    .wi-est  { background: var(--blue-light); border-color: #93c5fd; }
+    .wi-est h4 { color: var(--blue); }
+    .wi-est p  { color: #1e40af; }
+    .wi-com  { background: var(--teal-light); border-color: #5eead4; }
+    .wi-com h4 { color: var(--teal); }
+    .wi-com p  { color: #134e4a; }
+    .wi-fun  { background: var(--green-light); border-color: #86efac; }
+    .wi-fun h4 { color: var(--green); }
+    .wi-fun p  { color: var(--green-dark); }
+
+    /* PELIGROS */
+    .danger-item {
+      display: flex;
+      gap: .8rem;
+      align-items: flex-start;
+      padding: .7rem .9rem;
+      border-radius: 8px;
+      margin-bottom: .6rem;
+      background: var(--red-light);
+      border-left: 4px solid var(--red);
+    }
+    .danger-item:last-child { margin-bottom: 0; }
+    .danger-item .di-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .danger-item h4 { font-size: .85rem; font-weight: 700; color: var(--red); margin-bottom: .15rem; }
+    .danger-item p  { font-size: .8rem; color: #7f1d1d; }
+
+    /* CICLO DE VIDA — línea horizontal */
+    .lifecycle {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin: .5rem 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    .lc-phase {
+      flex: 1;
+      min-width: 100px;
+      padding: .8rem .7rem;
+      text-align: center;
+    }
+    .lc-phase .lc-icon { font-size: 1.2rem; margin-bottom: .25rem; }
+    .lc-phase h4 { font-size: .78rem; font-weight: 700; margin-bottom: .2rem; }
+    .lc-phase p  { font-size: .72rem; }
+    .lc-1 { background: #e0f2fe; }
+    .lc-1 h4 { color: #0369a1; }
+    .lc-1 p  { color: #075985; }
+    .lc-2 { background: var(--green-light); }
+    .lc-2 h4 { color: var(--green); }
+    .lc-2 p  { color: var(--green-dark); }
+    .lc-3 { background: var(--yellow-light); }
+    .lc-3 h4 { color: var(--yellow); }
+    .lc-3 p  { color: #78350f; }
+    .lc-4 { background: var(--orange-light); }
+    .lc-4 h4 { color: var(--orange); }
+    .lc-4 p  { color: #9a3412; }
+    .lc-5 { background: var(--red-light); }
+    .lc-5 h4 { color: var(--red); }
+    .lc-5 p  { color: #7f1d1d; }
+
+    /* LTS */
+    .lts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px,1fr));
+      gap: .75rem;
+    }
+    .lts-item {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: .9rem 1rem;
+    }
+    .lts-item h4 {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .3rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .lts-item p { font-size: .79rem; color: #475569; }
+
+    /* LTS vs normal */
+    .tabla {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .84rem;
+    }
+    .tabla th {
+      background: var(--gray-100);
+      padding: .5rem .8rem;
+      text-align: left;
+      font-weight: 700;
+      color: var(--gray-900);
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .tabla td {
+      padding: .5rem .8rem;
+      border-bottom: 1px solid var(--gray-100);
+      vertical-align: top;
+    }
+    .tabla tr:last-child td { border-bottom: none; }
+    .tabla tr:hover td { background: var(--gray-50); }
+
+    /* BADGE */
+    .badge {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .15rem .5rem;
+      border-radius: 999px;
+      margin-right: .25rem;
+      vertical-align: middle;
+    }
+    .badge-green  { background: var(--green-light);  color: var(--green); }
+    .badge-blue   { background: var(--blue-light);   color: var(--blue); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+    .badge-red    { background: var(--red-light);    color: var(--red); }
+
+    /* CMD */
+    .cmd {
+      display: block;
+      background: #1e293b;
+      color: #86efac;
+      border-radius: 7px;
+      padding: .5rem .9rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: .82rem;
+      margin: .4rem 0;
+    }
+
+    /* PATH */
+    .path {
+      background: var(--gray-100);
+      color: #1e3a8a;
+      border-radius: 5px;
+      padding: .15rem .45rem;
+      font-size: .8rem;
+      font-family: 'Consolas', monospace;
+    }
+
+    /* TYPE labels */
+    .type-gui { background: #dcfce7; color: #15803d; font-size: .7rem; font-weight:700; padding:.1rem .45rem; border-radius:4px; }
+    .type-cli { background: #ffedd5; color: #c2410c; font-size: .7rem; font-weight:700; padding:.1rem .45rem; border-radius:4px; }
+  </style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="label">Sistemas Informáticos · Tema 2</div>
+  <h1>2.6 Actualizaciones de los SO</h1>
+  <p>Por qué actualizar · Peligros · Ciclo de vida · LTS</p>
+</header>
+
+<div class="content">
+
+  <div class="note">
+    <strong>Idea clave:</strong> Mantener el SO actualizado es <strong>fundamental</strong> para garantizar seguridad, estabilidad y compatibilidad. No hacerlo expone el equipo a ataques y problemas graves.
+  </div>
+
+  <!-- ══════════════════════
+       POR QUÉ ACTUALIZAR
+  ═══════════════════════ -->
+  <div class="section-title">
+    <span class="num">✅</span>
+    <h2>¿Por qué es importante actualizar?</h2>
+  </div>
+
+  <div class="card">
+    <div class="why-grid">
+      <div class="why-item wi-sec">
+        <div class="wi-icon">🔒</div>
+        <h4>Seguridad</h4>
+        <p>Corrigen vulnerabilidades que los hackers pueden explotar. Sin updates → más riesgo de virus, malware y ransomware.</p>
+      </div>
+      <div class="why-item wi-est">
+        <div class="wi-icon">⚡</div>
+        <h4>Estabilidad y rendimiento</h4>
+        <p>Mejoran el funcionamiento del software y corrigen errores que ralentizan o bloquean el sistema.</p>
+      </div>
+      <div class="why-item wi-com">
+        <div class="wi-icon">🔌</div>
+        <h4>Compatibilidad</h4>
+        <p>Garantizan que el SO pueda ejecutar nuevo software, hardware y servicios en red.</p>
+      </div>
+      <div class="why-item wi-fun">
+        <div class="wi-icon">✨</div>
+        <h4>Nuevas funcionalidades</h4>
+        <p>Incorporan características que mejoran la experiencia y productividad del usuario.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       CÓMO ACTUALIZAR
+  ═══════════════════════ -->
+  <div class="section-title">
+    <span class="num">🔧</span>
+    <h2>Cómo actualizar</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🪟 Windows <span class="type-gui">GUI</span></h3>
+      <p style="font-size:.85rem;margin-bottom:.5rem">Ve a:</p>
+      <p><span class="path">Configuración → Actualización y seguridad → Windows Update</span></p>
+      <p style="font-size:.83rem;margin-top:.5rem">Haz clic en <strong>Buscar actualizaciones</strong> e instala todo lo disponible.</p>
+    </div>
+    <div class="card">
+      <h3>🐧 Ubuntu <span class="type-cli">CLI</span></h3>
+      <p style="font-size:.85rem;margin-bottom:.4rem">Desde el terminal:</p>
+      <code class="cmd">sudo apt update</code>
+      <code class="cmd">sudo apt upgrade</code>
+      <p style="font-size:.78rem;color:#64748b;margin-top:.3rem">O por GUI: <span class="path">Software y actualizaciones → Buscar actualizaciones</span></p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       PELIGROS SIN ACTUALIZAR
+  ═══════════════════════ -->
+  <div class="section-title">
+    <span class="num">⚠️</span>
+    <h2>Peligros de NO actualizar</h2>
+  </div>
+
+  <div class="card">
+    <div class="danger-item">
+      <div class="di-icon">🦠</div>
+      <div>
+        <h4>Vulnerabilidades de seguridad</h4>
+        <p>Las brechas conocidas quedan abiertas. Los atacantes las explotan para robar datos, instalar malware o ransomware.</p>
+      </div>
+    </div>
+    <div class="danger-item">
+      <div class="di-icon">🔌</div>
+      <div>
+        <h4>Incompatibilidad con software y hardware</h4>
+        <p>El SO desactualizado puede no ejecutar nuevas versiones de apps o drivers, causando fallos y ralentizaciones.</p>
+      </div>
+    </div>
+    <div class="danger-item">
+      <div class="di-icon">💥</div>
+      <div>
+        <h4>Problemas de estabilidad y rendimiento</h4>
+        <p>Los bugs sin corregir pueden provocar bloqueos, cuelgues e inestabilidad general del sistema.</p>
+      </div>
+    </div>
+    <div class="danger-item">
+      <div class="di-icon">🚫</div>
+      <div>
+        <h4>Pérdida de soporte técnico</h4>
+        <p>El fabricante deja de ofrecer parches y ayuda para versiones antiguas. Si hay un problema, no habrá solución oficial.</p>
+      </div>
+    </div>
+    <div class="danger-item">
+      <div class="di-icon">🎯</div>
+      <div>
+        <h4>Exposición a ataques dirigidos</h4>
+        <p>Los atacantes buscan específicamente SO desactualizados con vulnerabilidades conocidas y públicas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       CICLO DE VIDA
+  ═══════════════════════ -->
+  <div class="section-title">
+    <span class="num">🔄</span>
+    <h2>Ciclo de vida del software</h2>
+  </div>
+
+  <div class="card">
+    <p style="font-size:.86rem;margin-bottom:.9rem">Todo SO pasa por estas fases. Conocerlas ayuda a saber <strong>cuándo actualizar o cambiar de versión</strong>.</p>
+    <div class="lifecycle">
+      <div class="lc-phase lc-1">
+        <div class="lc-icon">🛠️</div>
+        <h4>Desarrollo</h4>
+        <p>Se crea y prueba el SO. Se corrigen errores antes del lanzamiento.</p>
+      </div>
+      <div class="lc-phase lc-2">
+        <div class="lc-icon">🚀</div>
+        <h4>Lanzamiento inicial</h4>
+        <p>Primera versión pública. Parches rápidos ante errores iniciales.</p>
+      </div>
+      <div class="lc-phase lc-2">
+        <div class="lc-icon">✅</div>
+        <h4>Soporte activo</h4>
+        <p>Updates regulares: nuevas funciones, seguridad y corrección de bugs.</p>
+      </div>
+      <div class="lc-phase lc-3">
+        <div class="lc-icon">🔧</div>
+        <h4>Soporte extendido</h4>
+        <p>Solo actualizaciones de seguridad y errores críticos. Sin nuevas funciones.</p>
+      </div>
+      <div class="lc-phase lc-5">
+        <div class="lc-icon">💀</div>
+        <h4>Fin de vida (EOL)</h4>
+        <p>Sin soporte de ningún tipo. Muy vulnerable. Hay que migrar.</p>
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:#64748b;margin-top:.6rem;text-align:center">EOL = <em>End Of Life</em> — Fin del ciclo de soporte</p>
+  </div>
+
+  <!-- ══════════════════════
+       LTS
+  ═══════════════════════ -->
+  <div class="section-title">
+    <span class="num">LTS</span>
+    <h2>¿Qué es el LTS? (Long Term Support)</h2>
+  </div>
+
+  <div class="note">
+    <strong>LTS</strong> = versiones de software diseñadas para recibir soporte <strong>a largo plazo</strong>, generalmente <strong>5 a 10 años</strong>. Muy comunes en distribuciones Linux como Ubuntu.
+  </div>
+
+  <div class="card">
+    <div class="lts-grid">
+      <div class="lts-item">
+        <h4>🏛️ Estabilidad</h4>
+        <p>Diseñadas para ser muy estables. Ideales para entornos de producción y servidores.</p>
+      </div>
+      <div class="lts-item">
+        <h4>📅 Soporte prolongado</h4>
+        <p>Parches de seguridad garantizados durante años. Sin preocupación por obsolescencia a corto plazo.</p>
+      </div>
+      <div class="lts-item">
+        <h4>🔒 Actualizaciones de seguridad</h4>
+        <p>Reciben fixes de seguridad y corrección de errores críticos sin cambios drásticos.</p>
+      </div>
+      <div class="lts-item">
+        <h4>🐢 Menos cambios drásticos</h4>
+        <p>No incluyen las últimas novedades. El objetivo es la estabilidad, no la vanguardia tecnológica.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LTS vs versión normal -->
+  <div class="card">
+    <h3>⚖️ LTS vs versión normal</h3>
+    <table class="tabla">
+      <thead>
+      <tr>
+        <th>Aspecto</th>
+        <th><span class="badge badge-purple">LTS</span> Long Term Support</th>
+        <th><span class="badge badge-blue">Normal</span> Versión estándar</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><strong>Período de soporte</strong></td>
+        <td>5 – 10 años</td>
+        <td>1 – 2 años</td>
+      </tr>
+      <tr>
+        <td><strong>Nuevas funciones</strong></td>
+        <td>Pocas (prioridad: estabilidad)</td>
+        <td>Sí, frecuentes</td>
+      </tr>
+      <tr>
+        <td><strong>Ideal para</strong></td>
+        <td>Servidores, empresas, producción</td>
+        <td>Uso doméstico, desarrollo</td>
+      </tr>
+      <tr>
+        <td><strong>Riesgo de cambio</strong></td>
+        <td>Bajo</td>
+        <td>Medio-alto</td>
+      </tr>
+      <tr>
+        <td><strong>Ejemplo Ubuntu</strong></td>
+        <td><span class="badge badge-green">Ubuntu 22.04 LTS</span></td>
+        <td><span class="badge badge-blue">Ubuntu 23.10</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

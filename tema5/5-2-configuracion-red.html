@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.2 Configuración de Red</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .type-gui {
+      font-size: 11px; font-weight: 500;
+      padding: 2px 8px; border-radius: 99px;
+      background: #E6F4EA; color: #1E6B2E;
+    }
+    .type-cli {
+      font-size: 11px; font-weight: 500;
+      padding: 2px 8px; border-radius: 99px;
+      background: #FEF3E2; color: #A05C00;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .step {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .step-num {
+      font-size: 11px;
+      font-weight: 600;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-purple);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-text {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+    .step-text strong {
+      color: var(--color-text-primary);
+    }
+    .param-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .param-item {
+      background: var(--color-bg-secondary);
+      border: 0.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 8px 10px;
+    }
+    .param-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-purple);
+      margin-bottom: 2px;
+    }
+    .param-desc {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+    .code-block {
+      background: var(--color-bg-secondary);
+      border: 0.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-family: var(--font-mono),monospace;
+      font-size: 12px;
+      color: var(--color-text-primary);
+      white-space: pre;
+      overflow-x: auto;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">5.2 Configuración de red</p>
+  <p class="section-sub">Parámetros esenciales para conectar un dispositivo a la red correctamente.</p>
+
+  <!-- Parámetros clave -->
+  <p class="table-section-title">Parámetros de configuración</p>
+  <div class="param-grid" style="margin-bottom:20px;">
+    <div class="param-item">
+      <div class="param-name">🖥️ Dirección IP</div>
+      <div class="param-desc">Identifica al dispositivo en la red. Puede ser estática (manual) o dinámica (DHCP).</div>
+    </div>
+    <div class="param-item">
+      <div class="param-name">🎭 Máscara de subred</div>
+      <div class="param-desc">Separa la parte de red de la parte de host. Ej: <code style="font-family:var(--font-mono),monospace;font-size:11px;">255.255.255.0</code></div>
+    </div>
+    <div class="param-item">
+      <div class="param-name">🚪 Puerta de enlace</div>
+      <div class="param-desc">Dispositivo que conecta la red local con el exterior (internet).</div>
+    </div>
+    <div class="param-item">
+      <div class="param-name">🔍 DNS</div>
+      <div class="param-desc">Traduce nombres de dominio (como google.com) a direcciones IP.</div>
+    </div>
+    <div class="param-item">
+      <div class="param-name">⚡ DHCP</div>
+      <div class="param-desc">Servidor que asigna IP automáticamente al conectarse a la red.</div>
+    </div>
+    <div class="param-item">
+      <div class="param-name">🔧 Avanzado</div>
+      <div class="param-desc">NAT, VLANs, QoS — para redes más complejas y segmentadas.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Windows -->
+  <div class="cols">
+    <!-- GUI Windows -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows</span>
+        <span class="card-title">Configuración gráfica</span>
+        <span class="type-gui">GUI</span>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Inicio → <strong>Configuración</strong> → <strong>Red e Internet</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Estado → <strong>Cambiar opciones de adaptador</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Clic derecho en la red → <strong>Propiedades</strong></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Selecciona <strong>TCP/IPv4</strong> → <strong>Propiedades</strong></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Introduce IP, máscara, gateway y DNS → <strong>Aceptar</strong></div></div>
+      </div>
+    </div>
+
+    <!-- CLI Windows -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows</span>
+        <span class="card-title">Línea de comandos</span>
+        <span class="type-cli">CLI</span>
+      </div>
+      <div class="topic">
+        <div class="topic-label">Asignar IP estática</div>
+        <div class="code-block">netsh interface ip set address name="Ethernet"
+static 192.168.1.10 255.255.255.0 192.168.1.1
+        </div>
+      </div>
+      <div class="topic">
+        <div class="topic-label">Configurar DNS</div>
+        <div class="code-block">netsh interface ip set dns name="Ethernet"
+static 8.8.8.8</div>
+      </div>
+      <div class="topic">
+        <div class="topic-label">Verificar configuración</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">ipconfig /all</code><span class="cmd-desc">Ver toda la config de red</span></div>
+          <div class="cmd-row"><code class="cmd">ping 8.8.8.8</code><span class="cmd-desc">Comprobar conectividad</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ubuntu -->
+  <div class="cols">
+    <!-- GUI Ubuntu -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Configuración gráfica (NetworkManager)</span>
+        <span class="type-gui">GUI</span>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Icono de red → <strong>Configuración de red</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Selecciona la conexión (Ethernet o Wi-Fi)</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Pestaña <strong>IPv4</strong> → Método: <strong>Manual</strong></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Introduce IP, máscara, gateway y DNS</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Clic en <strong>Aplicar</strong> → verificar con <code style="font-family:var(--font-mono),monospace;font-size:11px;">ip a</code></div></div>
+      </div>
+    </div>
+
+    <!-- CLI Ubuntu Netplan -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Netplan (desde Ubuntu 18.04)</span>
+        <span class="type-cli">CLI</span>
+      </div>
+      <div class="topic">
+        <div class="topic-label">Editar archivo de configuración</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">sudo nano /etc/netplan/01-netcfg.yaml</code></div>
+        </div>
+      </div>
+      <div class="topic">
+        <div class="topic-label">Contenido del archivo .yaml</div>
+        <div class="code-block">network:
+          version: 2
+          ethernets:
+          eth0:
+          dhcp4: no
+          addresses: [192.168.1.10/24]
+          gateway4: 192.168.1.1
+          nameservers:
+          addresses: [8.8.8.8, 8.8.4.4]</div>
+      </div>
+      <div class="topic" style="margin-top:10px;">
+        <div class="topic-label">Aplicar cambios</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">sudo netplan apply</code><span class="cmd-desc">Activa la nueva config</span></div>
+          <div class="cmd-row"><code class="cmd">ip a</code><span class="cmd-desc">Verificar interfaces</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="script-note">
+    <strong>💡 Recuerda:</strong> Sustituye <code>eth0</code> por el nombre real de tu interfaz de red. Para conocerlo, ejecuta <code>ip a</code> antes de editar el archivo YAML.
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6.3 Servidores en red</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .type-gui { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#E6F4EA;color:#1E6B2E; }
+    .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+    .steps { display:flex;flex-direction:column;gap:7px; }
+    .step { display:flex;gap:10px;align-items:flex-start; }
+    .step-num { font-size:11px;font-weight:600;min-width:20px;height:20px;border-radius:50%;background:var(--accent-purple);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px; }
+    .step-text { font-size:13px;color:var(--color-text-secondary);line-height:1.45; }
+    .step-text strong { color:var(--color-text-primary); }
+    .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+    .code-block { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 14px;font-family:var(--font-mono),monospace;font-size:12px;color:var(--color-text-primary);white-space:pre;overflow-x:auto;line-height:1.7;margin-top:6px; }
+    .server-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px; }
+    .server-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px;text-align:center; }
+    .server-icon { font-size:20px;margin-bottom:4px; }
+    .server-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:2px; }
+    .server-tool { font-size:11px;color:var(--color-text-secondary); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">6.3 Servidores en red</p>
+  <p class="section-sub">Tipos de servidores esenciales y cómo configurarlos en Windows y Ubuntu.</p>
+
+  <!-- Tipos de servidor -->
+  <p class="table-section-title">Tipos de servidor y herramientas</p>
+  <div class="server-grid">
+    <div class="server-item">
+      <div class="server-icon">📁</div>
+      <div class="server-name">Archivos</div>
+      <div class="server-tool">Win: Servidor de archivos<br>Ubuntu: Samba</div>
+    </div>
+    <div class="server-item">
+      <div class="server-icon">🌐</div>
+      <div class="server-name">Web</div>
+      <div class="server-tool">Win: IIS<br>Ubuntu: Apache / Nginx</div>
+    </div>
+    <div class="server-item">
+      <div class="server-icon">🏢</div>
+      <div class="server-name">Dominio</div>
+      <div class="server-tool">Win: Active Directory<br>Ubuntu: Samba DC</div>
+    </div>
+    <div class="server-item">
+      <div class="server-icon">🗄️</div>
+      <div class="server-name">Base de datos</div>
+      <div class="server-tool">Win: SQL Server<br>Ubuntu: MySQL</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Windows servidores -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-win" style="margin-right:8px;">Windows</span> Configuración de servidores
+  </p>
+
+  <div class="cols">
+    <!-- Archivos + Active Directory -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">📁 Servidor de archivos</span><span class="type-gui">GUI</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Abre el <strong>Administrador del servidor</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Agregar roles → <strong>Servidor de archivos e iSCSI</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Comparte una carpeta: clic derecho → <strong>Propiedades → Compartir</strong></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Configura permisos en Propiedades → <strong>Seguridad → Editar</strong></div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🏢 Active Directory (dominio)</span><span class="type-gui">GUI</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Administrador del servidor → Agregar roles → <strong>AD DS</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Promueve el servidor como <strong>controlador de dominio</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Define el dominio (p. ej., <code style="font-family:var(--font-mono),monospace;font-size:11px;">empresa.local</code>)</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Administra usuarios y grupos desde el <strong>Administrador de Active Directory</strong></div></div>
+      </div>
+    </div>
+
+    <!-- IIS Windows -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">🌐 Servidor web con IIS</span><span class="type-gui">GUI</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Administrador del servidor → <strong>Agregar roles y características</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Selecciona el rol <strong>Servidor web (IIS)</strong> y sigue el asistente</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Coloca los archivos del sitio en <code style="font-family:var(--font-mono),monospace;font-size:11px;">C:\inetpub\wwwroot</code></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Inicia el servidor desde el <strong>Administrador de IIS</strong></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Accede al sitio en <code style="font-family:var(--font-mono),monospace;font-size:11px;">http://localhost</code></div></div>
+      </div>
+      <div class="script-note" style="margin-top:10px;">
+        <strong>Prueba rápida:</strong> Crea un archivo <code>index.html</code> en <code>C:\inetpub\wwwroot</code> y ábrelo en el navegador con <code>http://localhost</code>.
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ubuntu servidores -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-lin" style="margin-right:8px;">Ubuntu</span> Configuración de servidores
+  </p>
+
+  <div class="cols">
+    <!-- Samba + Apache -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">📁 Servidor de archivos (Samba)</span><span class="type-cli">CLI</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">sudo apt install samba</code></div>
+        <div class="cmd-row"><code class="cmd">sudo nano /etc/samba/smb.conf</code></div>
+      </div>
+      <div class="code-block">[compartida]
+        path = /ruta/de/la/carpeta
+        read only = no
+        browsable = yes</div>
+      <div class="cmd-list" style="margin-top:8px;">
+        <div class="cmd-row"><code class="cmd">sudo systemctl restart smbd</code></div>
+      </div>
+      <div class="script-note" style="margin-top:8px;">
+        Accede desde otro equipo con: <code>\\IP_del_servidor\compartida</code>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🌐 Servidor web (Apache)</span><span class="type-cli">CLI</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">sudo apt install apache2</code></div>
+        <div class="cmd-row"><code class="cmd">sudo systemctl restart apache2</code></div>
+      </div>
+      <div class="script-note" style="margin-top:8px;">
+        Coloca los archivos del sitio en <code>/var/www/html</code>. Accede en <code>http://localhost</code>.
+      </div>
+    </div>
+
+    <!-- SSH + MySQL -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">🔒 Servidor SSH (acceso remoto)</span><span class="type-cli">CLI</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">sudo apt install openssh-server</code></div>
+        <div class="cmd-row"><code class="cmd">sudo nano /etc/ssh/sshd_config</code><span class="cmd-desc">Reforzar seguridad</span></div>
+        <div class="cmd-row"><code class="cmd">ssh usuario@ip_del_servidor</code><span class="cmd-desc">Conectar desde otro equipo</span></div>
+      </div>
+      <div class="script-note" style="margin-top:8px;">
+        En <code>sshd_config</code> desactiva el acceso root (<code>PermitRootLogin no</code>) y usa claves públicas para mayor seguridad.
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🗄️ Servidor de base de datos (MySQL)</span><span class="type-cli">CLI</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">sudo apt install mysql-server</code></div>
+        <div class="cmd-row"><code class="cmd">sudo mysql_secure_installation</code><span class="cmd-desc">Asistente de seguridad</span></div>
+        <div class="cmd-row"><code class="cmd">sudo mysql -u root -p</code><span class="cmd-desc">Acceder al servidor</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tabla comparativa -->
+  <p class="table-section-title">Comparativa: tipos de servidor en Windows vs Ubuntu</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr><th>Tipo de servidor</th><th>Windows</th><th>Ubuntu</th><th>Puerto típico</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Archivos</td>
+        <td>Servidor de archivos (SMB)</td>
+        <td>Samba</td>
+        <td><span class="tag-cat">445</span></td>
+      </tr>
+      <tr>
+        <td>Web</td>
+        <td>IIS</td>
+        <td>Apache / Nginx</td>
+        <td><span class="tag-cat">80 / 443</span></td>
+      </tr>
+      <tr>
+        <td>Dominio</td>
+        <td>Active Directory</td>
+        <td>Samba DC / realmd</td>
+        <td><span class="tag-cat">389 / 636</span></td>
+      </tr>
+      <tr>
+        <td>Acceso remoto</td>
+        <td>RDP</td>
+        <td>OpenSSH</td>
+        <td><span class="tag-cat">3389 / 22</span></td>
+      </tr>
+      <tr>
+        <td>Base de datos</td>
+        <td>SQL Server</td>
+        <td>MySQL / PostgreSQL</td>
+        <td><span class="tag-cat">1433 / 3306</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

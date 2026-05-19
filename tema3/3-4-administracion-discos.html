@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.4 Administración de discos</title>
+    <link rel="stylesheet" href="../estilos.css" />
+    <style>
+        .section-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+        }
+        .tool {
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+            border-bottom: 0.5px solid var(--color-border);
+        }
+        .tool:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        .tool-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+
+        .tool-type {
+            font-size: 10px;
+            font-weight: 500;
+            padding: 2px 7px;
+            border-radius: 99px;
+        }
+        .type-gui { background: #E1F5EE; color: #085041; }
+        .type-cli { background: #FAEEDA; color: #633806; }
+
+        .tool-desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        .cmd-block {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 8px 10px;
+            margin-top: 6px;
+        }
+        .cmd-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .cmd-row:last-child { margin-bottom: 0; }
+        .cmd-desc-sm {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            padding-top: 2px;
+        }
+        .note {
+            background: var(--color-bg-secondary);
+            border-left: 3px solid #7F77DD;
+            border-radius: 0;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 6px;
+        }
+        .note strong { color: var(--color-text-primary); font-weight: 500; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <p class="section-title">3.4 Administración de discos</p>
+    <p class="section-sub">Organizar, mantener y optimizar el almacenamiento en dispositivos físicos y virtuales</p>
+
+    <div class="cols">
+
+        <!-- Windows -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-win">Windows</span>
+                <span class="card-title">Herramientas de disco</span>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">🖥 Administrador de discos</span>
+                    <span class="tool-type type-gui">Gráfico</span>
+                </div>
+                <div class="tool-desc">Interfaz visual para gestionar particiones y volúmenes. Acceso con <span class="cmd">Win + X</span> o escribiendo <span class="cmd">diskmgmt.msc</span>.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Crear, eliminar y formatear particiones</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Cambiar la letra de unidad</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Reducir o extender volúmenes</span></div>
+                </div>
+                <div class="note"><strong>Ejemplo:</strong> clic derecho en espacio no asignado → Nuevo volumen simple → sigue el asistente</div>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">💻 DiskPart</span>
+                    <span class="tool-type type-cli">Terminal</span>
+                </div>
+                <div class="tool-desc">Herramienta de línea de comandos para tareas avanzadas. Escribe <span class="cmd">diskpart</span> en PowerShell como administrador.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd">list disk</span><span class="cmd-desc-sm">listar discos</span></div>
+                    <div class="cmd-row"><span class="cmd">list volume</span><span class="cmd-desc-sm">listar volúmenes</span></div>
+                    <div class="cmd-row"><span class="cmd">select disk [n]</span><span class="cmd-desc-sm">seleccionar disco</span></div>
+                    <div class="cmd-row"><span class="cmd">clean</span><span class="cmd-desc-sm">eliminar todas las particiones</span></div>
+                    <div class="cmd-row"><span class="cmd">create partition primary</span><span class="cmd-desc-sm">crear partición</span></div>
+                    <div class="cmd-row"><span class="cmd">format fs=ntfs quick</span><span class="cmd-desc-sm">formatear en NTFS</span></div>
+                    <div class="cmd-row"><span class="cmd">assign letter=[X]</span><span class="cmd-desc-sm">asignar letra de unidad</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ubuntu -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-lin">Ubuntu</span>
+                <span class="card-title">Herramientas de disco</span>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">🖥 Utilidad de discos (GNOME Disks)</span>
+                    <span class="tool-type type-gui">Gráfico</span>
+                </div>
+                <div class="tool-desc">Herramienta visual accesible desde el menú buscando "Discos". Intuitiva para tareas básicas.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Crear, eliminar y redimensionar particiones</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Formatear discos con distintos sistemas de archivos</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Configurar puntos de montaje automáticos</span></div>
+                </div>
+                <div class="note"><strong>Formatear:</strong> selecciona disco → icono engranaje → Formatear disco → elige sistema de archivos</div>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">💻 fdisk / parted / lsblk</span>
+                    <span class="tool-type type-cli">Terminal</span>
+                </div>
+                <div class="tool-desc">Herramientas avanzadas para particionado desde la terminal.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd">lsblk</span><span class="cmd-desc-sm">ver discos y particiones</span></div>
+                    <div class="cmd-row"><span class="cmd">sudo fdisk /dev/sdX</span><span class="cmd-desc-sm">particionar un disco</span></div>
+                    <div class="cmd-row"><span class="cmd">n</span><span class="cmd-desc-sm">nueva partición (dentro de fdisk)</span></div>
+                    <div class="cmd-row"><span class="cmd">d</span><span class="cmd-desc-sm">eliminar partición</span></div>
+                    <div class="cmd-row"><span class="cmd">w</span><span class="cmd-desc-sm">guardar cambios</span></div>
+                    <div class="cmd-row"><span class="cmd">sudo parted /dev/sdX</span><span class="cmd-desc-sm">para discos grandes</span></div>
+                </div>
+                <div class="note">
+                    <strong>Montar partición:</strong><br>
+                    <span class="cmd">sudo mkdir /mnt/mi_particion</span><br>
+                    <span class="cmd">sudo mount /dev/sdX1 /mnt/mi_particion</span><br>
+                    Añadir a <span class="cmd">/etc/fstab</span> para montaje automático al inicio
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="divider" />
+
+    <p class="table-section-title">Tabla comparativa de herramientas</p>
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>Tarea</th>
+                <th>Windows</th>
+                <th>Ubuntu</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span class="tag-cat">Herramienta gráfica</span></td>
+                <td>Administrador de discos <span class="cmd">diskmgmt.msc</span></td>
+                <td>Utilidad de discos (GNOME Disks)</td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Herramienta terminal</span></td>
+                <td><span class="cmd">diskpart</span></td>
+                <td><span class="cmd">fdisk</span> / <span class="cmd">parted</span></td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Ver discos y particiones</span></td>
+                <td><span class="cmd">list disk</span> / <span class="cmd">list volume</span></td>
+                <td><span class="cmd">lsblk</span></td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Crear partición</span></td>
+                <td><span class="cmd">create partition primary</span></td>
+                <td><span class="cmd">n</span> en fdisk o <span class="cmd">mkpart</span> en parted</td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Formatear</span></td>
+                <td><span class="cmd">format fs=ntfs quick</span></td>
+                <td>Engranaje → Formatear disco (GUI)</td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Montar disco</span></td>
+                <td>Automático (letra de unidad)</td>
+                <td><span class="cmd">sudo mount /dev/sdX1 /mnt/ruta</span></td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Montaje automático</span></td>
+                <td>Automático al asignar letra</td>
+                <td>Añadir entrada en <span class="cmd">/etc/fstab</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

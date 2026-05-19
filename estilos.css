@@ -1,0 +1,710 @@
+/* =============================================
+   Tema 3 - Gestión de la Información
+   Estilos compartidos para todos los resúmenes
+   ============================================= */
+
+:root {
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f5f5f3;
+  --color-text-primary: #1a1a18;
+  --color-text-secondary: #6b6b66;
+  --color-border: rgba(0, 0, 0, 0.12);
+  --color-border-strong: rgba(0, 0, 0, 0.25);
+  --font-sans: 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Colores de badge por sistema */
+  --win-bg: #E6F1FB;
+  --win-text: #0C447C;
+  --lin-bg: #EAF3DE;
+  --lin-text: #27500A;
+  --tag-bg: #EEEDFE;
+  --tag-text: #3C3489;
+  --accent-purple: #7F77DD;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1e1e1c;
+    --color-bg-secondary: #2a2a27;
+    --color-text-primary: #f0ede8;
+    --color-text-secondary: #9e9b94;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-border-strong: rgba(255, 255, 255, 0.2);
+    --win-bg: #0c2a44;
+    --win-text: #85B7EB;
+    --lin-bg: #173404;
+    --lin-text: #97C459;
+    --tag-bg: #26215C;
+    --tag-text: #AFA9EC;
+  }
+}
+
+/* =============================================
+   Reset y base
+   ============================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans), sans-serif;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+/* =============================================
+   Contenedor principal
+   ============================================= */
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--color-border);
+}
+
+/* =============================================
+   Cabecera de sección
+   ============================================= */
+
+.section-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.section-sub {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: 24px;
+}
+
+/* =============================================
+   Grid de columnas
+   ============================================= */
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* =============================================
+   Cards
+   ============================================= */
+
+.card {
+  background: var(--color-bg);
+  border: 0.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* =============================================
+   Badges
+   ============================================= */
+
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+.badge-win {
+  background: var(--win-bg);
+  color: var(--win-text);
+}
+
+.badge-lin {
+  background: var(--lin-bg);
+  color: var(--lin-text);
+}
+
+/* =============================================
+   Bloques de tema / categoría dentro de card
+   ============================================= */
+
+.topic {
+  margin-bottom: 14px;
+}
+
+.topic:last-child {
+  margin-bottom: 0;
+}
+
+.topic-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+/* =============================================
+   Comandos
+   ============================================= */
+
+.cmd-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cmd-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.cmd {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  background: var(--color-bg-secondary);
+  border: 0.5px solid var(--color-border);
+  border-radius: 4px;
+  padding: 2px 7px;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cmd-desc {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  padding-top: 2px;
+}
+
+/* =============================================
+   Notas / Script notes
+   ============================================= */
+
+.script-note {
+  background: var(--color-bg-secondary);
+  border-left: 3px solid var(--accent-purple);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.script-note strong {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.script-note code {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  background: var(--color-bg);
+  border: 0.5px solid var(--color-border);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+/* =============================================
+   Divisor
+   ============================================= */
+
+.divider {
+  border: none;
+  border-top: 0.5px solid var(--color-border);
+  margin: 24px 0;
+}
+
+/* =============================================
+   Tabla comparativa
+   ============================================= */
+
+.table-section-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-size: 12px;
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 0.5px solid var(--color-border-strong);
+}
+
+td {
+  padding: 9px 12px;
+  border-bottom: 0.5px solid var(--color-border);
+  color: var(--color-text-primary);
+  vertical-align: middle;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.tag-cat {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--tag-text);
+  background: var(--tag-bg);
+  padding: 2px 8px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+/* =============================================
+   Imágenes
+   ============================================= */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =============================================
+   NUEVOS ESTILOS A AÑADIR A estilos.css
+   (Agregar al final del archivo)
+   ============================================= */
+
+/* =============================================
+   Cabecera principal de la página
+   ============================================= */
+
+.main-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+/* =============================================
+   Sección genérica
+   ============================================= */
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.section:last-of-type {
+  margin-bottom: 2rem;
+}
+
+/* =============================================
+   Descripción de card
+   ============================================= */
+
+.card-description {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+/* =============================================
+   Iconos de card
+   ============================================= */
+
+.card-icon {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+}
+
+/* =============================================
+   Botones
+   ============================================= */
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans), sans-serif;
+}
+
+.btn-primary {
+  background: #007AFF;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0051D5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  background: #003D99;
+}
+
+.btn-secondary {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-strong);
+}
+
+.btn-secondary:hover {
+  background: var(--accent-purple);
+  color: white;
+  border-color: var(--accent-purple);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(127, 119, 221, 0.3);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-accent {
+  background: var(--accent-purple);
+  color: white;
+}
+
+.btn-accent:hover {
+  background: #6B65CC;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(127, 119, 221, 0.4);
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+  background: #5C5BB8;
+}
+
+/* =============================================
+   Metadatos de test
+   ============================================= */
+
+.test-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.test-info {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  padding: 4px 8px;
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+  display: inline-block;
+  width: fit-content;
+}
+
+/* =============================================
+   Metadatos de examen
+   ============================================= */
+
+.exam-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0;
+  padding: 12px;
+  background: var(--color-bg-secondary);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent-purple);
+}
+
+.exam-info {
+  font-size: 13px;
+  color: var(--color-text-primary);
+}
+
+.exam-info strong {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+/* =============================================
+   Grid para modelos de examen
+   ============================================= */
+
+.cols-model {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* =============================================
+   Card para modelos de examen
+   ============================================= */
+
+.card-model {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-model .btn {
+  margin-top: auto;
+}
+
+/* =============================================
+   Footer
+   ============================================= */
+
+.main-footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+/* =============================================
+   Responsive: Tablas en pantallas pequeñas
+   ============================================= */
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .wrap {
+    padding: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .page-subtitle {
+    font-size: 14px;
+  }
+
+  .cols {
+    grid-template-columns: 1fr;
+  }
+
+  .cols-model {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .test-meta,
+  .exam-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .test-info,
+  .exam-info {
+    flex: 1;
+    min-width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0.75rem;
+  }
+
+  .wrap {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .main-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px 16px;
+  }
+
+  .card-icon {
+    font-size: 20px;
+  }
+
+  .card-title {
+    font-size: 14px;
+  }
+
+  .card-description {
+    font-size: 12px;
+  }
+}
+
+/* =============================================
+   Mejoras de accesibilidad
+   ============================================= */
+
+.btn:focus {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+.card:focus-within {
+  box-shadow: 0 0 0 2px var(--accent-purple);
+}
+
+/* =============================================
+   Tema oscuro - Ajustes adicionales
+   ============================================= */
+
+@media (prefers-color-scheme: dark) {
+  .main-header {
+    border-bottom-color: var(--color-border);
+  }
+
+  .main-footer {
+    border-top-color: var(--color-border);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2);
+  }
+
+  .btn-secondary:hover {
+    box-shadow: 0 4px 12px rgba(127, 119, 221, 0.2);
+  }
+
+  .btn-accent:hover {
+    box-shadow: 0 4px 12px rgba(127, 119, 221, 0.25);
+  }
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+  color: var(--accent-purple);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* Navegación anterior/siguiente */
+.subnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.btn-nav-prev,
+.btn-nav-next {
+  flex: 1;
+  text-align: center;
+}
+
+.btn-nav-prev {
+  order: 1;
+}
+
+.progress {
+  order: 2;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 120px;
+}
+
+.btn-nav-next {
+  order: 3;
+}
+
+/* Desactivar botones en primer/último item */
+.btn-nav-prev:disabled,
+.btn-nav-next:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .subnav {
+    flex-direction: column;
+  }
+
+  .btn-nav-prev,
+  .btn-nav-next,
+  .progress {
+    order: unset;
+    width: 100%;
+  }
+
+  .progress {
+    order: 2;
+  }
+}

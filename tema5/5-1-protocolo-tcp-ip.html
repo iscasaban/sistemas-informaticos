@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.1 Protocolo TCP/IP</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    .section-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+
+    /* Diagrama de capas */
+    .layers { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .layer { display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: stretch; }
+    .layer-label { border-radius: var(--radius-md); padding: 12px 14px; display: flex; flex-direction: column; justify-content: center; }
+    .layer-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+    .layer-fn { font-size: 11px; line-height: 1.4; opacity: 0.85; }
+
+    .layer-app { background: #EEEDFE; }
+    .layer-app .layer-name { color: #26215C; }
+    .layer-app .layer-fn { color: #534AB7; }
+    .layer-trans { background: #E6F1FB; }
+    .layer-trans .layer-name { color: #042C53; }
+    .layer-trans .layer-fn { color: #185FA5; }
+    .layer-inet { background: #FAEEDA; }
+    .layer-inet .layer-name { color: #412402; }
+    .layer-inet .layer-fn { color: #854F0B; }
+    .layer-link { background: #E1F5EE; }
+    .layer-link .layer-name { color: #04342C; }
+    .layer-link .layer-fn { color: #0F6E56; }
+
+    .protos { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 10px 12px; background: var(--color-bg-secondary); border-radius: var(--radius-md); }
+    .proto-pill { font-family: var(--font-mono),monospace; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 4px; }
+    .pill-app  { background: #EEEDFE; color: #3C3489; }
+    .pill-trans { background: #E6F1FB; color: #0C447C; }
+    .pill-inet { background: #FAEEDA; color: #633806; }
+    .pill-link { background: #E1F5EE; color: #085041; }
+
+    /* TCP vs UDP */
+    .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .vs-card { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 12px 14px; }
+    .vs-title { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+    .vs-tcp .vs-title { color: #0C447C; }
+    .vs-udp .vs-title { color: #633806; }
+    .vs-row { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 3px; padding-left: 4px; }
+    .vs-row strong { color: var(--color-text-primary); font-weight: 500; }
+
+    /* Flujo */
+    .flow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .flow-step { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; }
+    .flow-num { font-family: var(--font-mono),monospace; font-size: 11px; font-weight: 500; color: #534AB7; margin-bottom: 4px; }
+    .flow-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+    .flow-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+
+    /* IPv4 vs IPv6 */
+    .ip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .ip-card { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 12px 14px; }
+    .ip-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 6px; }
+    .ip-row { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 3px; }
+    .ip-row strong { color: var(--color-text-primary); font-weight: 500; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">5.1 Protocolo TCP/IP</p>
+  <p class="section-sub">El conjunto de protocolos que permite la comunicación entre dispositivos en cualquier red</p>
+
+  <p class="section-label">Las 4 capas del modelo TCP/IP</p>
+  <div class="layers">
+    <div class="layer">
+      <div class="layer-label layer-app">
+        <div class="layer-name">🌐 Capa de aplicación</div>
+        <div class="layer-fn">Servicios directos al usuario: web, email, archivos</div>
+      </div>
+      <div class="protos">
+        <span class="proto-pill pill-app">HTTP</span>
+        <span class="proto-pill pill-app">FTP</span>
+        <span class="proto-pill pill-app">SMTP</span>
+        <span class="proto-pill pill-app">DNS</span>
+        <span class="proto-pill pill-app">SSH</span>
+        <span class="proto-pill pill-app">DHCP</span>
+        <span class="proto-pill pill-app">SNMP</span>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-label layer-trans">
+        <div class="layer-name">🚚 Capa de transporte</div>
+        <div class="layer-fn">Transmisión fiable de datos entre dispositivos</div>
+      </div>
+      <div class="protos">
+        <span class="proto-pill pill-trans">TCP</span>
+        <span class="proto-pill pill-trans">UDP</span>
+        <span class="proto-pill pill-trans">DCCP</span>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-label layer-inet">
+        <div class="layer-name">🗺 Capa de internet</div>
+        <div class="layer-fn">Direccionamiento y encaminamiento de paquetes</div>
+      </div>
+      <div class="protos">
+        <span class="proto-pill pill-inet">IP</span>
+        <span class="proto-pill pill-inet">ICMP</span>
+        <span class="proto-pill pill-inet">IPSEC</span>
+        <span class="proto-pill pill-inet">IGMP</span>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-label layer-link">
+        <div class="layer-name">🔌 Capa de enlace de datos</div>
+        <div class="layer-fn">Transmisión física a través del medio (cable, Wi-Fi)</div>
+      </div>
+      <div class="protos">
+        <span class="proto-pill pill-link">Ethernet</span>
+        <span class="proto-pill pill-link">Wi-Fi</span>
+        <span class="proto-pill pill-link">ARP</span>
+        <span class="proto-pill pill-link">PPP</span>
+        <span class="proto-pill pill-link">L2TP</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-label">TCP vs UDP — ¿cuál usar?</p>
+  <div class="vs-grid">
+    <div class="vs-card vs-tcp">
+      <div class="vs-title">TCP — orientado a conexión</div>
+      <div class="vs-row"><strong>Garantía:</strong> entrega confirmada y en orden</div>
+      <div class="vs-row"><strong>Mecanismo:</strong> confirmaciones y retransmisiones</div>
+      <div class="vs-row"><strong>Velocidad:</strong> más lento (mayor control)</div>
+      <div class="vs-row"><strong>Uso:</strong> web, email, transferencia de archivos</div>
+    </div>
+    <div class="vs-card vs-udp">
+      <div class="vs-title">UDP — sin conexión</div>
+      <div class="vs-row"><strong>Garantía:</strong> no garantiza entrega ni orden</div>
+      <div class="vs-row"><strong>Mecanismo:</strong> envío directo sin confirmación</div>
+      <div class="vs-row"><strong>Velocidad:</strong> más rápido (menor control)</div>
+      <div class="vs-row"><strong>Uso:</strong> streaming, videojuegos, DNS</div>
+    </div>
+  </div>
+
+  <p class="section-label">Flujo de datos en TCP/IP</p>
+  <div class="flow-grid">
+    <div class="flow-step">
+      <div class="flow-num">① Inicio</div>
+      <div class="flow-title">Capa de aplicación</div>
+      <div class="flow-desc">La app solicita enviar datos. Se prepara el mensaje.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">② Segmentación</div>
+      <div class="flow-title">Capa de transporte</div>
+      <div class="flow-desc">Los datos se dividen en paquetes numerados (TCP establece la conexión).</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">③ Direccionamiento</div>
+      <div class="flow-title">Capa de internet</div>
+      <div class="flow-desc">Se asignan IPs de origen y destino. Los paquetes se encapsulan.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">④ Transmisión</div>
+      <div class="flow-title">Capa de enlace</div>
+      <div class="flow-desc">Los datagramas se convierten en tramas y viajan por el medio físico.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">⑤ Recepción</div>
+      <div class="flow-title">Desencapsulación</div>
+      <div class="flow-desc">El receptor reconstruye los datos subiendo por las capas.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">⑥ Entrega</div>
+      <div class="flow-title">Aplicación destino</div>
+      <div class="flow-desc">Los datos llegan a la app receptora. Ciclo completado.</div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <p class="section-label">IPv4 vs IPv6</p>
+  <div class="ip-grid">
+    <div class="ip-card">
+      <div class="ip-title">IPv4</div>
+      <div class="ip-row"><strong>Formato:</strong> 4 números (192.168.1.1)</div>
+      <div class="ip-row"><strong>Direcciones:</strong> ~4.300 millones</div>
+      <div class="ip-row"><strong>Estado:</strong> en uso actualmente, agotándose</div>
+    </div>
+    <div class="ip-card">
+      <div class="ip-title">IPv6</div>
+      <div class="ip-row"><strong>Formato:</strong> 8 grupos hexadecimales</div>
+      <div class="ip-row"><strong>Direcciones:</strong> prácticamente ilimitadas</div>
+      <div class="ip-row"><strong>Ventajas:</strong> mejor enrutamiento y seguridad</div>
+    </div>
+  </div>
+
+  <p class="table-section-title">Tabla resumen de protocolos clave</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Protocolo</th>
+        <th>Capa</th>
+        <th>Función</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="tag-cat">HTTP / HTTPS</span></td>
+        <td>Aplicación</td>
+        <td>Navegación web</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">FTP</span></td>
+        <td>Aplicación</td>
+        <td>Transferencia de archivos</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">SMTP</span></td>
+        <td>Aplicación</td>
+        <td>Envío de correo electrónico</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">DNS</span></td>
+        <td>Aplicación</td>
+        <td>Traducir nombres de dominio a IPs</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">TCP</span></td>
+        <td>Transporte</td>
+        <td>Entrega fiable y ordenada de paquetes</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">UDP</span></td>
+        <td>Transporte</td>
+        <td>Entrega rápida sin confirmación</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">IP</span></td>
+        <td>Internet</td>
+        <td>Direccionamiento y encaminamiento</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">ICMP</span></td>
+        <td>Internet</td>
+        <td>Mensajes de control y errores (ping)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">ARP</span></td>
+        <td>Enlace</td>
+        <td>Resolver IPs a direcciones MAC</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Ethernet / Wi-Fi</span></td>
+        <td>Enlace</td>
+        <td>Transmisión física de datos</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

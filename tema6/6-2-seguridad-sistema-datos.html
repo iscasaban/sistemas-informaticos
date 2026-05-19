@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6.2 Seguridad del sistema y de los datos</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .type-gui { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#E6F4EA;color:#1E6B2E; }
+    .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+    .steps { display:flex;flex-direction:column;gap:7px; }
+    .step { display:flex;gap:10px;align-items:flex-start; }
+    .step-num { font-size:11px;font-weight:600;min-width:20px;height:20px;border-radius:50%;background:var(--accent-purple);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px; }
+    .step-text { font-size:13px;color:var(--color-text-secondary);line-height:1.45; }
+    .step-text strong { color:var(--color-text-primary); }
+    .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+    .code-block { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 14px;font-family:var(--font-mono),monospace;font-size:12px;color:var(--color-text-primary);white-space:pre;overflow-x:auto;line-height:1.7;margin-top:6px; }
+    .pillar-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px; }
+    .pillar { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px;text-align:center; }
+    .pillar-icon { font-size:20px;margin-bottom:4px; }
+    .pillar-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:2px; }
+    .pillar-desc { font-size:11px;color:var(--color-text-secondary); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">6.2 Seguridad del sistema y de los datos</p>
+  <p class="section-sub">Cortafuegos, cifrado, autenticación y actualizaciones: las cuatro capas esenciales de protección.</p>
+
+  <!-- Pilares -->
+  <div class="pillar-grid">
+    <div class="pillar">
+      <div class="pillar-icon">🔥</div>
+      <div class="pillar-name">Cortafuegos</div>
+      <div class="pillar-desc">Filtra el tráfico entrante y saliente.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🔐</div>
+      <div class="pillar-name">Cifrado</div>
+      <div class="pillar-desc">Protege datos en caso de pérdida o robo.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🔑</div>
+      <div class="pillar-name">Autenticación</div>
+      <div class="pillar-desc">Contraseñas seguras, MFA, claves SSH.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🔄</div>
+      <div class="pillar-name">Actualizaciones</div>
+      <div class="pillar-desc">Parchear vulnerabilidades regularmente.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Windows -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-win" style="margin-right:8px;">Windows</span> Herramientas de seguridad
+  </p>
+
+  <div class="cols">
+    <!-- Defender + BitLocker -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">🛡️ Windows Defender</span><span class="type-gui">GUI</span></div>
+      <div class="topic">
+        <div class="topic-label">Acceso</div>
+        <div class="step-text" style="font-size:13px;color:var(--color-text-secondary);">
+          Configuración → Actualización y seguridad → <strong>Seguridad de Windows</strong>
+        </div>
+      </div>
+      <div class="topic" style="margin-top:8px;">
+        <div class="topic-label">Funciones principales</div>
+        <div class="steps">
+          <div class="step"><div class="step-num">✓</div><div class="step-text">Protección en tiempo real contra virus, malware y ransomware</div></div>
+          <div class="step"><div class="step-num">✓</div><div class="step-text">Análisis de amenazas — Protección contra virus → <strong>Análisis rápido</strong></div></div>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🔒 BitLocker (cifrado de disco)</span><span class="type-gui">GUI</span></div>
+      <div class="topic">
+        <div class="topic-label">Acceso</div>
+        <div class="step-text" style="font-size:13px;color:var(--color-text-secondary);">Panel de control → Sistema y seguridad → <strong>BitLocker Drive Encryption</strong></div>
+      </div>
+      <div class="topic" style="margin-top:8px;">
+        <div class="topic-label">Activar cifrado</div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text">Selecciona la unidad → <strong>Activar BitLocker</strong></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text">Elige método de autenticación: contraseña o USB</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text">Guarda la <strong>clave de recuperación</strong> en un lugar seguro</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firewall + Autenticación + Updates -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">🔥 Firewall de Windows Defender</span><span class="type-gui">GUI</span></div>
+      <div class="topic">
+        <div class="topic-label">Acceso</div>
+        <div class="step-text" style="font-size:13px;color:var(--color-text-secondary);">Seguridad de Windows → <strong>Firewall y protección de red</strong></div>
+      </div>
+      <div class="topic" style="margin-top:8px;">
+        <div class="topic-label">Permitir una aplicación</div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text">Clic en <em>Permitir una aplicación a través del firewall</em></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text">Selecciona la app y activa redes públicas o privadas</div></div>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🔑 Autenticación segura</span></div>
+      <div class="topic">
+        <div class="topic-label">Políticas de contraseña</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">gpedit.msc</code><span class="cmd-desc">Editor de políticas de grupo</span></div>
+        </div>
+        <div class="step-text" style="font-size:12px;color:var(--color-text-secondary);margin-top:4px;">
+          Ruta: Configuración del equipo → Configuración de Windows → Seguridad → <strong>Políticas de cuenta</strong>
+        </div>
+      </div>
+      <div class="topic" style="margin-top:8px;">
+        <div class="topic-label">MFA y actualizaciones</div>
+        <div class="steps">
+          <div class="step"><div class="step-num">✓</div><div class="step-text">Habilita <strong>autenticación multifactor (MFA)</strong> para cuentas Microsoft</div></div>
+          <div class="step"><div class="step-num">✓</div><div class="step-text">Configuración → Actualización y seguridad → <strong>Windows Update</strong> → automático</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ubuntu -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-lin" style="margin-right:8px;">Ubuntu</span> Herramientas de seguridad
+  </p>
+
+  <div class="cols">
+    <!-- UFW + Cifrado -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">🔥 UFW — Cortafuegos</span><span class="type-cli">CLI</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">sudo ufw enable</code><span class="cmd-desc">Activar el cortafuegos</span></div>
+        <div class="cmd-row"><code class="cmd">sudo ufw allow ssh</code><span class="cmd-desc">Permitir SSH</span></div>
+        <div class="cmd-row"><code class="cmd">sudo ufw deny 80</code><span class="cmd-desc">Bloquear puerto 80</span></div>
+        <div class="cmd-row"><code class="cmd">sudo ufw status</code><span class="cmd-desc">Ver reglas activas</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🔒 Cifrado de disco (ecryptfs)</span><span class="type-cli">CLI</span></div>
+      <div class="topic">
+        <div class="topic-label">Cifrar una carpeta específica</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">sudo apt install ecryptfs-utils</code></div>
+          <div class="cmd-row"><code class="cmd">ecryptfs-setup-private</code><span class="cmd-desc">Cifra la carpeta del usuario</span></div>
+        </div>
+      </div>
+      <div class="script-note" style="margin-top:8px;">
+        <strong>💡 Alternativa:</strong> Durante la instalación de Ubuntu puedes habilitar el <strong>cifrado completo del disco</strong> desde el instalador.
+      </div>
+    </div>
+
+    <!-- AppArmor + SSH + Updates -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">🛡️ AppArmor</span><span class="type-cli">CLI</span></div>
+      <div class="topic">
+        <div class="topic-label">¿Qué hace?</div>
+        <div class="step-text" style="font-size:13px;color:var(--color-text-secondary);">Restringe las capacidades de cada aplicación. Si una app es comprometida, <strong>no puede acceder a lo que no tiene permitido</strong>.</div>
+      </div>
+      <div class="cmd-list" style="margin-top:8px;">
+        <div class="cmd-row"><code class="cmd">sudo aa-status</code><span class="cmd-desc">Ver estado de AppArmor</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🔑 Autenticación con claves SSH</span><span class="type-cli">CLI</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">ssh-keygen</code><span class="cmd-desc">Genera par de claves pública/privada</span></div>
+        <div class="cmd-row"><code class="cmd">ssh-copy-id usuario@servidor</code><span class="cmd-desc">Copia la clave pública al servidor</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🔄 Actualizaciones automáticas</span><span class="type-cli">CLI</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">sudo apt install unattended-upgrades</code></div>
+        <div class="cmd-row"><code class="cmd">sudo dpkg-reconfigure unattended-upgrades</code></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tabla comparativa -->
+  <p class="table-section-title">Comparativa: herramientas de seguridad</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr><th>Función</th><th>Windows</th><th>Ubuntu</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>Antivirus / protección</td><td>Windows Defender</td><td>AppArmor + ClamAV (opcional)</td></tr>
+      <tr><td>Cifrado de disco</td><td>BitLocker</td><td>ecryptfs / cifrado en instalación</td></tr>
+      <tr><td>Cortafuegos</td><td>Windows Defender Firewall</td><td>UFW / iptables</td></tr>
+      <tr><td>Autenticación segura</td><td>MFA + gpedit.msc</td><td>Claves SSH (<code style="font-family:var(--font-mono),monospace;font-size:12px;">ssh-keygen</code>)</td></tr>
+      <tr><td>Actualizaciones automáticas</td><td>Windows Update</td><td>unattended-upgrades</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

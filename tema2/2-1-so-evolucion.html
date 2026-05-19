@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tema 2 – Introducción y 2.1 Evolución histórica</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    /* ── tokens ── */
+    :root {
+      --purple:   #7c3aed;
+      --purple-light: #ede9fe;
+      --blue:     #1d4ed8;
+      --blue-light:#dbeafe;
+      --green:    #15803d;
+      --green-light:#dcfce7;
+      --orange:   #c2410c;
+      --orange-light:#ffedd5;
+      --gray-50:  #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-700: #334155;
+      --gray-900: #0f172a;
+      --radius:   10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* ── header ── */
+    .page-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 60%, #7c3aed 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+    .page-header .label {
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #c4b5fd;
+      margin-bottom: .4rem;
+    }
+    .page-header h1 { font-size: 1.6rem; font-weight: 700; }
+    .page-header p  { font-size: .9rem; color: #ddd6fe; margin-top: .4rem; }
+
+    /* ── contenido ── */
+    .content { max-width: 860px; margin: 0 auto; padding: 1.8rem 1rem 3rem; }
+
+    /* ── section title ── */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 2rem 0 1rem;
+    }
+    .section-title .num {
+      background: var(--purple);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .25rem .55rem;
+      border-radius: 6px;
+    }
+    .section-title h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    /* ── card base ── */
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .6rem;
+    }
+    .card ul { padding-left: 1.2rem; }
+    .card li { font-size: .88rem; margin-bottom: .35rem; }
+
+    /* ── grid 2 cols ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media(max-width:600px){ .grid-2{ grid-template-columns:1fr; } }
+
+    /* ── nota púrpura ── */
+    .note {
+      border-left: 4px solid var(--purple);
+      background: var(--purple-light);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: .9rem 1.1rem;
+      font-size: .87rem;
+      margin-bottom: 1rem;
+    }
+    .note strong { color: var(--purple); }
+
+    /* ── capas SO ── */
+    .layers {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      max-width: 340px;
+      margin: .5rem auto 1rem;
+    }
+    .layer {
+      text-align: center;
+      padding: .55rem 1rem;
+      border-radius: 8px;
+      font-size: .88rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .layer-1 { background: #7c3aed; }
+    .layer-2 { background: #6d28d9; margin: 0 1rem; }
+    .layer-3 { background: #5b21b6; margin: 0 2rem; }
+    .layer-4 { background: #4c1d95; margin: 0 3rem; }
+
+    /* ── funciones grid ── */
+    .func-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: .8rem;
+    }
+    .func-card {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+      padding: 1rem;
+      text-align: center;
+    }
+    .func-card .icon { font-size: 1.6rem; margin-bottom: .4rem; }
+    .func-card h4    { font-size: .85rem; font-weight: 700; color: var(--gray-900); margin-bottom: .3rem; }
+    .func-card p     { font-size: .78rem; color: #64748b; }
+
+    /* ── timeline ── */
+    .timeline { position: relative; padding-left: 2.2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: .9rem; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--purple), #c4b5fd);
+      border-radius: 2px;
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 1.2rem;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -1.55rem; top: .35rem;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: var(--purple);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--purple);
+    }
+    .tl-era {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      background: var(--purple);
+      color: #fff;
+      padding: .15rem .5rem;
+      border-radius: 4px;
+      margin-bottom: .35rem;
+    }
+    .tl-item h4  { font-size: .9rem; font-weight: 700; color: var(--gray-900); margin-bottom: .2rem; }
+    .tl-item p   { font-size: .82rem; color: #475569; }
+    .tl-item ul  { padding-left: 1rem; }
+    .tl-item li  { font-size: .82rem; margin-bottom: .2rem; }
+
+    /* ── badge colors ── */
+    .badge {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .15rem .5rem;
+      border-radius: 999px;
+      margin-right: .3rem;
+      margin-bottom: .2rem;
+      vertical-align: middle;
+    }
+    .badge-blue   { background: var(--blue-light);   color: var(--blue); }
+    .badge-green  { background: var(--green-light);  color: var(--green); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="label">Sistemas Informáticos · Tema 2</div>
+  <h1>Sistemas Operativos</h1>
+  <p>Introducción + 2.1 Evolución histórica</p>
+</header>
+
+<div class="content">
+
+  <!-- ══════════════════════════════
+       INTRODUCCIÓN
+  ═══════════════════════════════ -->
+  <div class="section-title">
+    <span class="num">INTRO</span>
+    <h2>¿Qué es un Sistema Operativo?</h2>
+  </div>
+
+  <div class="note">
+    <strong>Definición clave:</strong> Un SO es un software de sistema que gestiona los recursos de hardware y software de un ordenador, actuando de <strong>intermediario</strong> entre el usuario y el hardware.
+  </div>
+
+  <!-- capas -->
+  <div class="card">
+    <h3>🔺 Capas de un sistema informático</h3>
+    <div class="layers">
+      <div class="layer layer-1">👤 Usuario</div>
+      <div class="layer layer-2">📦 Aplicación</div>
+      <div class="layer layer-3">⚙️ Sistema Operativo</div>
+      <div class="layer layer-4">🖥️ Hardware</div>
+    </div>
+    <p style="text-align:center;font-size:.8rem;color:#64748b">Cada capa se apoya en la de abajo. El SO es el puente central.</p>
+  </div>
+
+  <!-- funciones principales -->
+  <div class="card">
+    <h3>🛠️ Funciones principales del SO</h3>
+    <div class="func-grid">
+      <div class="func-card">
+        <div class="icon">⚡</div>
+        <h4>Gestión de procesos</h4>
+        <p>Planifica y coordina la ejecución de programas.</p>
+      </div>
+      <div class="func-card">
+        <div class="icon">🧠</div>
+        <h4>Gestión de memoria</h4>
+        <p>Asigna y libera RAM. Usa memoria virtual.</p>
+      </div>
+      <div class="func-card">
+        <div class="icon">💾</div>
+        <h4>Gestión de almacenamiento</h4>
+        <p>Organiza archivos y controla el acceso al disco.</p>
+      </div>
+      <div class="func-card">
+        <div class="icon">🖨️</div>
+        <h4>Gestión de dispositivos</h4>
+        <p>Comunica el hardware mediante controladores (drivers).</p>
+      </div>
+      <div class="func-card">
+        <div class="icon">🖱️</div>
+        <h4>Interfaz de usuario</h4>
+        <p>CLI (terminal) o GUI (ventanas e iconos).</p>
+      </div>
+      <div class="func-card">
+        <div class="icon">🔒</div>
+        <h4>Seguridad</h4>
+        <p>Autenticación, cifrado y control de acceso.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ejemplos SO -->
+  <div class="card">
+    <h3>💡 Ejemplos de sistemas operativos</h3>
+    <div class="grid-2">
+      <ul>
+        <li><span class="badge badge-blue">Windows</span> PC y servidores · Microsoft · privativo</li>
+        <li><span class="badge badge-blue">macOS</span> Equipos Apple · privativo</li>
+        <li><span class="badge badge-green">Linux</span> Código abierto · servidores y más</li>
+      </ul>
+      <ul>
+        <li><span class="badge badge-green">Android</span> Móviles · basado en Linux · Google</li>
+        <li><span class="badge badge-orange">iOS</span> iPhone/iPad · Apple · privativo</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       2.1 EVOLUCIÓN HISTÓRICA
+  ═══════════════════════════════ -->
+  <div class="section-title">
+    <span class="num">2.1</span>
+    <h2>Evolución histórica de los sistemas operativos</h2>
+  </div>
+
+  <div class="note">
+    <strong>Idea clave:</strong> Los SO han pasado de simples programas de control (años 50) a complejas plataformas multifuncionales que gestionan hardware, redes, móviles y la nube.
+  </div>
+
+  <div class="card">
+    <div class="timeline">
+
+      <!-- 1950-1960 -->
+      <div class="tl-item">
+        <div class="tl-era">1950 – 1960</div>
+        <h4>Los primeros SO</h4>
+        <ul>
+          <li><strong>Procesamiento por lotes:</strong> trabajos secuenciales en mainframes, sin interacción de usuario.</li>
+          <li><strong>Tiempo compartido:</strong> varios usuarios, un ordenador. Ej.: CTSS (MIT, 1961).</li>
+          <li>Primer SO reconocido: <strong>GM-NAA I/O</strong> (1956).</li>
+        </ul>
+      </div>
+
+      <!-- 1970 -->
+      <div class="tl-item">
+        <div class="tl-era">1970</div>
+        <h4>Unix y las redes</h4>
+        <ul>
+          <li><strong>Unix (1969)</strong> – Bell Labs (Thompson & Ritchie). Sistema jerárquico de archivos, escrito en C. Base de muchos SO modernos.</li>
+          <li>Aparecen los <strong>SO de red</strong> (ARPANET → precursora de internet).</li>
+        </ul>
+      </div>
+
+      <!-- 1980 -->
+      <div class="tl-item">
+        <div class="tl-era">1980</div>
+        <h4>La era del PC</h4>
+        <ul>
+          <li><span class="badge badge-blue">MS-DOS</span> (1981) · Microsoft · línea de comandos, estándar del PC.</li>
+          <li><span class="badge badge-blue">macOS</span> (1984) · Apple Macintosh · primera GUI popular: ratón y ventanas.</li>
+          <li>Unix deriva en <strong>BSD</strong> y <strong>Solaris</strong>.</li>
+        </ul>
+      </div>
+
+      <!-- 1990 -->
+      <div class="tl-item">
+        <div class="tl-era">1990</div>
+        <h4>Windows y Linux</h4>
+        <ul>
+          <li><span class="badge badge-blue">Windows 3.0 / 95</span> · GUI avanzada, Plug&Play · domina el mercado doméstico.</li>
+          <li><span class="badge badge-green">Linux</span> (1991) · Linus Torvalds · código abierto basado en Unix · comunidad activa.</li>
+        </ul>
+      </div>
+
+      <!-- 2000 -->
+      <div class="tl-item">
+        <div class="tl-era">2000</div>
+        <h4>Móviles y la nube</h4>
+        <ul>
+          <li><span class="badge badge-blue">Windows XP</span> (2001) · uno de los más populares de la historia.</li>
+          <li><span class="badge badge-blue">macOS X</span> (2001) · basado en Unix · ecosistema Apple.</li>
+          <li><span class="badge badge-orange">iOS</span> (2007) y <span class="badge badge-green">Android</span> (2008) · revolución móvil.</li>
+          <li>Nube: <strong>AWS</strong>, <strong>Google Cloud</strong>.</li>
+        </ul>
+      </div>
+
+      <!-- 2010-hoy -->
+      <div class="tl-item">
+        <div class="tl-era">2010 – Actualidad</div>
+        <h4>Convergencia y nuevas tecnologías</h4>
+        <ul>
+          <li><span class="badge badge-blue">Windows 10</span> (2015) · integración móvil, Cortana, PC + tablet + consola.</li>
+          <li><span class="badge badge-green">Linux / Open Source</span> · Ubuntu, CentOS, Red Hat · domina servidores e infraestructura.</li>
+          <li><strong>IoT:</strong> Google Fuchsia, Amazon FreeRTOS para dispositivos inteligentes.</li>
+        </ul>
+      </div>
+
+    </div><!-- /timeline -->
+  </div><!-- /card -->
+
+  <!-- resumen visual línea del tiempo compacta -->
+  <div class="card">
+    <h3>📅 Línea del tiempo (resumen rápido)</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem;">
+      <div style="flex:1;min-width:110px;background:#ede9fe;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;text-align:center;">
+        <strong style="color:#5b21b6">1950-60</strong><br>Lotes & tiempo compartido
+      </div>
+      <div style="flex:1;min-width:110px;background:#dbeafe;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;text-align:center;">
+        <strong style="color:#1d4ed8">1970</strong><br>Unix · Redes
+      </div>
+      <div style="flex:1;min-width:110px;background:#ffedd5;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;text-align:center;">
+        <strong style="color:#c2410c">1980</strong><br>MS-DOS · macOS
+      </div>
+      <div style="flex:1;min-width:110px;background:#dcfce7;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;text-align:center;">
+        <strong style="color:#15803d">1990</strong><br>Windows · Linux
+      </div>
+      <div style="flex:1;min-width:110px;background:#dbeafe;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;text-align:center;">
+        <strong style="color:#1d4ed8">2000</strong><br>Móviles · Nube
+      </div>
+      <div style="flex:1;min-width:110px;background:#ede9fe;border-radius:8px;padding:.6rem .8rem;font-size:.8rem;text-align:center;">
+        <strong style="color:#5b21b6">2010+</strong><br>IoT · Convergencia
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+</body>
+</html>

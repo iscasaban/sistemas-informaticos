@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.4 Servicios y procesos</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    .section-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+
+    .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .diff-card { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 12px 14px; }
+    .diff-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .diff-row { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 4px; padding-left: 4px; }
+    .diff-row strong { color: var(--color-text-primary); font-weight: 500; }
+
+    .block { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 0.5px solid var(--color-border); }
+    .block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .tool-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+
+    .tool-type { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 99px; display: inline-block; margin-bottom: 6px; }
+    .type-gui { background: #E1F5EE; color: #085041; }
+    .type-cli { background: #FAEEDA; color: #633806; }
+
+    .step { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 3px; padding-left: 4px; }
+
+    .cmd-block { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 8px 10px; margin-top: 6px; }
+    .cmd-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+    .cmd-row:last-child { margin-bottom: 0; }
+    .cmd-desc-sm { font-size: 11px; color: var(--color-text-secondary); padding-top: 2px; line-height: 1.4; }
+
+    .note { background: var(--color-bg-secondary); border-left: 3px solid #7F77DD; border-radius: 0; padding: 8px 12px; font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; }
+    .note strong { color: var(--color-text-primary); font-weight: 500; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">4.4 Servicios y procesos</p>
+  <p class="section-sub">Entender qué se está ejecutando en el sistema y cómo controlarlo</p>
+
+  <p class="section-label">Proceso vs Servicio — ¿en qué se diferencian?</p>
+  <div class="diff-grid">
+    <div class="diff-card">
+      <div class="diff-title">⚙️ Proceso</div>
+      <div class="diff-row"><strong>Qué es:</strong> un programa en ejecución</div>
+      <div class="diff-row"><strong>Quién lo inicia:</strong> el usuario (abrir una app)</div>
+      <div class="diff-row"><strong>Visibilidad:</strong> interacción directa con el usuario</div>
+      <div class="diff-row"><strong>Ciclo de vida:</strong> se abre y cierra según necesidad</div>
+      <div class="diff-row"><strong>Ejemplo:</strong> el navegador, un editor de texto</div>
+    </div>
+    <div class="diff-card">
+      <div class="diff-title">🔧 Servicio</div>
+      <div class="diff-row"><strong>Qué es:</strong> proceso en segundo plano</div>
+      <div class="diff-row"><strong>Quién lo inicia:</strong> el sistema al arrancar</div>
+      <div class="diff-row"><strong>Visibilidad:</strong> sin interfaz, el usuario no lo ve</div>
+      <div class="diff-row"><strong>Ciclo de vida:</strong> activo mientras el sistema esté encendido</div>
+      <div class="diff-row"><strong>Ejemplo:</strong> gestión de red, impresión, actualizaciones</div>
+    </div>
+  </div>
+
+  <div class="cols">
+
+    <!-- Windows -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows 10</span>
+        <span class="card-title">Gestión de procesos y servicios</span>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">📊 Administrador de tareas — procesos</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Acceso: <strong>Ctrl + Shift + Esc</strong></div>
+        <div class="step">Pestaña <em>Procesos</em> → lista con uso de CPU, memoria, disco y red</div>
+        <div class="step">→ seleccionar proceso → <em>Finalizar tarea</em></div>
+        <div class="step">Pestaña <em>Rendimiento</em> → gráficos en tiempo real</div>
+        <div class="note"><strong>Servicios desde el Administrador:</strong> pestaña Servicios → clic derecho para iniciar, detener o reiniciar</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔧 Consola de servicios</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Acceso: <strong>Win + R</strong> → escribe <strong>services.msc</strong></div>
+        <div class="step">→ clic derecho sobre un servicio → Iniciar / Detener / Reiniciar</div>
+        <div class="step">→ Propiedades → Tipo de inicio: <em>Automático, Manual o Deshabilitado</em></div>
+      </div>
+    </div>
+
+    <!-- Ubuntu -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Gestión de procesos y servicios</span>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">⚙️ Gestión de procesos</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd-desc-sm">Listar todos los procesos:</span><span class="cmd">ps aux</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Vista en tiempo real (interactiva):</span><span class="cmd">top</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Versión mejorada de top:</span><span class="cmd">htop</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Finalizar proceso por su ID:</span><span class="cmd">kill PID</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Forzar cierre si no responde:</span><span class="cmd">kill -9 PID</span></div>
+        </div>
+        <div class="note"><strong>GUI:</strong> Monitor del sistema → equivalente al Administrador de tareas</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔧 Gestión de servicios — systemctl</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd-desc-sm">Ver estado:</span><span class="cmd">sudo systemctl status servicio</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Iniciar:</span><span class="cmd">sudo systemctl start servicio</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Detener:</span><span class="cmd">sudo systemctl stop servicio</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Reiniciar:</span><span class="cmd">sudo systemctl restart servicio</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Activar al inicio:</span><span class="cmd">sudo systemctl enable servicio</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Desactivar del inicio:</span><span class="cmd">sudo systemctl disable servicio</span></div>
+        </div>
+        <div class="note"><strong>systemd</strong> es el sistema de gestión de servicios en Ubuntu. El comando principal es <span class="cmd">systemctl</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <p class="table-section-title">Tabla comparativa de gestión</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Tarea</th>
+        <th>Windows 10</th>
+        <th>Ubuntu</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="tag-cat">Ver procesos</span></td>
+        <td>Administrador de tareas <span class="cmd">Ctrl+Shift+Esc</span></td>
+        <td><span class="cmd">ps aux</span> / <span class="cmd">top</span> / <span class="cmd">htop</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Finalizar proceso</span></td>
+        <td>Finalizar tarea (GUI)</td>
+        <td><span class="cmd">kill PID</span> / <span class="cmd">kill -9 PID</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Ver servicios</span></td>
+        <td>Pestaña Servicios o <span class="cmd">services.msc</span></td>
+        <td><span class="cmd">sudo systemctl status servicio</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Iniciar servicio</span></td>
+        <td>Clic derecho → Iniciar (services.msc)</td>
+        <td><span class="cmd">sudo systemctl start servicio</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Detener servicio</span></td>
+        <td>Clic derecho → Detener (services.msc)</td>
+        <td><span class="cmd">sudo systemctl stop servicio</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Activar en inicio</span></td>
+        <td>Propiedades → Tipo de inicio: Automático</td>
+        <td><span class="cmd">sudo systemctl enable servicio</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Desactivar en inicio</span></td>
+        <td>Propiedades → Tipo de inicio: Deshabilitado</td>
+        <td><span class="cmd">sudo systemctl disable servicio</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Monitorización GUI</span></td>
+        <td>Administrador de tareas / Monitor de recursos</td>
+        <td>Monitor del sistema (GNOME)</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

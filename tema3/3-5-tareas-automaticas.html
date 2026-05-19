@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.5 Tareas automáticas</title>
+    <link rel="stylesheet" href="../estilos.css" />
+    <style>
+        .section-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+        }
+
+        /* Bloque visual formato cron */
+        .cron-box {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+            margin-bottom: 20px;
+        }
+        .cron-title {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 10px;
+        }
+        .cron-fields {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .cron-field { text-align: center; }
+        .cron-val {
+            font-family: var(--font-mono),monospace;
+            font-size: 14px;
+            font-weight: 500;
+            color: #3C3489;
+            background: #EEEDFE;
+            border-radius: 4px;
+            padding: 4px 0;
+            display: block;
+        }
+        .cron-lbl {
+            font-size: 10px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+            display: block;
+            line-height: 1.4;
+        }
+        .cron-example {
+            font-family: var(--font-mono),monospace;
+            font-size: 12px;
+            color: var(--color-text-primary);
+            background: var(--color-bg);
+            border-radius: 4px;
+            padding: 7px 10px;
+            border: 0.5px solid var(--color-border);
+            margin-top: 8px;
+        }
+        .cron-ex-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Herramientas */
+        .tool {
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+            border-bottom: 0.5px solid var(--color-border);
+        }
+        .tool:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        .tool-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+
+        .tool-type {
+            font-size: 10px;
+            font-weight: 500;
+            padding: 2px 7px;
+            border-radius: 99px;
+        }
+        .type-gui  { background: #E1F5EE; color: #085041; }
+        .type-cli  { background: #FAEEDA; color: #633806; }
+
+        .tool-desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        .cmd-block {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 8px 10px;
+            margin-top: 6px;
+        }
+        .cmd-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .cmd-row:last-child { margin-bottom: 0; }
+        .cmd-desc-sm {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            padding-top: 2px;
+            line-height: 1.4;
+        }
+
+        .note {
+            background: var(--color-bg-secondary);
+            border-left: 3px solid #7F77DD;
+            border-radius: 0;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 6px;
+        }
+        .note strong { color: var(--color-text-primary); font-weight: 500; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <p class="section-title">3.5 Tareas automáticas</p>
+    <p class="section-sub">Programar tareas repetitivas para que se ejecuten solas, sin intervención manual</p>
+
+    <!-- Formato cron -->
+    <p class="section-label">El formato cron (Ubuntu)</p>
+    <div class="cron-box">
+        <div class="cron-title">Estructura de una línea cron</div>
+        <div class="cron-fields">
+            <div class="cron-field"><span class="cron-val">*</span><span class="cron-lbl">Minuto<br>0–59</span></div>
+            <div class="cron-field"><span class="cron-val">*</span><span class="cron-lbl">Hora<br>0–23</span></div>
+            <div class="cron-field"><span class="cron-val">*</span><span class="cron-lbl">Día mes<br>1–31</span></div>
+            <div class="cron-field"><span class="cron-val">*</span><span class="cron-lbl">Mes<br>1–12</span></div>
+            <div class="cron-field"><span class="cron-val">*</span><span class="cron-lbl">Día semana<br>0–7</span></div>
+        </div>
+        <div class="cron-example">0 3 * * * rsync -av /documentos /respaldo</div>
+        <div class="cron-ex-label">→ Ejecuta rsync todos los días a las 3:00 a.m.</div>
+    </div>
+
+    <div class="cols">
+
+        <!-- Windows -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-win">Windows</span>
+                <span class="card-title">Herramientas de automatización</span>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">🗓 Programador de tareas</span>
+                    <span class="tool-type type-gui">Gráfico</span>
+                </div>
+                <div class="tool-desc">Herramienta principal para programar procesos. Acceso buscando "Programador de tareas" o con <span class="cmd">taskschd.msc</span>.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Programar por horario o por evento</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Configurar condiciones y desencadenantes</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Ejecutar scripts, programas o comandos</span></div>
+                </div>
+                <div class="note"><strong>Ejemplo:</strong> Crear tarea básica → desencadenante Semanal → acción Iniciar programa → guardar</div>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">💻 PowerShell + Programador</span>
+                    <span class="tool-type type-cli">Script</span>
+                </div>
+                <div class="tool-desc">Crea un script <span class="cmd">.ps1</span> y prográmalo en el Programador de tareas como acción.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd">Remove-Item -Path "C:\Temp\*" -Recurse -Force</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">→ limpia archivos temporales</span></div>
+                </div>
+                <div class="note"><strong>Acción en el programador:</strong> <span class="cmd">powershell.exe -File "C:\ruta\script.ps1"</span></div>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">📄 Archivos por lotes (.bat)</span>
+                    <span class="tool-type type-cli">Script</span>
+                </div>
+                <div class="tool-desc">Ejecutan comandos de Windows en secuencia. Se programan también desde el Programador de tareas.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd">xcopy C:\Documentos D:\Backup /E /I</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">→ copia de seguridad de Documentos</span></div>
+                </div>
+                <div class="note"><strong>Apagado automático:</strong> <span class="cmd">shutdown /s /t 0</span> programado a hora específica</div>
+            </div>
+        </div>
+
+        <!-- Ubuntu -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-lin">Ubuntu</span>
+                <span class="card-title">Herramientas de automatización</span>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">⏰ Cron</span>
+                    <span class="tool-type type-cli">Terminal</span>
+                </div>
+                <div class="tool-desc">Servicio para tareas recurrentes. Edita la configuración con <span class="cmd">crontab -e</span>.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd">0 3 * * *</span><span class="cmd-desc-sm">backup diario a las 3:00 a.m.</span></div>
+                    <div class="cmd-row"><span class="cmd">0 2 * * 0</span><span class="cmd-desc-sm">tarea cada domingo a las 2:00 a.m.</span></div>
+                    <div class="cmd-row"><span class="cmd">0 2 * * 0 rm -rf /tmp/*</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">→ limpia /tmp/ cada domingo</span></div>
+                </div>
+                <div class="note"><strong>Editar crontab:</strong> <span class="cmd">crontab -e</span> → añade una línea por tarea</div>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">🕐 At</span>
+                    <span class="tool-type type-cli">Terminal</span>
+                </div>
+                <div class="tool-desc">Para tareas únicas en una hora concreta (no recurrentes). Requiere instalar el servicio.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd">sudo apt install at</span></div>
+                    <div class="cmd-row"><span class="cmd">sudo systemctl enable atd</span></div>
+                    <div class="cmd-row"><span class="cmd">echo "shutdown now" | at 23:00</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">→ apaga el sistema a las 23:00</span></div>
+                </div>
+            </div>
+
+            <div class="tool">
+                <div class="tool-header">
+                    <span class="tool-name">🖥 GNOME Schedule</span>
+                    <span class="tool-type type-gui">Gráfico</span>
+                </div>
+                <div class="tool-desc">Interfaz gráfica para gestionar cron sin escribir comandos. Opcional, no viene por defecto.</div>
+                <div class="cmd-block">
+                    <div class="cmd-row"><span class="cmd">sudo apt install gnome-schedule</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Crea y edita tareas recurrentes visualmente</span></div>
+                    <div class="cmd-row"><span class="cmd-desc-sm">✔ Supervisa tareas programadas en ejecución</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="divider" />
+
+    <p class="table-section-title">Tabla comparativa de herramientas</p>
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>Necesidad</th>
+                <th>Windows</th>
+                <th>Ubuntu</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span class="tag-cat">Tarea recurrente (gráfico)</span></td>
+                <td>Programador de tareas <span class="cmd">taskschd.msc</span></td>
+                <td>GNOME Schedule (opcional)</td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Tarea recurrente (terminal)</span></td>
+                <td>PowerShell + Programador</td>
+                <td>Cron <span class="cmd">crontab -e</span></td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Tarea única puntual</span></td>
+                <td>Programador de tareas (una vez)</td>
+                <td><span class="cmd">at</span></td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Script de limpieza</span></td>
+                <td><span class="cmd">Remove-Item</span> vía <span class="cmd">.ps1</span></td>
+                <td><span class="cmd">rm -rf /tmp/*</span> vía cron</td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Backup automático</span></td>
+                <td><span class="cmd">xcopy</span> o script <span class="cmd">.bat</span></td>
+                <td><span class="cmd">rsync</span> + cron</td>
+            </tr>
+            <tr>
+                <td><span class="tag-cat">Apagado programado</span></td>
+                <td><span class="cmd">shutdown /s /t 0</span> en tarea</td>
+                <td><span class="cmd">echo "shutdown now" | at 23:00</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.3 Normas de seguridad y prevención de riesgos laborales</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+    .risk-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:20px; }
+    .risk-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 12px; }
+    .risk-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:4px;display:flex;align-items:center;gap:6px; }
+    .risk-desc { font-size:12px;color:var(--color-text-secondary);line-height:1.45; }
+    .law-item { display:flex;gap:10px;align-items:flex-start;margin-bottom:8px; }
+    .law-icon { font-size:14px;flex-shrink:0;margin-top:1px; }
+    .law-text { font-size:13px;color:var(--color-text-secondary);line-height:1.4; }
+    .law-text strong { color:var(--color-text-primary); }
+    .tip-list { display:flex;flex-direction:column;gap:6px; }
+    .tip { display:flex;gap:8px;align-items:flex-start; }
+    .tip-dot { width:6px;height:6px;border-radius:50%;background:var(--accent-purple);flex-shrink:0;margin-top:5px; }
+    .tip-text { font-size:13px;color:var(--color-text-secondary);line-height:1.4; }
+    .tip-text strong { color:var(--color-text-primary); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">1.3 Normas de seguridad y prevención de riesgos laborales</p>
+  <p class="section-sub">Marco legal y buenas prácticas para un entorno de trabajo informático seguro y saludable.</p>
+
+  <hr class="divider">
+
+  <!-- Marco legal -->
+  <p class="table-section-title">📜 Marco normativo</p>
+  <div class="card" style="margin-bottom:20px;">
+    <div class="card-header"><span class="card-title">Ley 31/1995 de Prevención de Riesgos Laborales (España)</span></div>
+    <div class="law-item">
+      <div class="law-icon">🏛️</div>
+      <div class="law-text"><strong>Art. 40.2 Constitución española:</strong> los poderes públicos deben garantizar la seguridad e higiene en el trabajo.</div>
+    </div>
+    <div class="law-item">
+      <div class="law-icon">📄</div>
+      <div class="law-text"><strong>Art. 4.2 Estatuto de los Trabajadores:</strong> derecho a un entorno de trabajo seguro.</div>
+    </div>
+    <div class="law-item">
+      <div class="law-icon">🇪🇺</div>
+      <div class="law-text"><strong>Directiva marco UE (1989):</strong> promueve medidas de seguridad para mejorar las condiciones laborales.</div>
+    </div>
+    <div class="law-item">
+      <div class="law-icon">🌍</div>
+      <div class="law-text"><strong>Convenio 155 OIT:</strong> estándares globales para la salud y seguridad en el trabajo.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Riesgos laborales -->
+  <p class="table-section-title">⚠️ Riesgos laborales del trabajo informático</p>
+  <div class="risk-grid">
+    <div class="risk-item">
+      <div class="risk-name">🦴 Ergonomía</div>
+      <div class="risk-desc">Posturas incorrectas → dolores de espalda y cuello. Exposición prolongada a pantallas → fatiga ocular y síndrome del ojo seco.</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-name">🧠 Estrés y salud mental</div>
+      <div class="risk-desc">Plazos ajustados y alta carga de trabajo → estrés y ansiedad. Trabajo remoto → aislamiento y problemas psicológicos.</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-name">⚡ Riesgos eléctricos</div>
+      <div class="risk-desc">El manejo de equipos electrónicos requiere cumplir normas básicas de seguridad eléctrica.</div>
+    </div>
+    <div class="risk-item">
+      <div class="risk-name">🌫️ Ambiente laboral</div>
+      <div class="risk-desc">Calidad del aire, ruido e iluminación inadecuados afectan al rendimiento y la salud.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Buenas prácticas -->
+  <p class="table-section-title">✅ Buenas prácticas para prevenir riesgos</p>
+
+  <div class="cols">
+    <div class="card">
+      <div class="card-header"><span class="card-title">💡 Iluminación adecuada</span></div>
+      <div class="tip-list">
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Usa persianas o cortinas para controlar la luz del sol.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Coloca el monitor sin luz directa (ni natural ni artificial).</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Usa luz difusa y evita contrastes fuertes.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Colores neutros en el entorno (gris, beige, crema).</div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">👁️ Cuidado visual</span></div>
+      <div class="tip-list">
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Distancia:</strong> pantalla a ~un brazo de distancia.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Altura:</strong> borde superior de la pantalla a la altura de los ojos.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Brillo y contraste:</strong> ajustar según la luz ambiental.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Limpieza:</strong> mantener el monitor limpio para evitar reflejos.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">🪑 Ergonomía en el puesto</span></div>
+      <div class="tip-list">
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Espalda:</strong> silla ergonómica con soporte lumbar. Altura ajustada.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Piernas:</strong> pies apoyados en el suelo o reposapiés. Espacio libre bajo la mesa.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Brazos y hombros:</strong> codos alineados con teclado y ratón. Objetos frecuentes al alcance del brazo.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Muñecas:</strong> rectas al teclear. Evitar apoyarlas sobre bordes duros.</div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">⏱️ Tiempo de uso y pausas activas</span></div>
+      <div class="tip-list">
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Pausa de <strong>5-8 minutos</strong> cada <strong>60-90 minutos</strong> de trabajo continuo.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Durante las pausas: estiramientos y movilización muscular.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Teclear con movimientos ligeros. No presionar excesivamente el ratón.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tabla resumen riesgos y soluciones -->
+  <p class="table-section-title">Resumen: riesgos y medidas preventivas</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr><th>Riesgo</th><th>Consecuencia</th><th>Medida preventiva</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>Postura incorrecta</td><td>Dolor de espalda y cuello</td><td>Silla ergonómica, altura ajustada</td></tr>
+      <tr><td>Pantalla demasiado cerca</td><td>Fatiga ocular, ojo seco</td><td>Distancia de un brazo, brillo ajustado</td></tr>
+      <tr><td>Sin pausas</td><td>Fatiga muscular y visual</td><td>Pausa 5-8 min cada 60-90 min</td></tr>
+      <tr><td>Mala iluminación</td><td>Reflejos, cansancio visual</td><td>Luz difusa, sin luz directa al monitor</td></tr>
+      <tr><td>Alta carga de trabajo</td><td>Estrés y ansiedad</td><td>Gestión de tiempos, descansos</td></tr>
+      <tr><td>Trabajo remoto sin contacto</td><td>Aislamiento social</td><td>Mantener rutinas y contacto con compañeros</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

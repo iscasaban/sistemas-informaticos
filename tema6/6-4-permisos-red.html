@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6.4 Permisos de red</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .type-gui { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#E6F4EA;color:#1E6B2E; }
+    .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+    .steps { display:flex;flex-direction:column;gap:7px; }
+    .step { display:flex;gap:10px;align-items:flex-start; }
+    .step-num { font-size:11px;font-weight:600;min-width:20px;height:20px;border-radius:50%;background:var(--accent-purple);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px; }
+    .step-text { font-size:13px;color:var(--color-text-secondary);line-height:1.45; }
+    .step-text strong { color:var(--color-text-primary); }
+    .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+    .code-block { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 14px;font-family:var(--font-mono),monospace;font-size:12px;color:var(--color-text-primary);white-space:pre;overflow-x:auto;line-height:1.7;margin-top:6px; }
+    .perm-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px; }
+    .perm-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px;text-align:center; }
+    .perm-icon { font-size:20px;margin-bottom:4px; }
+    .perm-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:2px; }
+    .perm-desc { font-size:11px;color:var(--color-text-secondary); }
+    .chmod-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px; }
+    .chmod-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:7px 10px;text-align:center; }
+    .chmod-num { font-family:var(--font-mono),monospace;font-size:18px;font-weight:700;color:var(--accent-purple); }
+    .chmod-label { font-size:11px;color:var(--color-text-secondary);margin-top:2px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">6.4 Permisos de red</p>
+  <p class="section-sub">Controla quién puede leer, modificar o eliminar recursos compartidos en la red.</p>
+
+  <!-- Niveles de permiso -->
+  <p class="table-section-title">Niveles de permiso en carpetas compartidas</p>
+  <div class="perm-grid">
+    <div class="perm-item">
+      <div class="perm-icon">👁️</div>
+      <div class="perm-name">Leer</div>
+      <div class="perm-desc">Solo visualizar archivos. Sin modificar ni eliminar.</div>
+    </div>
+    <div class="perm-item">
+      <div class="perm-icon">✏️</div>
+      <div class="perm-name">Cambiar</div>
+      <div class="perm-desc">Modificar archivos, pero no eliminar la carpeta compartida.</div>
+    </div>
+    <div class="perm-item">
+      <div class="perm-icon">🔑</div>
+      <div class="perm-name">Control total</div>
+      <div class="perm-desc">Leer, escribir, ejecutar y eliminar sin restricciones.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Windows -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-win" style="margin-right:8px;">Windows</span> Gestión de permisos de red
+  </p>
+
+  <div class="cols">
+    <!-- GUI permisos Windows -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">Permisos básicos</span><span class="type-gui">GUI</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Clic derecho en la carpeta → <strong>Propiedades → Compartir → Compartir avanzado</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Activa <em>Compartir esta carpeta</em> → clic en <strong>Permisos</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Selecciona usuario o grupo y asigna: <strong>Leer / Cambiar / Control total</strong></div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">Permisos avanzados</span><span class="type-gui">GUI</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Propiedades → pestaña <strong>Seguridad → Editar</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Selecciona un usuario o grupo</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Define permisos específicos: <strong>Lectura y ejecución / Modificar / Control total</strong></div></div>
+      </div>
+    </div>
+
+    <!-- CLI permisos Windows -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">Permisos por línea de comandos</span><span class="type-cli">CLI</span></div>
+      <div class="topic">
+        <div class="topic-label">icacls — gestión de permisos NTFS</div>
+        <div class="cmd-list">
+          <div class="cmd-row">
+            <code class="cmd">icacls "C:\CarpetaCompartida" /grant Usuario:(F)</code>
+          </div>
+        </div>
+        <div class="script-note" style="margin-top:8px;">
+          <strong>Valores de permiso:</strong><br>
+          <code>(F)</code> = Control total &nbsp;·&nbsp;
+          <code>(M)</code> = Modificar &nbsp;·&nbsp;
+          <code>(R)</code> = Leer &nbsp;·&nbsp;
+          <code>(W)</code> = Escribir
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic">
+        <div class="topic-label">Políticas de grupo (entornos empresariales)</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">gpedit.msc</code><span class="cmd-desc">Abre el editor de políticas locales</span></div>
+        </div>
+        <div class="step-text" style="font-size:12px;color:var(--color-text-secondary);margin-top:6px;">
+          Ruta: Configuración del equipo → Configuración de Windows → Seguridad → <strong>Directivas locales</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ubuntu -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-lin" style="margin-right:8px;">Ubuntu</span> Gestión de permisos de red
+  </p>
+
+  <div class="cols">
+    <!-- Samba permisos Ubuntu -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">Permisos con Samba</span><span class="type-cli">CLI</span></div>
+      <div class="topic">
+        <div class="topic-label">Configurar recurso compartido</div>
+        <div class="code-block">[Compartida]
+          path = /home/usuario/compartida
+          read only = no
+          browsable = yes</div>
+      </div>
+      <div class="topic" style="margin-top:10px;">
+        <div class="topic-label">Permisos del sistema de archivos</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">sudo chmod 770 /home/usuario/compartida</code></div>
+          <div class="cmd-row"><code class="cmd">sudo chown usuario:grupo /home/usuario/compartida</code></div>
+        </div>
+      </div>
+      <div class="topic" style="margin-top:10px;">
+        <div class="topic-label">Añadir usuario a Samba y reiniciar</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">sudo smbpasswd -a usuario</code></div>
+          <div class="cmd-row"><code class="cmd">sudo systemctl restart smbd</code></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- chmod/chown Ubuntu -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">chmod y chown</span><span class="type-cli">CLI</span></div>
+      <div class="topic">
+        <div class="topic-label">¿Qué significa chmod 770?</div>
+        <div class="chmod-grid">
+          <div class="chmod-item">
+            <div class="chmod-num">7</div>
+            <div class="chmod-label">Propietario<br>rwx (todo)</div>
+          </div>
+          <div class="chmod-item">
+            <div class="chmod-num">7</div>
+            <div class="chmod-label">Grupo<br>rwx (todo)</div>
+          </div>
+          <div class="chmod-item">
+            <div class="chmod-num">0</div>
+            <div class="chmod-label">Otros<br>sin acceso</div>
+          </div>
+        </div>
+      </div>
+      <div class="topic" style="margin-top:10px;">
+        <div class="topic-label">Valores numéricos de chmod</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">4</code><span class="cmd-desc">= Lectura (r)</span></div>
+          <div class="cmd-row"><code class="cmd">2</code><span class="cmd-desc">= Escritura (w)</span></div>
+          <div class="cmd-row"><code class="cmd">1</code><span class="cmd-desc">= Ejecución (x)</span></div>
+          <div class="cmd-row"><code class="cmd">7</code><span class="cmd-desc">= r+w+x (4+2+1 = todo)</span></div>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic">
+        <div class="topic-label">AppArmor — refuerzo adicional</div>
+        <div class="cmd-list">
+          <div class="cmd-row"><code class="cmd">sudo aa-status</code><span class="cmd-desc">Ver estado de AppArmor</span></div>
+        </div>
+        <div class="script-note" style="margin-top:6px;">
+          Restringe qué puede hacer cada aplicación sobre los recursos compartidos, aunque tenga permisos del sistema de archivos.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tabla comparativa -->
+  <p class="table-section-title">Comparativa: gestión de permisos de red</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr><th>Acción</th><th>Windows</th><th>Ubuntu</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>Permisos básicos GUI</td><td>Propiedades → Compartir → Permisos</td><td>Configuración → Recursos compartidos</td></tr>
+      <tr><td>Permisos avanzados GUI</td><td>Propiedades → Seguridad → Editar</td><td>—</td></tr>
+      <tr><td>Permisos por CLI</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">icacls "ruta" /grant User:(F)</code></td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">chmod</code> / <code style="font-family:var(--font-mono),monospace;font-size:12px;">chown</code></td></tr>
+      <tr><td>Permisos Samba</td><td>—</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">read only = no/yes</code> en smb.conf</td></tr>
+      <tr><td>Políticas centralizadas</td><td>gpedit.msc / Active Directory</td><td>AppArmor / OpenLDAP</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

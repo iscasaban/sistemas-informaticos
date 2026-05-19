@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.5 Registros y logs</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    .section-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .why-card { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; }
+    .why-icon { font-size: 16px; margin-bottom: 4px; }
+    .why-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+    .why-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+
+    .aspects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 20px; }
+    .aspect { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 8px 10px; }
+    .aspect-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; }
+    .aspect-text { font-size: 11px; color: var(--color-text-primary); line-height: 1.4; }
+
+    .block { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 0.5px solid var(--color-border); }
+    .block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .tool-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+
+    .tool-type { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 99px; display: inline-block; margin-bottom: 6px; }
+    .type-gui { background: #E1F5EE; color: #085041; }
+    .type-cli { background: #FAEEDA; color: #633806; }
+
+    .step { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 3px; padding-left: 4px; }
+
+    .cmd-block { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 8px 10px; margin-top: 6px; }
+    .cmd-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+    .cmd-row:last-child { margin-bottom: 0; }
+    .cmd-desc-sm { font-size: 11px; color: var(--color-text-secondary); padding-top: 2px; line-height: 1.4; }
+
+    .note { background: var(--color-bg-secondary); border-left: 3px solid #7F77DD; border-radius: 0; padding: 8px 12px; font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; line-height: 1.6; }
+    .note strong { color: var(--color-text-primary); font-weight: 500; }
+
+    .logs-list { display: flex; flex-direction: column; gap: 5px; margin-top: 6px; }
+    .log-row { display: flex; align-items: flex-start; gap: 8px; }
+    .log-path { font-family: var(--font-mono),monospace; font-size: 11px; background: var(--color-bg); border: 0.5px solid var(--color-border); border-radius: 4px; padding: 2px 6px; color: #185FA5; white-space: nowrap; flex-shrink: 0; }
+    .log-desc { font-size: 11px; color: var(--color-text-secondary); padding-top: 2px; line-height: 1.4; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">4.5 Registros y logs</p>
+  <p class="section-sub">Archivos donde el sistema guarda un historial de todo lo que ocurre</p>
+
+  <p class="section-label">¿Para qué sirven los logs?</p>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-icon">🔍</div><div class="why-title">Diagnóstico</div><div class="why-desc">Identificar errores y fallos en servicios o aplicaciones</div></div>
+    <div class="why-card"><div class="why-icon">🛡️</div><div class="why-title">Auditoría de seguridad</div><div class="why-desc">Detectar accesos sospechosos o brechas de seguridad</div></div>
+    <div class="why-card"><div class="why-icon">📈</div><div class="why-title">Rendimiento</div><div class="why-desc">Identificar cuellos de botella o uso excesivo de recursos</div></div>
+    <div class="why-card"><div class="why-icon">⚖️</div><div class="why-title">Cumplimiento normativo</div><div class="why-desc">Muchas regulaciones exigen conservar registros de actividad</div></div>
+  </div>
+
+  <p class="section-label">Aspectos clave en la gestión de logs</p>
+  <div class="aspects-grid">
+    <div class="aspect"><div class="aspect-label">💾 Almacenamiento</div><div class="aspect-text">Guardar los logs de forma eficiente para no sobrecargar el sistema</div></div>
+    <div class="aspect"><div class="aspect-label">👁 Monitoreo</div><div class="aspect-text">Seguimiento en tiempo real para detectar incidentes rápido</div></div>
+    <div class="aspect"><div class="aspect-label">🔄 Rotación</div><div class="aspect-text">Archivar o eliminar logs antiguos con políticas automáticas</div></div>
+    <div class="aspect"><div class="aspect-label">🏢 Centralización</div><div class="aspect-text">Reunir logs de varios servidores en un único lugar</div></div>
+  </div>
+
+  <div class="cols">
+
+    <!-- Windows -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows 10</span>
+        <span class="card-title">Visor de eventos</span>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">📋 Acceso y navegación</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Acceso: <strong>Win + X</strong> → Visor de eventos</div>
+        <div class="step">Panel izquierdo → categorías de registros:</div>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd-desc-sm"><strong style="color:var(--color-text-primary)">Registros de Windows:</strong> Aplicación, Seguridad, Configuración, Sistema</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm"><strong style="color:var(--color-text-primary)">Registros de apps y servicios:</strong> eventos específicos de cada aplicación</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔎 Trabajar con eventos</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">→ cada evento muestra hora, origen y nivel (info / advertencia / error)</div>
+        <div class="step">→ filtrar por nivel o buscar eventos concretos</div>
+        <div class="step">→ <em>Guardar eventos como…</em> para archivar</div>
+        <div class="step">→ <em>Borrar registro</em> para liberar espacio</div>
+        <div class="note"><strong>Auditoría de seguridad:</strong> Registros de Seguridad → inicios de sesión, cambios de configuración, accesos</div>
+      </div>
+    </div>
+
+    <!-- Ubuntu -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Directorio /var/log</span>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">📁 Logs importantes</div>
+        <div class="logs-list">
+          <div class="log-row"><span class="log-path">/var/log/syslog</span><span class="log-desc">registros generales del sistema</span></div>
+          <div class="log-row"><span class="log-path">/var/log/auth.log</span><span class="log-desc">autenticaciones e inicios de sesión</span></div>
+          <div class="log-row"><span class="log-path">/var/log/dmesg</span><span class="log-desc">mensajes del kernel (hardware)</span></div>
+          <div class="log-row"><span class="log-path">/var/log/kern.log</span><span class="log-desc">mensajes específicos del kernel</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔎 Leer y monitorizar logs</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd-desc-sm">Listar archivos de log:</span><span class="cmd">ls /var/log</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Ver contenido completo:</span><span class="cmd">cat /var/log/syslog</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Ver las últimas líneas:</span><span class="cmd">tail /var/log/syslog</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">Monitorizar en tiempo real:</span><span class="cmd">tail -f /var/log/syslog</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔄 Rotación y centralización</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <span class="cmd-desc-sm">Rotar logs manualmente:</span>
+          <div class="cmd-row"><span class="cmd">sudo logrotate -f /etc/logrotate.conf</span></div>
+        </div>
+        <div class="note">
+          <strong>logrotate:</strong> archiva, comprime y elimina logs antiguos automáticamente según <span class="cmd">/etc/logrotate.conf</span><br><br>
+          <strong>rsyslog:</strong> centraliza logs de múltiples servidores en uno
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <p class="table-section-title">Tabla comparativa de gestión de logs</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Tarea</th>
+        <th>Windows 10</th>
+        <th>Ubuntu</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="tag-cat">Herramienta principal</span></td>
+        <td>Visor de eventos <span class="cmd">Win + X</span></td>
+        <td>Directorio <span class="cmd">/var/log</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Ver log general</span></td>
+        <td>Registros de Windows → Sistema</td>
+        <td><span class="cmd">cat /var/log/syslog</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Log de seguridad</span></td>
+        <td>Registros de Windows → Seguridad</td>
+        <td><span class="cmd">/var/log/auth.log</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Monitorizar en tiempo real</span></td>
+        <td>Visor de eventos (actualización manual)</td>
+        <td><span class="cmd">tail -f /var/log/syslog</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Archivar logs</span></td>
+        <td>Guardar eventos como… (GUI)</td>
+        <td><span class="cmd">logrotate</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Eliminar logs</span></td>
+        <td>Borrar registro (GUI)</td>
+        <td>Configurar rotación en <span class="cmd">/etc/logrotate.conf</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Centralizar logs</span></td>
+        <td>Eventos reenviados (GUI)</td>
+        <td><span class="cmd">rsyslog</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

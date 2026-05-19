@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6.6 Gestión de dominios</title>
+    <link rel="stylesheet" href="../estilos.css">
+    <style>
+        .type-gui { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#E6F4EA;color:#1E6B2E; }
+        .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+        .steps { display:flex;flex-direction:column;gap:7px; }
+        .step { display:flex;gap:10px;align-items:flex-start; }
+        .step-num { font-size:11px;font-weight:600;min-width:20px;height:20px;border-radius:50%;background:var(--accent-purple);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px; }
+        .step-text { font-size:13px;color:var(--color-text-secondary);line-height:1.45; }
+        .step-text strong { color:var(--color-text-primary); }
+        .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+        .code-block { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 14px;font-family:var(--font-mono),monospace;font-size:12px;color:var(--color-text-primary);white-space:pre;overflow-x:auto;line-height:1.7;margin-top:6px; }
+        .concept-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px; }
+        .concept-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px;text-align:center; }
+        .concept-icon { font-size:20px;margin-bottom:4px; }
+        .concept-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:2px; }
+        .concept-desc { font-size:11px;color:var(--color-text-secondary); }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <p class="section-title">6.6 Gestión de dominios</p>
+    <p class="section-sub">Administración centralizada de usuarios, equipos y políticas en una red empresarial.</p>
+
+    <!-- Conceptos clave -->
+    <div class="concept-grid">
+        <div class="concept-item">
+            <div class="concept-icon">🏢</div>
+            <div class="concept-name">Dominio</div>
+            <div class="concept-desc">Grupo de equipos y usuarios gestionados de forma centralizada.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-icon">🖥️</div>
+            <div class="concept-name">Controlador de dominio</div>
+            <div class="concept-desc">Servidor que autentica usuarios y aplica políticas en la red.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-icon">📋</div>
+            <div class="concept-name">Políticas de grupo</div>
+            <div class="concept-desc">Reglas que se aplican automáticamente a usuarios y equipos del dominio.</div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Windows -->
+    <p class="table-section-title" style="margin-bottom:12px;">
+        <span class="badge badge-win" style="margin-right:8px;">Windows</span> Active Directory
+    </p>
+
+    <div class="cols">
+        <!-- AD instalación -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">🏢 Instalar Active Directory (AD DS)</span><span class="type-gui">GUI</span></div>
+            <div class="steps">
+                <div class="step"><div class="step-num">1</div><div class="step-text">Abre el <strong>Administrador del servidor</strong></div></div>
+                <div class="step"><div class="step-num">2</div><div class="step-text">Agregar roles y características → selecciona <strong>AD DS</strong> (Servicios de dominio de Active Directory)</div></div>
+                <div class="step"><div class="step-num">3</div><div class="step-text">Completa el asistente y <strong>promueve el servidor</strong> como controlador de dominio</div></div>
+                <div class="step"><div class="step-num">4</div><div class="step-text">Define el nombre del dominio, p. ej. <code style="font-family:var(--font-mono),monospace;font-size:11px;">empresa.local</code></div></div>
+                <div class="step"><div class="step-num">5</div><div class="step-text">Administra usuarios y grupos desde el <strong>Administrador de Active Directory</strong></div></div>
+            </div>
+            <div class="script-note" style="margin-top:10px;">
+                <strong>💡 Ventaja clave:</strong> con Active Directory puedes controlar desde un único punto todos los equipos, usuarios, contraseñas y políticas de la red.
+            </div>
+        </div>
+
+        <!-- Políticas de grupo -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">📋 Políticas de grupo (GPO)</span><span class="type-cli">CLI / GUI</span></div>
+            <div class="topic">
+                <div class="topic-label">Acceso al editor</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">gpedit.msc</code><span class="cmd-desc">Editor de políticas locales</span></div>
+                </div>
+                <div class="step-text" style="font-size:12px;color:var(--color-text-secondary);margin-top:6px;">
+                    Ruta: Configuración del equipo → Configuración de Windows → Seguridad → <strong>Políticas de cuenta</strong>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">¿Qué se puede controlar con GPO?</div>
+                <div class="steps">
+                    <div class="step"><div class="step-num">✓</div><div class="step-text">Requisitos de contraseñas (longitud, complejidad)</div></div>
+                    <div class="step"><div class="step-num">✓</div><div class="step-text">Bloqueo de aplicaciones o acceso al sistema</div></div>
+                    <div class="step"><div class="step-num">✓</div><div class="step-text">Configuración automática de escritorios y software</div></div>
+                    <div class="step"><div class="step-num">✓</div><div class="step-text">Restricción de dispositivos USB u otros periféricos</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Ubuntu -->
+    <p class="table-section-title" style="margin-bottom:12px;">
+        <span class="badge badge-lin" style="margin-right:8px;">Ubuntu</span> Samba DC y realmd
+    </p>
+
+    <div class="cols">
+        <!-- Samba DC Ubuntu -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">🏢 Controlador de dominio con Samba</span><span class="type-cli">CLI</span></div>
+            <div class="topic">
+                <div class="topic-label">Instalación</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo apt install samba smbclient</code></div>
+                </div>
+            </div>
+            <div class="topic" style="margin-top:10px;">
+                <div class="topic-label">Configuración en /etc/samba/smb.conf</div>
+                <div class="code-block">
+[global]
+workgroup = EMPRESA
+security = user
+domain logons = yes
+logon path = \\%N\profiles\%U
+logon drive = H:</div>
+            </div>
+            <div class="topic" style="margin-top:10px;">
+                <div class="topic-label">Reiniciar servicios</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo systemctl restart smbd nmbd</code></div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">Gestionar usuarios del dominio</div>
+                <div class="cmd-list">
+                    <span class="cmd-desc">Listar usuarios del dominio:</span>
+                    <div class="cmd-row"><code class="cmd">wbinfo -u</code></div>
+                    <span class="cmd-desc">Listar grupos del dominio:</span>
+                    <div class="cmd-row"><code class="cmd">wbinfo -g</code></div>
+                    <span class="cmd-desc">Asignar propietario del dominio:</span>
+                    <div class="cmd-row"><code class="cmd" style="white-space:normal;">sudo chown dominio\usuario /ruta/carpeta</code></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unir Ubuntu a dominio -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">🔗 Unir Ubuntu a un dominio existente</span><span class="type-cli">CLI</span></div>
+            <div class="topic">
+                <div class="topic-label">1. Instalar herramientas</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo apt install realmd sssd sssd-tools adcli</code></div>
+                </div>
+            </div>
+            <div class="topic" style="margin-top:10px;">
+                <div class="topic-label">2. Descubrir el dominio</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">realm discover dominio.local</code></div>
+                </div>
+            </div>
+            <div class="topic" style="margin-top:10px;">
+                <div class="topic-label">3. Unirse al dominio</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo realm join dominio.local -U administrador</code></div>
+                </div>
+            </div>
+            <div class="topic" style="margin-top:10px;">
+                <div class="topic-label">4. Verificar la unión</div>
+                <div class="cmd-list">
+                    <span class="cmd-desc">Muestra los dominios a los que pertenece el equipo:</span>
+                    <div class="cmd-row"><code class="cmd">realm list</code></div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">Opcional: OpenLDAP (autenticación centralizada)</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo apt install slapd ldap-utils</code></div>
+                </div>
+                <div class="script-note" style="margin-top:6px;">
+                    <strong>OpenLDAP</strong> permite gestionar políticas de seguridad y autenticación centralizada en entornos Linux puros, sin depender de Active Directory.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Tabla comparativa -->
+    <p class="table-section-title">Comparativa: gestión de dominios Windows vs Ubuntu</p>
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr><th>Función</th><th>Windows</th><th>Ubuntu</th></tr>
+            </thead>
+            <tbody>
+            <tr><td>Controlador de dominio</td><td>Active Directory (AD DS)</td><td>Samba DC</td></tr>
+            <tr><td>Unirse a un dominio</td><td>Configuración → Sistema → Dominio</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">realm join dominio.local</code></td></tr>
+            <tr><td>Descubrir dominios</td><td>Automático en la red local</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">realm discover dominio.local</code></td></tr>
+            <tr><td>Políticas de grupo</td><td>GPO + gpedit.msc</td><td>Samba GPO / OpenLDAP</td></tr>
+            <tr><td>Listar usuarios</td><td>Administrador de AD</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">wbinfo -u</code></td></tr>
+            <tr><td>Listar grupos</td><td>Administrador de AD</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">wbinfo -g</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

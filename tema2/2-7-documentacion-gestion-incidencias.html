@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tema 2.7 – Documentación de instalación e incidencias</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    :root {
+      --purple:       #7c3aed;
+      --purple-light: #ede9fe;
+      --blue:         #1d4ed8;
+      --blue-light:   #dbeafe;
+      --blue-dark:    #1e3a8a;
+      --green:        #15803d;
+      --green-dark:   #14532d;
+      --green-light:  #dcfce7;
+      --orange:       #c2410c;
+      --orange-light: #ffedd5;
+      --red:          #b91c1c;
+      --red-light:    #fee2e2;
+      --yellow:       #92400e;
+      --yellow-light: #fef3c7;
+      --teal:         #0f766e;
+      --teal-light:   #ccfbf1;
+      --gray-50:      #f8fafc;
+      --gray-100:     #f1f5f9;
+      --gray-200:     #e2e8f0;
+      --gray-700:     #334155;
+      --gray-900:     #0f172a;
+      --radius:       10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .page-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 60%, #7c3aed 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+    .page-header .label {
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #c4b5fd;
+      margin-bottom: .4rem;
+    }
+    .page-header h1 { font-size: 1.6rem; font-weight: 700; }
+    .page-header p  { font-size: .9rem; color: #ddd6fe; margin-top: .4rem; }
+
+    .content { max-width: 860px; margin: 0 auto; padding: 1.8rem 1rem 3rem; }
+
+    /* SECTION TITLE */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 1.8rem 0 .9rem;
+    }
+    .section-title .num {
+      background: var(--purple);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .25rem .55rem;
+      border-radius: 6px;
+    }
+    .section-title h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    /* NOTAS */
+    .note {
+      border-left: 4px solid var(--purple);
+      background: var(--purple-light);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: .9rem 1.1rem;
+      font-size: .87rem;
+      margin-bottom: 1.2rem;
+    }
+    .note strong { color: var(--purple); }
+
+    .note-green {
+      border-left: 4px solid var(--green);
+      background: var(--green-light);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: .9rem 1.1rem;
+      font-size: .87rem;
+      margin-bottom: 1rem;
+    }
+    .note-green strong { color: var(--green); }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .8rem;
+    }
+
+    /* GRID 2 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media(max-width:600px){ .grid-2{ grid-template-columns:1fr; } }
+
+    /* DOC INSTALACIÓN — secciones */
+    .doc-section {
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+      padding: .75rem .9rem;
+      border-radius: 8px;
+      margin-bottom: .6rem;
+      border-left: 4px solid;
+    }
+    .doc-section:last-child { margin-bottom: 0; }
+    .doc-section .ds-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: .05rem; }
+    .doc-section h4 { font-size: .88rem; font-weight: 700; margin-bottom: .25rem; }
+    .doc-section ul { padding-left: 1rem; }
+    .doc-section li { font-size: .8rem; margin-bottom: .15rem; }
+    .doc-section p  { font-size: .8rem; }
+
+    .ds-intro    { background: var(--blue-light);   border-color: var(--blue); }
+    .ds-intro h4 { color: var(--blue-dark); }
+    .ds-req      { background: var(--yellow-light); border-color: #d97706; }
+    .ds-req h4   { color: var(--yellow); }
+    .ds-medio    { background: var(--teal-light);   border-color: var(--teal); }
+    .ds-medio h4 { color: var(--teal); }
+    .ds-proceso  { background: var(--purple-light); border-color: var(--purple); }
+    .ds-proceso h4 { color: var(--purple); }
+    .ds-post     { background: var(--green-light);  border-color: var(--green); }
+    .ds-post h4  { color: var(--green-dark); }
+    .ds-prob     { background: var(--red-light);    border-color: var(--red); }
+    .ds-prob h4  { color: var(--red); }
+
+    /* INCIDENCIAS — numeradas */
+    .inc-step {
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+      margin-bottom: .8rem;
+      padding-bottom: .8rem;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .inc-step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .inc-num {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      background: var(--purple);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+    .inc-body h4 { font-size: .88rem; font-weight: 700; color: var(--gray-900); margin-bottom: .3rem; }
+    .inc-body ul { padding-left: 1rem; }
+    .inc-body li { font-size: .8rem; margin-bottom: .18rem; }
+
+    /* GRAVEDAD badges */
+    .sev {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .15rem .5rem;
+      border-radius: 999px;
+      margin-right: .3rem;
+    }
+    .sev-baja    { background: #dcfce7; color: #15803d; }
+    .sev-media   { background: #fef3c7; color: #92400e; }
+    .sev-alta    { background: var(--orange-light); color: var(--orange); }
+    .sev-critica { background: var(--red-light);    color: var(--red); }
+
+    /* EJEMPLO INCIDENCIA */
+    .inc-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+    }
+    .inc-card .inc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: .7rem;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .inc-card .inc-id {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--purple);
+    }
+    .inc-card .inc-date {
+      font-size: .78rem;
+      color: #64748b;
+    }
+    .inc-field {
+      margin-bottom: .5rem;
+    }
+    .inc-field .label {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #94a3b8;
+      margin-bottom: .1rem;
+    }
+    .inc-field .value {
+      font-size: .82rem;
+      color: var(--gray-700);
+    }
+
+    /* CMD */
+    .cmd {
+      display: block;
+      background: #1e293b;
+      color: #86efac;
+      border-radius: 7px;
+      padding: .45rem .85rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: .8rem;
+      margin: .35rem 0;
+    }
+
+    /* FLUJO RESUMEN */
+    .flow-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem;
+    }
+    @media(max-width:580px){ .flow-2col{ grid-template-columns:1fr; } }
+    .flow-item {
+      background: var(--purple-light);
+      border: 1px solid #c4b5fd;
+      border-radius: 8px;
+      padding: .55rem .75rem;
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+    }
+    .flow-item .fi-num {
+      background: var(--purple);
+      color: #fff;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .flow-item p { font-size: .8rem; color: var(--purple); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="label">Sistemas Informáticos · Tema 2</div>
+  <h1>2.7 Documentación de instalación e incidencias</h1>
+  <p>Qué documentar · Cómo estructurarlo · Ejemplo real</p>
+</header>
+
+<div class="content">
+
+  <div class="note">
+    <strong>¿Por qué documentar?</strong> Una buena documentación garantiza que las instalaciones y resoluciones de problemas sean <strong>eficientes, repetibles y consultables</strong> en el futuro.
+  </div>
+
+  <!-- ══════════════════════════
+       DOCUMENTACIÓN DE INSTALACIÓN
+  ═══════════════════════════ -->
+  <div class="section-title">
+    <span class="num">📄</span>
+    <h2>Documentación de instalación</h2>
+  </div>
+
+  <div class="card">
+    <h3>🗂️ Secciones que debe incluir</h3>
+
+    <div class="doc-section ds-intro">
+      <div class="ds-icon">📌</div>
+      <div>
+        <h4>1. Introducción</h4>
+        <ul>
+          <li>Descripción del SO y sus objetivos.</li>
+          <li>Alcance del documento: versiones incluidas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-section ds-req">
+      <div class="ds-icon">📋</div>
+      <div>
+        <h4>2. Requisitos previos</h4>
+        <ul>
+          <li><strong>Hardware:</strong> requisitos mínimos y recomendados.</li>
+          <li><strong>Software adicional</strong> necesario.</li>
+          <li><strong>Configuraciones previas:</strong> BIOS/UEFI, internet, disco duro.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-section ds-medio">
+      <div class="ds-icon">💿</div>
+      <div>
+        <h4>3. Preparación del medio de instalación</h4>
+        <ul>
+          <li>Descarga de la imagen ISO desde fuentes oficiales.</li>
+          <li>Creación del USB booteable o grabación del DVD.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-section ds-proceso">
+      <div class="ds-icon">⚙️</div>
+      <div>
+        <h4>4. Proceso de instalación</h4>
+        <ul>
+          <li>Inicio del instalador desde el medio.</li>
+          <li>Configuración inicial: idioma, zona horaria, teclado.</li>
+          <li>Particionado del disco.</li>
+          <li>Selección de paquetes.</li>
+          <li>Configuración de red.</li>
+          <li>Creación de usuarios y contraseñas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-section ds-post">
+      <div class="ds-icon">✅</div>
+      <div>
+        <h4>5. Configuración posterior a la instalación</h4>
+        <ul>
+          <li>Actualización del sistema a la última versión.</li>
+          <li>Instalación de controladores de hardware.</li>
+          <li>Ajustes de seguridad y optimización de rendimiento.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-section ds-prob">
+      <div class="ds-icon">🔍</div>
+      <div>
+        <h4>6. Solución de problemas comunes</h4>
+        <ul>
+          <li>Listado de errores frecuentes y sus soluciones.</li>
+          <li>Enlaces a documentación oficial y foros de soporte.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════
+       DOCUMENTACIÓN DE INCIDENCIAS
+  ═══════════════════════════ -->
+  <div class="section-title">
+    <span class="num">🚨</span>
+    <h2>Documentación de incidencias</h2>
+  </div>
+
+  <div class="note">
+    <strong>¿Qué es una incidencia?</strong> Cualquier problema, fallo o interrupción que afecte al funcionamiento normal del sistema. Documentarla bien permite resolverla y <strong>evitar que vuelva a ocurrir</strong>.
+  </div>
+
+  <div class="card">
+    <h3>📝 Estructura de un registro de incidencia</h3>
+
+    <div class="inc-step">
+      <div class="inc-num">1</div>
+      <div class="inc-body">
+        <h4>🔖 Identificación</h4>
+        <ul>
+          <li><strong>Número de incidencia:</strong> identificador único (ej. INC-2024-001).</li>
+          <li><strong>Fecha y hora</strong> en que se reportó.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="inc-step">
+      <div class="inc-num">2</div>
+      <div class="inc-body">
+        <h4>📋 Descripción</h4>
+        <ul>
+          <li><strong>Resumen breve</strong> y claro del problema.</li>
+          <li><strong>Detalles:</strong> síntomas, entorno (hardware y software), información relevante.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="inc-step">
+      <div class="inc-num">3</div>
+      <div class="inc-body">
+        <h4>💥 Impacto</h4>
+        <ul>
+          <li><strong>Usuarios afectados:</strong> cuántos y quiénes.</li>
+          <li><strong>Servicios afectados:</strong> qué deja de funcionar.</li>
+          <li><strong>Gravedad:</strong>
+            <span class="sev sev-baja">Baja</span>
+            <span class="sev sev-media">Media</span>
+            <span class="sev sev-alta">Alta</span>
+            <span class="sev sev-critica">Crítica</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="inc-step">
+      <div class="inc-num">4</div>
+      <div class="inc-body">
+        <h4>🔬 Diagnóstico inicial</h4>
+        <ul>
+          <li><strong>Pasos realizados</strong> para identificar el problema.</li>
+          <li><strong>Hallazgos</strong> durante el diagnóstico.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="inc-step">
+      <div class="inc-num">5</div>
+      <div class="inc-body">
+        <h4>🔧 Resolución</h4>
+        <ul>
+          <li><strong>Acciones tomadas</strong> para resolver el problema.</li>
+          <li><strong>Solución implementada</strong> y cambios realizados.</li>
+          <li><strong>Resultados:</strong> confirmación de que la incidencia está resuelta.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="inc-step">
+      <div class="inc-num">6</div>
+      <div class="inc-body">
+        <h4>🛡️ Prevención futura</h4>
+        <ul>
+          <li><strong>Causas raíz:</strong> qué originó realmente el problema.</li>
+          <li><strong>Medidas preventivas</strong> para que no vuelva a ocurrir.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="inc-step">
+      <div class="inc-num">7</div>
+      <div class="inc-body">
+        <h4>✔️ Cierre</h4>
+        <ul>
+          <li><strong>Confirmación de resolución</strong> completa.</li>
+          <li><strong>Firma y fecha</strong> del responsable del cierre.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="inc-step">
+      <div class="inc-num">8</div>
+      <div class="inc-body">
+        <h4>📚 Seguimiento</h4>
+        <ul>
+          <li><strong>Lecciones aprendidas</strong> durante la gestión.</li>
+          <li><strong>Mejoras sugeridas</strong> en los procesos.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════
+       EJEMPLO REAL
+  ═══════════════════════════ -->
+  <div class="section-title">
+    <span class="num">📌</span>
+    <h2>Ejemplo real de incidencia</h2>
+  </div>
+
+  <div class="card">
+    <h3>🐧 Caso: Sin internet tras instalar Kali Linux</h3>
+    <div class="inc-card">
+
+      <div class="inc-header">
+        <span class="inc-id">INC-2023-001</span>
+        <span class="inc-date">📅 04 julio 2023 · 10:30 AM</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <div class="inc-field">
+            <div class="label">Resumen</div>
+            <div class="value">Sin conexión a internet por Ethernet tras instalación limpia de Kali Linux.</div>
+          </div>
+          <div class="inc-field">
+            <div class="label">Entorno</div>
+            <div class="value">Kali Linux 2023.1 · Lenovo ThinkPad X1 · Ethernet</div>
+          </div>
+          <div class="inc-field">
+            <div class="label">Síntoma</div>
+            <div class="value">El comando <code style="background:#f1f5f9;padding:.1rem .3rem;border-radius:3px;font-size:.79rem">ping</code> no alcanza ninguna IP externa.</div>
+          </div>
+          <div class="inc-field">
+            <div class="label">Gravedad</div>
+            <div class="value"><span class="sev sev-alta">Alta</span> · 1 usuario afectado</div>
+          </div>
+        </div>
+        <div>
+          <div class="inc-field">
+            <div class="label">Diagnóstico</div>
+            <div class="value">El sistema no detecta la interfaz de red Ethernet. Controlador no instalado automáticamente.</div>
+          </div>
+          <div class="inc-field">
+            <div class="label">Solución</div>
+            <div class="value">Instalación manual del controlador Realtek:</div>
+          </div>
+          <code class="cmd">sudo apt install firmware-realtek</code>
+          <div class="inc-field" style="margin-top:.4rem">
+            <div class="label">Resultado</div>
+            <div class="value">✅ Conexión restablecida. Verificado con ping.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:.8rem;padding-top:.7rem;border-top:1px solid var(--gray-200)">
+        <div class="grid-2">
+          <div class="inc-field">
+            <div class="label">Causa raíz</div>
+            <div class="value">El driver de red no se instaló automáticamente durante la instalación del SO.</div>
+          </div>
+          <div class="inc-field">
+            <div class="label">Prevención</div>
+            <div class="value">Añadir verificación de drivers de red en el checklist post-instalación.</div>
+          </div>
+        </div>
+        <div style="margin-top:.5rem;font-size:.78rem;color:#64748b;text-align:right">
+          Cierre: Juan Pérez · 04/07/2023
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════
+       RESUMEN FINAL
+  ═══════════════════════════ -->
+  <div class="section-title">
+    <span class="num">✅</span>
+    <h2>Resumen — ¿Qué documentar siempre?</h2>
+  </div>
+
+  <div class="card">
+    <div class="flow-2col">
+      <div class="flow-item"><div class="fi-num">1</div><p>Introducción y alcance del documento</p></div>
+      <div class="flow-item"><div class="fi-num">2</div><p>Requisitos de hardware y software</p></div>
+      <div class="flow-item"><div class="fi-num">3</div><p>Preparación del medio de instalación</p></div>
+      <div class="flow-item"><div class="fi-num">4</div><p>Proceso de instalación paso a paso</p></div>
+      <div class="flow-item"><div class="fi-num">5</div><p>Configuración posterior a la instalación</p></div>
+      <div class="flow-item"><div class="fi-num">6</div><p>Errores comunes y soluciones</p></div>
+      <div class="flow-item"><div class="fi-num">7</div><p>Incidencias: ID · descripción · impacto</p></div>
+      <div class="flow-item"><div class="fi-num">8</div><p>Resolución · prevención · lecciones aprendidas</p></div>
+    </div>
+  </div>
+
+  <div class="note-green">
+    <strong>💡 Recuerda:</strong> Una documentación bien estructurada no solo resuelve problemas más rápido, sino que sirve como <strong>recurso de aprendizaje y referencia futura</strong> para todo el equipo.
+  </div>
+
+</div>
+</body>
+</html>

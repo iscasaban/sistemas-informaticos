@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.4 Redes informáticas</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+    .net-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px; }
+    .net-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 12px; }
+    .net-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:3px; }
+    .net-acro { font-family:var(--font-mono),monospace;font-size:13px;font-weight:700;color:var(--accent-purple);margin-bottom:4px; }
+    .net-desc { font-size:11px;color:var(--color-text-secondary);line-height:1.4; }
+    .tip-list { display:flex;flex-direction:column;gap:6px; }
+    .tip { display:flex;gap:8px;align-items:flex-start; }
+    .tip-dot { width:6px;height:6px;border-radius:50%;background:var(--accent-purple);flex-shrink:0;margin-top:5px; }
+    .tip-text { font-size:13px;color:var(--color-text-secondary);line-height:1.4; }
+    .tip-text strong { color:var(--color-text-primary); }
+    .topo-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px; }
+    .topo-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 12px;text-align:center; }
+    .topo-icon { font-size:22px;margin-bottom:4px; }
+    .topo-name { font-size:12px;font-weight:600;color:var(--color-text-primary);margin-bottom:3px; }
+    .topo-desc { font-size:11px;color:var(--color-text-secondary);line-height:1.4; }
+    .topo-warn { font-size:11px;color:#C0392B;margin-top:3px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">1.4 Redes informáticas</p>
+  <p class="section-sub">Sistemas de dispositivos interconectados para compartir recursos y facilitar la comunicación.</p>
+
+  <div class="script-note" style="margin-bottom:20px;">
+    <strong>Definición:</strong> conjunto de dispositivos (ordenadores, servidores, impresoras, móviles…) conectados entre sí para <strong>compartir recursos</strong> y <strong>comunicarse</strong>.
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tipos de redes -->
+  <p class="table-section-title">Tipos de redes</p>
+  <div class="net-grid">
+    <div class="net-item">
+      <div class="net-acro">PAN</div>
+      <div class="net-name">Red de área personal</div>
+      <div class="net-desc">Para un solo usuario. Conecta dispositivos personales. Tecnología: Bluetooth, USB.</div>
+    </div>
+    <div class="net-item">
+      <div class="net-acro">LAN</div>
+      <div class="net-name">Red de área local</div>
+      <div class="net-desc">Casa, oficina o edificio. Común en hogares y pequeñas empresas.</div>
+    </div>
+    <div class="net-item">
+      <div class="net-acro">MAN</div>
+      <div class="net-name">Red de área metropolitana</div>
+      <div class="net-desc">Ciudad o área metropolitana. Conecta varias LAN. Usada por universidades y gobiernos.</div>
+    </div>
+    <div class="net-item">
+      <div class="net-acro">WAN</div>
+      <div class="net-name">Red de área amplia</div>
+      <div class="net-desc">Países o continentes. Internet es la WAN más grande del mundo.</div>
+    </div>
+    <div class="net-item">
+      <div class="net-acro">VPN</div>
+      <div class="net-name">Red privada virtual</div>
+      <div class="net-desc">Usa red pública (internet) para acceso seguro y cifrado a una red privada.</div>
+    </div>
+    <div class="net-item">
+      <div class="net-acro">WLAN</div>
+      <div class="net-name">Red inalámbrica</div>
+      <div class="net-desc">Conexión sin cables por ondas de radio. El Wi-Fi es el tipo más común.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ventajas e inconvenientes -->
+  <div class="cols" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="card-header"><span class="card-title">✅ Ventajas</span></div>
+      <div class="tip-list">
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Recursos compartidos:</strong> archivos, impresoras, internet.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Comunicación eficiente:</strong> correo, mensajería, videoconferencia.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Centralización de datos:</strong> servidores con respaldo centralizado.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Movilidad:</strong> redes inalámbricas permiten conectarse desde cualquier lugar.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Escalabilidad:</strong> fácil añadir nuevos dispositivos y usuarios.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">⚠️ Inconvenientes</span></div>
+      <div class="tip-list">
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Coste de implementación:</strong> hardware, software y mantenimiento pueden ser costosos.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Seguridad:</strong> vulnerables a malware, phishing e intrusiones si no están bien configuradas.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Dependencia:</strong> si la red falla, todos los dispositivos conectados pueden quedar inutilizables.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text"><strong>Complejidad:</strong> redes grandes requieren gestión y personal especializado.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Componentes -->
+  <p class="table-section-title">Componentes de una red</p>
+  <div class="cols" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="card-header"><span class="card-title">🔧 Dispositivos de red</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">Router</code><span class="cmd-desc">Dirige tráfico entre redes distintas (LAN ↔ WAN)</span></div>
+        <div class="cmd-row"><code class="cmd">Switch</code><span class="cmd-desc">Conecta dispositivos dentro de la misma red</span></div>
+        <div class="cmd-row"><code class="cmd">Access Point (AP)</code><span class="cmd-desc">Permite conexión inalámbrica de dispositivos</span></div>
+        <div class="cmd-row"><code class="cmd">Firewall</code><span class="cmd-desc">Protege la red de accesos no autorizados</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">💻 Dispositivos finales</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">Ordenadores</code><span class="cmd-desc">Escritorio o portátil, acceden a la red</span></div>
+        <div class="cmd-row"><code class="cmd">Servidores</code><span class="cmd-desc">Almacenan y gestionan recursos compartidos</span></div>
+        <div class="cmd-row"><code class="cmd">Periféricos</code><span class="cmd-desc">Impresoras y otros dispositivos compartidos</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">🔌 Medios de transmisión</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">Cable Ethernet (cobre)</code><span class="cmd-desc">LAN. Económico y fácil de instalar</span></div>
+        <div class="cmd-row"><code class="cmd">Fibra óptica</code><span class="cmd-desc">Alta velocidad y larga distancia (WAN)</span></div>
+        <div class="cmd-row"><code class="cmd">Wi-Fi / Bluetooth</code><span class="cmd-desc">Inalámbrico, sin cables</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="card-header" style="margin-bottom:8px;"><span class="card-title">🖥️ Software de red</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">NOS</code><span class="cmd-desc">Sistema operativo de red (Windows Server, Linux)</span></div>
+        <div class="cmd-row"><code class="cmd">Protocolos</code><span class="cmd-desc">TCP/IP, UDP, HTTP, FTP…</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Topologías -->
+  <p class="table-section-title">Topologías de red</p>
+  <div class="topo-grid">
+    <div class="topo-item">
+      <div class="topo-icon">➖</div>
+      <div class="topo-name">Bus</div>
+      <div class="topo-desc">Todos conectados a un cable principal.</div>
+      <div class="topo-warn">⚠️ Si el cable falla, cae toda la red.</div>
+    </div>
+    <div class="topo-item">
+      <div class="topo-icon">⭐</div>
+      <div class="topo-name">Estrella</div>
+      <div class="topo-desc">Todos conectados a un nodo central (switch/hub). Fácil de gestionar.</div>
+      <div class="topo-warn">⚠️ Depende del nodo central.</div>
+    </div>
+    <div class="topo-item">
+      <div class="topo-icon">🔄</div>
+      <div class="topo-name">Anillo</div>
+      <div class="topo-desc">Dispositivos en bucle cerrado. Cada uno tiene dos vecinos.</div>
+      <div class="topo-warn">⚠️ Un fallo afecta a toda la red.</div>
+    </div>
+    <div class="topo-item">
+      <div class="topo-icon">🕸️</div>
+      <div class="topo-name">Malla</div>
+      <div class="topo-desc">Cada dispositivo conectado a todos los demás. Alta redundancia.</div>
+      <div class="topo-warn">⚠️ Costosa y compleja.</div>
+    </div>
+    <div class="topo-item">
+      <div class="topo-icon">🌳</div>
+      <div class="topo-name">Árbol</div>
+      <div class="topo-desc">Combinación de estrella y bus. Expansión jerárquica. Común en redes grandes.</div>
+      <div class="topo-warn">⚠️ Fallo en nodo raíz afecta a ramas.</div>
+    </div>
+    <div class="topo-item">
+      <div class="topo-icon">🔀</div>
+      <div class="topo-name">Mixta</div>
+      <div class="topo-desc">Combina varias topologías. Flexible y adaptable a entornos reales.</div>
+      <div class="topo-warn">⚠️ Mayor complejidad de gestión.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <img alt="imagen topologías de red" src="/media/topologias-red.png">
+  <hr class="divider">
+
+  <!-- Cableado -->
+  <p class="table-section-title">Tipos de cableado y conectores</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr><th>Cable</th><th>Descripción</th><th>Conector</th><th>Uso típico</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><strong>UTP</strong></td>
+        <td>Par trenzado sin blindaje. Económico y fácil de instalar.</td>
+        <td><span class="tag-cat">RJ-45</span></td>
+        <td>LAN (Ethernet)</td>
+      </tr>
+      <tr>
+        <td><strong>STP</strong></td>
+        <td>Par trenzado con blindaje. Menos interferencias.</td>
+        <td><span class="tag-cat">RJ-45</span></td>
+        <td>Entornos con ruido electromagnético</td>
+      </tr>
+      <tr>
+        <td><strong>Fibra óptica</strong></td>
+        <td>Transmite luz. Alta velocidad y larga distancia.</td>
+        <td><span class="tag-cat">SC / LC / ST</span></td>
+        <td>WAN, backbones de red</td>
+      </tr>
+      <tr>
+        <td><strong>Coaxial</strong></td>
+        <td>Alta resistencia a interferencias. Ya poco usado en redes.</td>
+        <td><span class="tag-cat">BNC</span></td>
+        <td>Redes antiguas, TV por cable</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr class="divider">
+
+</div>
+</body>
+</html>

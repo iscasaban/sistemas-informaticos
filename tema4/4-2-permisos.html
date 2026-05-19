@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.2 Permisos en un sistema operativo</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    .section-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+
+    .perms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .perm-card { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; text-align: center; }
+    .perm-letter { font-family: var(--font-mono),monospace; font-size: 22px; font-weight: 500; color: #534AB7; display: block; margin-bottom: 4px; }
+    .perm-name { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+    .perm-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.3; }
+
+    .levels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
+    .level { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 8px 10px; text-align: center; }
+    .level-icon { font-size: 16px; margin-bottom: 3px; }
+    .level-name { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+    .level-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.3; }
+
+    .chmod-box { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 20px; }
+    .chmod-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 8px; }
+    .chmod-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px; }
+    .chmod-field { text-align: center; }
+    .chmod-val { font-family: var(--font-mono),monospace; font-size: 16px; font-weight: 500; color: #3C3489; background: #EEEDFE; border-radius: 4px; padding: 4px 0; display: block; }
+    .chmod-lbl { font-size: 10px; color: var(--color-text-secondary); margin-top: 3px; display: block; }
+    .chmod-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; display: block; }
+    .chmod-example { font-family: var(--font-mono),monospace; font-size: 12px; color: var(--color-text-primary); background: var(--color-bg); border-radius: 4px; padding: 6px 8px; border: 0.5px solid var(--color-border); margin-top: 8px; }
+    .chmod-ex-label { font-size: 11px; color: var(--color-text-secondary); margin-top: 4px; }
+
+    .block { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 0.5px solid var(--color-border); }
+    .block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .block-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+
+    .tool-type { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 99px; display: inline-block; margin-bottom: 6px; }
+    .type-gui { background: #E1F5EE; color: #085041; }
+    .type-cli { background: #FAEEDA; color: #633806; }
+
+    .step { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 3px; padding-left: 4px; }
+
+    .cmd-block { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 8px 10px; margin-top: 6px; }
+    .cmd-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+    .cmd-row:last-child { margin-bottom: 0; }
+    .cmd-desc-sm { font-size: 11px; color: var(--color-text-secondary); padding-top: 2px; line-height: 1.4; }
+
+    .note { background: var(--color-bg-secondary); border-left: 3px solid #7F77DD; border-radius: 0; padding: 8px 12px; font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; }
+    .note strong { color: var(--color-text-primary); font-weight: 500; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">4.2 Permisos en un sistema operativo</p>
+  <p class="section-sub">Controlar qué puede hacer cada usuario sobre cada archivo o carpeta</p>
+
+  <p class="section-label">Tipos de permiso (comunes a ambos sistemas)</p>
+  <div class="perms-grid">
+    <div class="perm-card">
+      <span class="perm-letter">R</span>
+      <div class="perm-name">Lectura</div>
+      <div class="perm-desc">Ver el contenido de un archivo o listar un directorio</div>
+    </div>
+    <div class="perm-card">
+      <span class="perm-letter">W</span>
+      <div class="perm-name">Escritura</div>
+      <div class="perm-desc">Modificar, crear o eliminar archivos en un directorio</div>
+    </div>
+    <div class="perm-card">
+      <span class="perm-letter">X</span>
+      <div class="perm-name">Ejecución</div>
+      <div class="perm-desc">Ejecutar un programa o acceder al contenido de un directorio</div>
+    </div>
+  </div>
+
+  <p class="section-label">¿A quién se asignan los permisos?</p>
+  <div class="levels-grid">
+    <div class="level">
+      <div class="level-icon">👤</div>
+      <div class="level-name">Propietario</div>
+      <div class="level-desc">El usuario dueño del archivo</div>
+    </div>
+    <div class="level">
+      <div class="level-icon">👥</div>
+      <div class="level-name">Grupo</div>
+      <div class="level-desc">Usuarios con permisos compartidos</div>
+    </div>
+    <div class="level">
+      <div class="level-icon">🌐</div>
+      <div class="level-name">Otros</div>
+      <div class="level-desc">El resto de usuarios del sistema</div>
+    </div>
+  </div>
+
+  <p class="section-label">Notación numérica chmod (Ubuntu)</p>
+  <div class="chmod-box">
+    <div class="chmod-title">Cada dígito representa los permisos de un nivel: propietario / grupo / otros</div>
+    <div class="chmod-fields">
+      <div class="chmod-field"><span class="chmod-val">7</span><span class="chmod-lbl">Propietario</span><span class="chmod-sub">r + w + x</span></div>
+      <div class="chmod-field"><span class="chmod-val">5</span><span class="chmod-lbl">Grupo</span><span class="chmod-sub">r + x</span></div>
+      <div class="chmod-field"><span class="chmod-val">5</span><span class="chmod-lbl">Otros</span><span class="chmod-sub">r + x</span></div>
+    </div>
+    <div class="chmod-example">sudo chmod 755 archivo</div>
+    <div class="chmod-ex-label">→ Propietario puede todo (7 = rwx) · Grupo y otros solo leer y ejecutar (5 = r-x)</div>
+  </div>
+
+  <div class="cols">
+
+    <!-- Windows -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows 10</span>
+        <span class="card-title">Permisos (ACL)</span>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Asignar permisos</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Clic derecho en archivo/carpeta → Propiedades</div>
+        <div class="step">→ Pestaña Seguridad → Editar</div>
+        <div class="step">→ Selecciona usuario/grupo → marca o desmarca permisos</div>
+        <div class="step">→ Aplicar → Aceptar</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Permisos comunes</div>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd-desc-sm"><strong style="color:var(--color-text-primary)">Control total</strong> — cualquier operación, incluido cambiar permisos</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm"><strong style="color:var(--color-text-primary)">Modificar</strong> — cambiar el contenido</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm"><strong style="color:var(--color-text-primary)">Lectura y ejecución</strong> — abrir o ejecutar</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm"><strong style="color:var(--color-text-primary)">Escritura</strong> — cambiar contenido o añadir archivos</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ubuntu -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Permisos (rwx)</span>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Ver permisos</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd">ls -l</span><span class="cmd-desc-sm">muestra permisos → ej: -rwxr-xr--</span></div>
+        </div>
+        <div class="note"><strong>Lectura:</strong> 3 grupos de 3 caracteres = propietario / grupo / otros</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Cambiar permisos y propietario</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd">sudo chmod 755 archivo</span><span class="cmd-desc-sm">cambia permisos</span></div>
+          <div class="cmd-row"><span class="cmd">sudo chown juan archivo.txt</span><span class="cmd-desc-sm">cambia propietario</span></div>
+          <div class="cmd-row"><span class="cmd">sudo chown juan:grupo archivo.txt</span><span class="cmd-desc-sm">cambia propietario y grupo</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Asignar permisos (GUI)</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Clic derecho → Propiedades → pestaña Permisos</div>
+        <div class="step">→ Menús desplegables para Propietario, Grupo y Otros</div>
+        <div class="step">→ Clic en Cerrar para aplicar</div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <p class="table-section-title">Tabla comparativa de permisos</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Aspecto</th>
+        <th>Windows 10</th>
+        <th>Ubuntu</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="tag-cat">Modelo</span></td>
+        <td>Listas de Control de Acceso (ACL)</td>
+        <td>Propietario / Grupo / Otros (rwx)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Ver permisos</span></td>
+        <td>Propiedades → Seguridad (GUI)</td>
+        <td><span class="cmd">ls -l</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Cambiar permisos</span></td>
+        <td>Propiedades → Seguridad → Editar</td>
+        <td><span class="cmd">sudo chmod 755 archivo</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Cambiar propietario</span></td>
+        <td>Propiedades → Seguridad → Avanzado</td>
+        <td><span class="cmd">sudo chown usuario archivo</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Permiso máximo</span></td>
+        <td>Control total</td>
+        <td>rwx (7)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Solo lectura</span></td>
+        <td>Lectura</td>
+        <td>r-- (4)</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

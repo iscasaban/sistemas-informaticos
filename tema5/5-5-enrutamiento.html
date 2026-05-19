@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.5 Enrutamiento</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+    .code-block { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 14px;font-family:var(--font-mono),monospace;font-size:12px;color:var(--color-text-primary);white-space:pre;overflow-x:auto;line-height:1.7;margin-top:6px; }
+    .op-label { font-size:11px;font-weight:600;color:var(--accent-purple);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;margin-top:10px; }
+    .op-label:first-child { margin-top:0; }
+    .example-note { background:var(--color-bg-secondary);border-left:3px solid var(--accent-purple);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:10px 14px;font-size:12px;color:var(--color-text-secondary);margin-top:8px; }
+    .example-note code { font-family:var(--font-mono),monospace;font-size:11px;background:var(--color-bg);border:0.5px solid var(--color-border);border-radius:3px;padding:1px 5px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">5.5 Enrutamiento</p>
+  <p class="section-sub">Seleccionar el camino más eficiente para que los datos viajen entre redes distintas.</p>
+
+  <div class="script-note" style="margin-bottom:20px;">
+    <strong>¿Para qué sirve?</strong> El enrutamiento permite gestionar redes locales, acceder a múltiples subredes y usar conexiones VPN. Sin rutas correctas, los paquetes no llegan a su destino.
+  </div>
+
+  <!-- Windows -->
+  <div class="cols">
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows</span>
+        <span class="card-title">Comando <code style="font-family:var(--font-mono),monospace;">route</code></span>
+        <span class="type-cli">CLI</span>
+      </div>
+
+      <div class="op-label">Ver tabla de enrutamiento</div>
+      <div class="code-block">route print</div>
+      <div class="example-note">Muestra: destinos de red, máscaras, gateways e interfaces asociadas.</div>
+
+      <div class="op-label">Agregar una ruta</div>
+      <div class="code-block">route add [destino] MASK [máscara] [gateway]</div>
+      <div class="example-note">Ejemplo — subred 192.168.2.0/24 via 192.168.1.1:<br><code>route add 192.168.2.0 MASK 255.255.255.0 192.168.1.1</code></div>
+
+      <div class="op-label">Ruta permanente (persiste al reiniciar)</div>
+      <div class="code-block">route -p add 192.168.2.0 MASK 255.255.255.0 192.168.1.1</div>
+
+      <div class="op-label">Eliminar una ruta</div>
+      <div class="code-block">route delete 192.168.2.0</div>
+
+      <div class="op-label">Ejemplo completo — ruta estática</div>
+      <div class="code-block">route add 10.0.0.0 MASK 255.255.255.0 192.168.1.254
+        route print</div>
+    </div>
+
+    <!-- Ubuntu -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Comando <code style="font-family:var(--font-mono),monospace;">ip route</code></span>
+        <span class="type-cli">CLI</span>
+      </div>
+
+      <div class="op-label">Ver tabla de enrutamiento</div>
+      <div class="code-block">ip route show</div>
+      <div class="example-note">Salida típica:<br><code>default via 192.168.1.1 dev eth0</code><br><code>192.168.1.0/24 dev eth0 proto kernel scope link</code></div>
+
+      <div class="op-label">Agregar una ruta (temporal)</div>
+      <div class="code-block">sudo ip route add [destino] via [gateway] dev [interfaz]</div>
+      <div class="example-note">Ejemplo — subred 10.0.0.0/24:<br><code>sudo ip route add 10.0.0.0/24 via 192.168.1.1 dev eth0</code></div>
+
+      <div class="op-label">Eliminar una ruta</div>
+      <div class="code-block">sudo ip route del 10.0.0.0/24</div>
+
+      <div class="op-label">Ruta persistente — editar Netplan</div>
+      <div class="code-block">sudo nano /etc/netplan/01-netcfg.yaml</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Netplan config persistente -->
+  <p class="table-section-title">Rutas persistentes en Ubuntu (Netplan)</p>
+  <div class="card">
+    <div class="card-header">
+      <span class="badge badge-lin">Ubuntu</span>
+      <span class="card-title">Archivo /etc/netplan/01-netcfg.yaml</span>
+    </div>
+    <div class="code-block">network:
+      version: 2
+      ethernets:
+      eth0:
+      dhcp4: no
+      addresses: [192.168.1.100/24]
+      gateway4: 192.168.1.1
+      routes:
+      - to: 10.0.0.0/24
+      via: 192.168.1.1</div>
+    <div class="topic" style="margin-top:10px;">
+      <div class="topic-label">Aplicar cambios</div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">sudo netplan apply</code><span class="cmd-desc">Activa la configuración</span></div>
+        <div class="cmd-row"><code class="cmd">ip route show</code><span class="cmd-desc">Verificar que la ruta existe</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tabla comparativa -->
+  <p class="table-section-title">Comparativa: gestión de rutas Windows vs Ubuntu</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr><th>Operación</th><th>Windows</th><th>Ubuntu</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>Ver tabla de rutas</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">route print</code></td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">ip route show</code></td></tr>
+      <tr><td>Agregar ruta</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">route add ... MASK ...</code></td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">sudo ip route add ... via ...</code></td></tr>
+      <tr><td>Eliminar ruta</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">route delete [destino]</code></td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">sudo ip route del [destino]</code></td></tr>
+      <tr><td>Ruta permanente</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">route -p add ...</code></td><td>Editar <code style="font-family:var(--font-mono),monospace;font-size:12px;">/etc/netplan/*.yaml</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.1 Usuarios y grupos</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .reason-card { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; }
+    .reason-icon { font-size: 18px; margin-bottom: 4px; }
+    .reason-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+    .reason-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+
+    .block { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 0.5px solid var(--color-border); }
+    .block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .block-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+
+    .tool-type { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 99px; display: inline-block; margin-bottom: 6px; }
+    .type-gui { background: #E1F5EE; color: #085041; }
+    .type-cli { background: #FAEEDA; color: #633806; }
+
+    .step { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 3px; padding-left: 4px; }
+
+    .cmd-block { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 8px 10px; margin-top: 6px; }
+    .cmd-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+    .cmd-row:last-child { margin-bottom: 0; }
+    .cmd-desc-sm { font-size: 11px; color: var(--color-text-secondary); padding-top: 2px; line-height: 1.4; }
+
+    .note { background: var(--color-bg-secondary); border-left: 3px solid #7F77DD; border-radius: 0; padding: 8px 12px; font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; }
+    .note strong { color: var(--color-text-primary); font-weight: 500; }
+
+    .groups-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin-top: 8px; }
+    .group-pill { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 8px 10px; }
+    .group-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+    .group-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.3; }
+
+    .section-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">4.1 Usuarios y grupos</p>
+  <p class="section-sub">Controlar quién accede al sistema y qué puede hacer en él</p>
+
+  <p class="section-label">¿Por qué es importante gestionarlos?</p>
+  <div class="reasons-grid">
+    <div class="reason-card">
+      <div class="reason-icon">🔐</div>
+      <div class="reason-title">Seguridad</div>
+      <div class="reason-desc">Control de acceso por roles: cada usuario solo hace lo que tiene autorizado</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">🗂</div>
+      <div class="reason-title">Organización</div>
+      <div class="reason-desc">Asignar permisos a grupos, no uno a uno — menos errores, más rapidez</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">📋</div>
+      <div class="reason-title">Auditoría</div>
+      <div class="reason-desc">Registrar acciones de cada usuario facilita revisiones de seguridad</div>
+    </div>
+    <div class="reason-card">
+      <div class="reason-icon">⚙️</div>
+      <div class="reason-title">Eficiencia</div>
+      <div class="reason-desc">Gestionar permisos por grupos similares simplifica la administración</div>
+    </div>
+  </div>
+
+  <div class="cols">
+
+    <!-- Windows -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows 10</span>
+        <span class="card-title">Usuarios y grupos</span>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Crear usuario</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Configuración → Cuentas → Familia y otras personas</div>
+        <div class="step">→ Agregar otra persona a este equipo</div>
+        <div class="step">→ Introduce nombre, contraseña y pregunta de seguridad</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Asignar usuario a grupo</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Win + X → Administración de equipos</div>
+        <div class="step">→ Usuarios y Grupos Locales → Usuarios</div>
+        <div class="step">→ Clic derecho en usuario → Propiedades → Miembro de</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Grupos comunes</div>
+        <div class="groups-grid">
+          <div class="group-pill">
+            <div class="group-name">Administradores</div>
+            <div class="group-desc">Control total del sistema</div>
+          </div>
+          <div class="group-pill">
+            <div class="group-name">Usuarios</div>
+            <div class="group-desc">Permisos estándar, sin cambios críticos</div>
+          </div>
+          <div class="group-pill">
+            <div class="group-name">Invitados</div>
+            <div class="group-desc">Acceso muy limitado, uso temporal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ubuntu -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Usuarios y grupos</span>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Crear usuario</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Configuración del sistema → Detalles → Usuarios</div>
+        <div class="step">→ Desbloquear → botón + → Introduce nombre y tipo de cuenta</div>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd">sudo adduser nombre_usuario</span><span class="cmd-desc-sm">crea usuario por terminal</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Crear grupo y asignar usuario</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd">sudo groupadd nombre_grupo</span><span class="cmd-desc-sm">crear grupo nuevo</span></div>
+          <div class="cmd-row"><span class="cmd">sudo usermod -aG grupo usuario</span><span class="cmd-desc-sm">añadir usuario al grupo</span></div>
+        </div>
+        <div class="note"><strong>Ejemplo:</strong> <span class="cmd">sudo usermod -aG sudo juan</span> → da a "juan" permisos de administrador</div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Grupos comunes</div>
+        <div class="groups-grid">
+          <div class="group-pill">
+            <div class="group-name">sudo</div>
+            <div class="group-desc">Privilegios de root con sudo</div>
+          </div>
+          <div class="group-pill">
+            <div class="group-name">adm</div>
+            <div class="group-desc">Accede a archivos de registro</div>
+          </div>
+          <div class="group-pill">
+            <div class="group-name">dialout</div>
+            <div class="group-desc">Puertos serie y USB</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <p class="table-section-title">Tabla comparativa de gestión de usuarios</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Acción</th>
+        <th>Windows 10</th>
+        <th>Ubuntu</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="tag-cat">Crear usuario (GUI)</span></td>
+        <td>Configuración → Cuentas → Agregar persona</td>
+        <td>Configuración → Detalles → Usuarios → +</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Crear usuario (terminal)</span></td>
+        <td><span class="cmd">New-LocalUser</span></td>
+        <td><span class="cmd">sudo adduser nombre</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Crear grupo</span></td>
+        <td>Administración de equipos (GUI)</td>
+        <td><span class="cmd">sudo groupadd nombre_grupo</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Asignar usuario a grupo</span></td>
+        <td>Propiedades → Miembro de (GUI)</td>
+        <td><span class="cmd">sudo usermod -aG grupo usuario</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Grupo de admins</span></td>
+        <td>Administradores</td>
+        <td>sudo</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Grupo estándar</span></td>
+        <td>Usuarios</td>
+        <td>(usuario sin sudo)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Acceso mínimo</span></td>
+        <td>Invitados</td>
+        <td>(sin grupo sudo ni adm)</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

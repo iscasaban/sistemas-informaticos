@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tema 2.5 – Instalación de Linux (Ubuntu)</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    :root {
+      --purple:       #7c3aed;
+      --purple-light: #ede9fe;
+      --blue:         #1d4ed8;
+      --blue-light:   #dbeafe;
+      --green:        #15803d;
+      --green-dark:   #14532d;
+      --green-light:  #dcfce7;
+      --orange:       #c2410c;
+      --orange-light: #ffedd5;
+      --yellow:       #92400e;
+      --yellow-light: #fef3c7;
+      --gray-50:      #f8fafc;
+      --gray-100:     #f1f5f9;
+      --gray-200:     #e2e8f0;
+      --gray-700:     #334155;
+      --gray-900:     #0f172a;
+      --ubuntu:       #e95420;
+      --ubuntu-light: #fff3ef;
+      --radius:       10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .page-header {
+      background: linear-gradient(135deg, #14532d 0%, #15803d 60%, #22c55e 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+    }
+    .page-header .label {
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #bbf7d0;
+      margin-bottom: .4rem;
+    }
+    .page-header h1 { font-size: 1.6rem; font-weight: 700; }
+    .page-header p  { font-size: .9rem; color: #dcfce7; margin-top: .4rem; }
+    .badge-ubuntu {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .2rem .7rem;
+      border-radius: 999px;
+      margin-top: .6rem;
+    }
+
+    .content { max-width: 860px; margin: 0 auto; padding: 1.8rem 1rem 3rem; }
+
+    /* NOTAS */
+    .note {
+      border-left: 4px solid var(--purple);
+      background: var(--purple-light);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: .9rem 1.1rem;
+      font-size: .87rem;
+      margin-bottom: 1.2rem;
+    }
+    .note strong { color: var(--purple); }
+
+    .note-yellow {
+      border-left: 4px solid #d97706;
+      background: var(--yellow-light);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: .9rem 1.1rem;
+      font-size: .87rem;
+      margin-bottom: 1rem;
+    }
+    .note-yellow strong { color: var(--yellow); }
+
+    .note-green {
+      border-left: 4px solid var(--green);
+      background: var(--green-light);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: .9rem 1.1rem;
+      font-size: .87rem;
+      margin-bottom: 1rem;
+    }
+    .note-green strong { color: var(--green); }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .8rem;
+    }
+
+    /* REQUISITOS */
+    .req-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px,1fr));
+      gap: .75rem;
+    }
+    .req-item {
+      background: var(--green-light);
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: .8rem .9rem;
+      display: flex;
+      gap: .6rem;
+      align-items: flex-start;
+    }
+    .req-item .ri-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .req-item h4 { font-size: .82rem; font-weight: 700; color: var(--green-dark); margin-bottom: .15rem; }
+    .req-item p  { font-size: .77rem; color: #166534; }
+
+    /* PASOS */
+    .step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: .9rem;
+      padding-bottom: .9rem;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .step-num {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    .step-body h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: .3rem;
+    }
+    .step-body ul { padding-left: 1.1rem; }
+    .step-body li { font-size: .83rem; margin-bottom: .2rem; }
+    .step-body p  { font-size: .83rem; }
+
+    /* CMD */
+    .cmd {
+      display: block;
+      background: #1e293b;
+      color: #86efac;
+      border-radius: 7px;
+      padding: .5rem .9rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: .82rem;
+      margin: .4rem 0;
+    }
+
+    /* PATH */
+    .path {
+      background: var(--gray-100);
+      color: var(--green-dark);
+      border-radius: 5px;
+      padding: .15rem .45rem;
+      font-size: .8rem;
+      font-family: 'Consolas', monospace;
+    }
+
+    /* TIPO INSTALACIÓN cards */
+    .install-opt {
+      border-radius: 8px;
+      padding: .85rem 1rem;
+      margin-bottom: .6rem;
+      border-left: 4px solid;
+    }
+    .install-opt h4 { font-size: .88rem; font-weight: 700; margin-bottom: .25rem; }
+    .install-opt p  { font-size: .8rem; }
+    .io-clean   { border-color: var(--orange); background: var(--orange-light); }
+    .io-clean h4 { color: var(--orange); }
+    .io-dual    { border-color: var(--blue);   background: var(--blue-light); }
+    .io-dual h4  { color: var(--blue); }
+    .io-custom  { border-color: var(--purple); background: var(--purple-light); }
+    .io-custom h4 { color: var(--purple); }
+
+    /* PARTICIONES tabla */
+    .tabla {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .84rem;
+    }
+    .tabla th {
+      background: var(--gray-100);
+      padding: .5rem .8rem;
+      text-align: left;
+      font-weight: 700;
+      color: var(--gray-900);
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .tabla td {
+      padding: .5rem .8rem;
+      border-bottom: 1px solid var(--gray-100);
+      vertical-align: top;
+    }
+    .tabla tr:last-child td { border-bottom: none; }
+    .tabla tr:hover td { background: var(--gray-50); }
+
+    /* FLOW */
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      align-items: center;
+      justify-content: center;
+      margin-top: .5rem;
+    }
+    .flow-step {
+      background: var(--green-light);
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: .45rem .65rem;
+      text-align: center;
+      min-width: 80px;
+      flex: 1;
+    }
+    .flow-step .fs-num {
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--green);
+      display: block;
+      margin-bottom: .1rem;
+    }
+    .flow-step p {
+      font-size: .72rem;
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+    .flow-arrow { font-size: .9rem; color: var(--gray-200); }
+
+    /* BADGES */
+    .badge {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .15rem .5rem;
+      border-radius: 999px;
+      margin-right: .25rem;
+      vertical-align: middle;
+    }
+    .badge-green  { background: var(--green-light);  color: var(--green); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-blue   { background: var(--blue-light);   color: var(--blue); }
+
+    /* TYPE labels */
+    .type-gui { background: #dcfce7; color: #15803d; font-size: .7rem; font-weight:700; padding:.1rem .45rem; border-radius:4px; }
+    .type-cli { background: #ffedd5; color: #c2410c; font-size: .7rem; font-weight:700; padding:.1rem .45rem; border-radius:4px; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media(max-width:600px){ .grid-2{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="label">Sistemas Informáticos · Tema 2</div>
+  <h1>2.5 Instalación de Linux</h1>
+  <p>Proceso paso a paso para instalar Ubuntu Desktop</p>
+  <span class="badge-ubuntu">🐧 Ubuntu Desktop</span>
+</header>
+
+<div class="content">
+
+  <div class="note">
+    <strong>¿Por qué Ubuntu?</strong> Es la distribución más accesible para iniciarse en Linux. Código abierto, gratuita y con una gran comunidad de soporte.
+  </div>
+
+  <!-- ══════════════════
+       REQUISITOS PREVIOS
+  ═══════════════════ -->
+  <div class="card">
+    <h3>📋 Requisitos previos — ¿Qué necesitas?</h3>
+    <div class="req-grid">
+      <div class="req-item">
+        <div class="ri-icon">💿</div>
+        <div>
+          <h4>Medio de instalación</h4>
+          <p>USB (mín. 4 GB) o DVD con la imagen ISO de Ubuntu.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="ri-icon">🗂️</div>
+        <div>
+          <h4>Copia de seguridad</h4>
+          <p>La instalación puede borrar todos los archivos del disco.</p>
+        </div>
+      </div>
+      <div class="req-item">
+        <div class="ri-icon">🌐</div>
+        <div>
+          <h4>Acceso a internet</h4>
+          <p>Opcional pero recomendado para descargar actualizaciones.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════
+       PASOS 1-8
+  ═══════════════════ -->
+  <div class="card">
+    <h3>🐧 Proceso de instalación — 15 pasos</h3>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>Descargar Ubuntu <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>Ve a <strong>ubuntu.com/download</strong>.</li>
+          <li>Elige <strong>Ubuntu Desktop</strong> y descarga el archivo <strong>.ISO</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>Crear medio de instalación <span class="type-gui">GUI</span></h4>
+        <div class="grid-2" style="margin-top:.4rem">
+          <div style="background:var(--blue-light);border-radius:7px;padding:.7rem;font-size:.8rem">
+            <strong style="color:var(--blue)">📱 Para USB:</strong><br>
+            Usa <strong>Rufus</strong> o <strong>Etcher</strong>.<br>
+            Selecciona el .ISO → clic en <em>Iniciar</em>.
+          </div>
+          <div style="background:var(--orange-light);border-radius:7px;padding:.7rem;font-size:.8rem">
+            <strong style="color:var(--orange)">📀 Para DVD:</strong><br>
+            Usa <strong>ImgBurn</strong> o <strong>Brasero</strong>.<br>
+            Graba el .ISO en el DVD.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>Preparar la BIOS <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>Reinicia y pulsa <strong>F2, F10, Supr o Esc</strong>.</li>
+          <li>En <strong>Boot</strong>, pon el USB/DVD en primera posición.</li>
+          <li>Guarda y reinicia.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>Iniciar el instalador <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>Aparece el logo de Ubuntu y un menú.</li>
+          <li>Elige <strong>Install Ubuntu</strong>.</li>
+          <li>💡 Opcional: elige <em>Try Ubuntu without installing</em> para probar antes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h4>Idioma y teclado <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>Selecciona el <strong>idioma</strong> de instalación → <em>Continuar</em>.</li>
+          <li>Elige la <strong>distribución del teclado</strong> (Ubuntu la detecta automáticamente).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h4>Preparar la instalación <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>Marca <strong>Descargar actualizaciones</strong> e <strong>instalar software de terceros</strong> (códecs y drivers).</li>
+          <li>Haz clic en <em>Continuar</em>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-body">
+        <h4>Tipo de instalación <span class="type-gui">GUI</span></h4>
+        <div style="margin-top:.4rem">
+          <div class="install-opt io-clean">
+            <h4>🗑️ Borrar disco e instalar Ubuntu</h4>
+            <p>Instalación limpia. Borra todo el contenido del disco.</p>
+          </div>
+          <div class="install-opt io-dual">
+            <h4>🔀 Instalar junto a otro SO (Dual Boot)</h4>
+            <p>Conserva Windows u otro SO. Arranca dual al encender.</p>
+          </div>
+          <div class="install-opt io-custom">
+            <h4>⚙️ Más opciones (particiones personalizadas)</h4>
+            <p>Control total sobre las particiones. Para usuarios avanzados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">8</div>
+      <div class="step-body">
+        <h4>Configurar particiones (avanzado) <span class="type-gui">GUI</span></h4>
+        <table class="tabla" style="margin-top:.4rem">
+          <thead>
+          <tr>
+            <th>Partición</th>
+            <th>Formato</th>
+            <th>Tamaño recomendado</th>
+            <th>Uso</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><strong>/ (root)</strong></td>
+            <td><span class="badge badge-green">EXT4</span></td>
+            <td>20 GB mínimo</td>
+            <td>Sistema de archivos principal</td>
+          </tr>
+          <tr>
+            <td><strong>swap</strong></td>
+            <td>swap</td>
+            <td>2 – 8 GB (según RAM)</td>
+            <td>Memoria virtual de intercambio</td>
+          </tr>
+          </tbody>
+        </table>
+        <p style="font-size:.78rem;color:#64748b;margin-top:.4rem">💡 Si no tienes experiencia, usa las opciones predeterminadas de Ubuntu.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">9</div>
+      <div class="step-body">
+        <h4>Seleccionar zona horaria <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>El instalador detecta tu ubicación automáticamente.</li>
+          <li>Corrígela en el mapa si es incorrecta → <em>Continuar</em>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">10</div>
+      <div class="step-body">
+        <h4>Crear cuenta de usuario <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>Introduce <strong>nombre de usuario y contraseña</strong> (será la cuenta de administrador).</li>
+          <li>Elige entre <em>Iniciar sesión automáticamente</em> o <em>Solicitar contraseña</em>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">11</div>
+      <div class="step-body">
+        <h4>Instalación del sistema <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>Ubuntu copia archivos y configura el sistema (varios minutos).</li>
+          <li>Se muestran diapositivas informativas durante el proceso.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">12</div>
+      <div class="step-body">
+        <h4>Finalizar la instalación <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>Aparece mensaje de instalación completada.</li>
+          <li>Retira el USB/DVD cuando se indique y pulsa <strong>Enter</strong> para reiniciar.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">13</div>
+      <div class="step-body">
+        <h4>Primer arranque <span class="type-gui">GUI</span></h4>
+        <ul>
+          <li>Aparece la pantalla de inicio de sesión de Ubuntu.</li>
+          <li>Introduce tu <strong>usuario y contraseña</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">14</div>
+      <div class="step-body">
+        <h4>Actualizar el sistema <span class="type-gui">GUI</span> <span class="type-cli">CLI</span></h4>
+        <ul>
+          <li>Por GUI: <span class="path">Configuración → Software y actualizaciones → Buscar actualizaciones</span>.</li>
+          <li>Por terminal:</li>
+        </ul>
+        <code class="cmd">sudo apt update && sudo apt upgrade</code>
+        <ul style="margin-top:.3rem">
+          <li>Instala también controladores adicionales desde <span class="path">Software y actualizaciones → Controladores adicionales</span>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">15</div>
+      <div class="step-body">
+        <h4>Instalar software adicional <span class="type-gui">GUI</span> <span class="type-cli">CLI</span></h4>
+        <ul>
+          <li>Por GUI: usa la tienda <strong>Ubuntu Software</strong>.</li>
+          <li>Por terminal:</li>
+        </ul>
+        <code class="cmd">sudo apt install nombre_del_programa</code>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════
+       FLUJO RESUMEN
+  ═══════════════════ -->
+  <div class="card">
+    <h3>🗺️ Resumen visual del proceso</h3>
+    <div class="flow">
+      <div class="flow-step"><span class="fs-num">01</span><p>Descarga ISO</p></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-step"><span class="fs-num">02</span><p>Crea USB/DVD</p></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-step"><span class="fs-num">03</span><p>Config. BIOS</p></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-step"><span class="fs-num">04-06</span><p>Idioma · Teclado · Updates</p></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-step"><span class="fs-num">07-08</span><p>Tipo instal. · Particiones</p></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-step"><span class="fs-num">09-10</span><p>Zona horaria · Usuario</p></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-step"><span class="fs-num">11-15</span><p>Instala · Reinicia · Actualiza</p></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════
+       COMPARATIVA WIN vs UBUNTU
+  ═══════════════════ -->
+  <div class="card">
+    <h3>⚖️ Comparativa rápida: Windows vs Ubuntu</h3>
+    <table class="tabla">
+      <thead>
+      <tr>
+        <th>Aspecto</th>
+        <th>🪟 Windows 10</th>
+        <th>🐧 Ubuntu</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><strong>Licencia</strong></td>
+        <td>Privativa (clave de producto)</td>
+        <td>Código abierto (gratuita)</td>
+      </tr>
+      <tr>
+        <td><strong>Pasos de instalación</strong></td>
+        <td>7 pasos</td>
+        <td>15 pasos</td>
+      </tr>
+      <tr>
+        <td><strong>Medio recomendado</strong></td>
+        <td>USB (Media Creation Tool)</td>
+        <td>USB con Rufus / Etcher</td>
+      </tr>
+      <tr>
+        <td><strong>Partición principal</strong></td>
+        <td>NTFS</td>
+        <td>EXT4</td>
+      </tr>
+      <tr>
+        <td><strong>Instalar software</strong></td>
+        <td>Descarga manual / Microsoft Store</td>
+        <td><code>sudo apt install</code> / Ubuntu Software</td>
+      </tr>
+      <tr>
+        <td><strong>Dual Boot</strong></td>
+        <td>Posible (más complejo)</td>
+        <td>Opción integrada en el instalador</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-green">
+    <strong>💡 Recuerda:</strong> Ubuntu permite <strong>probar el sistema sin instalar</strong> (<em>Try Ubuntu</em>) antes de comprometerse con la instalación. Ideal para comprobar compatibilidad de hardware.
+  </div>
+
+</div>
+</body>
+</html>

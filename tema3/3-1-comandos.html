@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.1 Gestión de sistemas mediante comandos</title>
+  <link rel="stylesheet" href="../estilos.css" />
+</head>
+<body>
+
+  <div class="wrap">
+
+    <p class="section-title">3.1 Gestión de sistemas mediante comandos</p>
+    <p class="section-sub">Dos herramientas principales: PowerShell (Windows) y Bash (Ubuntu/Linux)</p>
+
+    <!-- Cards comparativas -->
+    <div class="cols">
+
+      <div class="card">
+        <div class="card-header">
+          <span class="badge badge-win">Windows</span>
+          <span class="card-title">PowerShell</span>
+        </div>
+
+        <div class="topic">
+          <div class="topic-label">📁 Sistema de archivos</div>
+          <div class="cmd-list">
+            <div class="cmd-row">
+              <span class="cmd">Get-ChildItem</span>
+              <span class="cmd-desc">listar archivos y carpetas</span>
+            </div>
+            <div class="cmd-row">
+              <span class="cmd">Set-Location</span>
+              <span class="cmd-desc">cambiar de directorio</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <div class="topic-label">⚙️ Procesos</div>
+          <div class="cmd-list">
+            <div class="cmd-row">
+              <span class="cmd">Get-Process</span>
+              <span class="cmd-desc">ver procesos activos</span>
+            </div>
+            <div class="cmd-row">
+              <span class="cmd">Stop-Process</span>
+              <span class="cmd-desc">finalizar un proceso</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <div class="topic-label">👤 Usuarios</div>
+          <div class="cmd-list">
+            <div class="cmd-row">
+              <span class="cmd">Get-LocalUser</span>
+              <span class="cmd-desc">listar usuarios locales</span>
+            </div>
+            <div class="cmd-row">
+              <span class="cmd">New-LocalUser</span>
+              <span class="cmd-desc">crear nuevo usuario</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <div class="topic-label">🤖 Scripts</div>
+          <div class="cmd-list">
+            <div class="cmd-row">
+              <span class="cmd">.\script.ps1</span>
+              <span class="cmd-desc">ejecutar un script</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="badge badge-lin">Linux</span>
+          <span class="card-title">Bash (Ubuntu)</span>
+        </div>
+
+        <div class="topic">
+          <div class="topic-label">📁 Sistema de archivos</div>
+          <div class="cmd-list">
+            <div class="cmd-row">
+              <span class="cmd">ls</span>
+              <span class="cmd-desc">listar contenido de un directorio</span>
+            </div>
+            <div class="cmd-row">
+              <span class="cmd">cd</span>
+              <span class="cmd-desc">cambiar de directorio</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <div class="topic-label">⚙️ Procesos</div>
+          <div class="cmd-list">
+            <div class="cmd-row">
+              <span class="cmd">ps aux</span>
+              <span class="cmd-desc">ver procesos activos</span>
+            </div>
+            <div class="cmd-row">
+              <span class="cmd">kill -9</span>
+              <span class="cmd-desc">finalizar un proceso por ID</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <div class="topic-label">👤 Usuarios</div>
+          <div class="cmd-list">
+            <div class="cmd-row">
+              <span class="cmd">whoami</span>
+              <span class="cmd-desc">ver usuario actual</span>
+            </div>
+            <div class="cmd-row">
+              <span class="cmd">sudo adduser</span>
+              <span class="cmd-desc">crear nuevo usuario</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic">
+          <div class="topic-label">🤖 Scripts</div>
+          <div class="cmd-list">
+            <div class="cmd-row">
+              <span class="cmd">./script.sh</span>
+              <span class="cmd-desc">ejecutar un script</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Notas sobre scripts -->
+    <div class="cols">
+      <div class="script-note">
+        <strong>Scripts PowerShell:</strong> extensión <code>.ps1</code> — ideales para limpiar archivos temporales y registros de eventos de forma automática.
+      </div>
+      <div class="script-note">
+        <strong>Scripts Bash:</strong> extensión <code>.sh</code> — muy usados para copias de seguridad con <code>rsync</code>. Necesitan permisos con <code>chmod +x</code>.
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Tabla comparativa -->
+    <p class="table-section-title">Tabla comparativa de comandos</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Categoría</th>
+            <th>PowerShell (Windows)</th>
+            <th>Bash (Ubuntu/Linux)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag-cat">Listar archivos</span></td>
+            <td><span class="cmd">Get-ChildItem C:\Users</span></td>
+            <td><span class="cmd">ls /home</span></td>
+          </tr>
+          <tr>
+            <td><span class="tag-cat">Cambiar directorio</span></td>
+            <td><span class="cmd">Set-Location C:\Windows</span></td>
+            <td><span class="cmd">cd /var/log</span></td>
+          </tr>
+          <tr>
+            <td><span class="tag-cat">Ver procesos</span></td>
+            <td><span class="cmd">Get-Process</span></td>
+            <td><span class="cmd">ps aux</span></td>
+          </tr>
+          <tr>
+            <td><span class="tag-cat">Matar proceso</span></td>
+            <td><span class="cmd">Stop-Process -Name notepad</span></td>
+            <td><span class="cmd">kill -9 1234</span></td>
+          </tr>
+          <tr>
+            <td><span class="tag-cat">Ver usuario actual</span></td>
+            <td><span class="cmd">Get-LocalUser</span></td>
+            <td><span class="cmd">whoami</span></td>
+          </tr>
+          <tr>
+            <td><span class="tag-cat">Crear usuario</span></td>
+            <td><span class="cmd">New-LocalUser -Name "usuario"</span></td>
+            <td><span class="cmd">sudo adduser nuevo_usuario</span></td>
+          </tr>
+          <tr>
+            <td><span class="tag-cat">Ejecutar script</span></td>
+            <td><span class="cmd">.\script.ps1</span></td>
+            <td><span class="cmd">./script.sh</span></td>
+          </tr>
+          <tr>
+            <td><span class="tag-cat">Copiar/sincronizar</span></td>
+            <td><span class="cmd">Remove-Item (limpieza)</span></td>
+            <td><span class="cmd">rsync -av --delete origen destino</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</body>
+</html>

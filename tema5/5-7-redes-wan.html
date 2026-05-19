@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.7 Redes de Área Extensa (WAN)</title>
+    <link rel="stylesheet" href="../estilos.css">
+    <style>
+        .type-gui { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#E6F4EA;color:#1E6B2E; }
+        .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+        .steps { display:flex;flex-direction:column;gap:6px; }
+        .step { display:flex;gap:9px;align-items:flex-start; }
+        .step-num { font-size:11px;font-weight:600;min-width:18px;height:18px;border-radius:50%;background:var(--accent-purple);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px; }
+        .step-text { font-size:13px;color:var(--color-text-secondary);line-height:1.4; }
+        .step-text strong { color:var(--color-text-primary); }
+        .code-block { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 14px;font-family:var(--font-mono),monospace;font-size:12px;color:var(--color-text-primary);white-space:pre;overflow-x:auto;line-height:1.7;margin-top:6px; }
+        .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+        .vpn-proto { display:flex;flex-wrap:wrap;gap:6px;margin-top:6px; }
+        .vpn-tag { font-size:11px;font-weight:500;padding:3px 9px;border-radius:99px;background:var(--tag-bg);color:var(--tag-text); }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <p class="section-title">5.7 Redes de área extensa (WAN)</p>
+    <p class="section-sub">Conexiones seguras entre ubicaciones remotas mediante VPN y enrutamiento WAN.</p>
+
+    <div class="script-note" style="margin-bottom:20px;">
+        <strong>¿Qué es una WAN?</strong> Una red de área extensa (Wide Area Network) conecta redes locales distantes entre sí. Las <strong>VPN</strong> son la herramienta principal para hacerlo de forma segura cifrando el tráfico.
+    </div>
+
+    <hr class="divider">
+
+    <!-- Windows WAN -->
+    <p class="table-section-title" style="margin-bottom:12px;">
+        <span class="badge badge-win" style="margin-right:8px;">Windows</span> Redes WAN y VPN
+    </p>
+
+    <div class="cols">
+        <!-- GUI VPN Windows -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">Configurar VPN</span><span class="type-gui">GUI</span></div>
+            <div class="steps">
+                <div class="step"><div class="step-num">1</div><div class="step-text">Configuración → <strong>Red e Internet → VPN</strong></div></div>
+                <div class="step"><div class="step-num">2</div><div class="step-text">Clic en <strong>Agregar una conexión VPN</strong></div></div>
+                <div class="step"><div class="step-num">3</div><div class="step-text">Introduce: nombre, dirección del servidor y tipo de protocolo</div></div>
+                <div class="step"><div class="step-num">4</div><div class="step-text">Guarda y haz clic en <strong>Conectar</strong></div></div>
+            </div>
+            <div class="topic" style="margin-top:10px;">
+                <div class="topic-label">Protocolos compatibles</div>
+                <div class="vpn-proto">
+                    <span class="vpn-tag">PPTP</span>
+                    <span class="vpn-tag">L2TP/IPsec</span>
+                    <span class="vpn-tag">IKEv2</span>
+                    <span class="vpn-tag">SSTP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CLI VPN Windows PowerShell -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">VPN y rutas WAN</span><span class="type-cli">CLI</span></div>
+            <div class="topic">
+                <div class="topic-label">Añadir VPN con PowerShell</div>
+                <div class="code-block">
+                    Add-VpnConnection
+                    -Name "MiVPN" `
+                    -ServerAddress "vpn.example.com" `
+                    -TunnelType L2tp `
+                    -EncryptionLevel Required `
+                    -AuthenticationMethod Pap `
+                    -L2tpPsk "ClaveSecreta"</div>
+            </div>
+            <div class="topic" style="margin-top:10px;">
+                <div class="topic-label">Conectar a la VPN</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">Connect-VpnConnection -Name "MiVPN"</code></div>
+                </div>
+            </div>
+            <div class="topic" style="margin-top:10px;">
+                <div class="topic-label">Enrutar tráfico por la WAN</div>
+                <div class="code-block">route add 10.0.0.0 MASK 255.255.255.0
+192.168.1.254</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Ubuntu WAN -->
+    <p class="table-section-title" style="margin-bottom:12px;">
+        <span class="badge badge-lin" style="margin-right:8px;">Ubuntu</span> Redes WAN y VPN
+    </p>
+
+    <div class="cols">
+        <!-- GUI VPN Ubuntu -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">Configurar VPN</span><span class="type-gui">GUI</span></div>
+            <div class="steps">
+                <div class="step"><div class="step-num">1</div><div class="step-text">Configuración → <strong>Red → VPN</strong></div></div>
+                <div class="step"><div class="step-num">2</div><div class="step-text">Clic en <strong>+</strong> para agregar nueva VPN</div></div>
+                <div class="step"><div class="step-num">3</div><div class="step-text">Selecciona el tipo: <strong>PPTP, L2TP o OpenVPN</strong></div></div>
+                <div class="step"><div class="step-num">4</div><div class="step-text">Introduce servidor, autenticación y credenciales → <strong>Guardar</strong></div></div>
+            </div>
+        </div>
+
+        <!-- CLI VPN Ubuntu -->
+        <div class="card">
+            <div class="card-header"><span class="card-title">OpenVPN y WireGuard</span><span class="type-cli">CLI</span></div>
+            <div class="topic">
+                <div class="topic-label">OpenVPN</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo apt install openvpn</code></div>
+                    <div class="cmd-row"><code class="cmd">sudo openvpn --config /ruta/a/archivo.ovpn</code></div>
+                    <div class="cmd-row"><code class="cmd">ip addr</code><span class="cmd-desc">Verificar conexión</span></div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">WireGuard (moderno y rápido)</div>
+                <div class="cmd-list">
+                    <div class="cmd-row"><code class="cmd">sudo apt install wireguard</code></div>
+                    <div class="cmd-row"><code class="cmd">sudo wg-quick up wg0</code><span class="cmd-desc">Iniciar conexión</span></div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="topic">
+                <div class="topic-label">Enrutar tráfico por la WAN</div>
+                <div class="code-block">sudo ip route add 10.0.0.0/24
+via 192.168.1.254 dev eth0</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Rutas WAN persistentes Ubuntu -->
+    <p class="table-section-title">Rutas WAN persistentes en Ubuntu (Netplan)</p>
+    <div class="card">
+        <div class="card-header"><span class="badge badge-lin">Ubuntu</span><span class="card-title">/etc/netplan/01-netcfg.yaml</span></div>
+        <div class="code-block">network:
+            version: 2
+            ethernets:
+            eth0:
+            dhcp4: no
+            addresses: [192.168.1.100/24]
+            gateway4: 192.168.1.1
+            routes:
+            - to: 10.0.0.0/24
+            via: 192.168.1.254</div>
+        <div class="topic" style="margin-top:10px;">
+            <div class="cmd-list">
+                <div class="cmd-row"><code class="cmd">sudo netplan apply</code><span class="cmd-desc">Aplica la configuración</span></div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Tabla -->
+    <p class="table-section-title">Comparativa: VPN en Windows vs Ubuntu</p>
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr><th>Aspecto</th><th>Windows</th><th>Ubuntu</th></tr>
+            </thead>
+            <tbody>
+            <tr><td>VPN gráfica</td><td>Configuración → Red → VPN</td><td>Configuración → Red → VPN</td></tr>
+            <tr><td>VPN por CLI</td><td>PowerShell (<code style="font-family:var(--font-mono),monospace;font-size:12px;">Add-VpnConnection</code>)</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">openvpn</code> / <code style="font-family:var(--font-mono),monospace;font-size:12px;">wg-quick</code></td></tr>
+            <tr><td>Protocolos comunes</td><td>PPTP, L2TP, IKEv2, SSTP</td><td>OpenVPN, WireGuard, L2TP</td></tr>
+            <tr><td>Enrutamiento WAN</td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">route add</code></td><td><code style="font-family:var(--font-mono),monospace;font-size:12px;">ip route add</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

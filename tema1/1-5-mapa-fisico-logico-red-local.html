@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1.5 Mapa físico y lógico de una red local</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+    .tip-list { display:flex;flex-direction:column;gap:6px; }
+    .tip { display:flex;gap:8px;align-items:flex-start; }
+    .tip-dot { width:6px;height:6px;border-radius:50%;background:var(--accent-purple);flex-shrink:0;margin-top:5px; }
+    .tip-text { font-size:13px;color:var(--color-text-secondary);line-height:1.4; }
+    .tip-text strong { color:var(--color-text-primary); }
+    .steps { display:flex;flex-direction:column;gap:7px; }
+    .step { display:flex;gap:10px;align-items:flex-start; }
+    .step-num { font-size:11px;font-weight:600;min-width:20px;height:20px;border-radius:50%;background:var(--accent-purple);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px; }
+    .step-text { font-size:13px;color:var(--color-text-secondary);line-height:1.45; }
+    .step-text strong { color:var(--color-text-primary); }
+    .map-header { display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius-md);margin-bottom:12px; }
+    .map-fisico { background:#E6F1FB;border:0.5px solid #B3CDE8; }
+    .map-logico { background:#EAF3DE;border:0.5px solid #B3D49A; }
+    .map-label { font-size:15px;font-weight:600; }
+    .map-fisico .map-label { color:#0C447C; }
+    .map-logico .map-label { color:#27500A; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">1.5 Mapa físico y lógico de una red local</p>
+  <p class="section-sub">Dos formas complementarias de documentar y entender la infraestructura de una red LAN.</p>
+
+  <div class="script-note" style="margin-bottom:20px;">
+    <strong>¿Por qué son necesarios?</strong> Permiten <strong>diseñar, implementar y gestionar</strong> redes de forma organizada. Facilitan el diagnóstico de problemas y la planificación de cambios.
+  </div>
+
+  <hr class="divider">
+
+  <!-- Dos columnas principales -->
+  <div class="cols">
+
+    <!-- Mapa físico -->
+    <div class="card">
+      <div class="map-header map-fisico">
+        <span style="font-size:22px;">🔌</span>
+        <span class="map-label">Mapa físico</span>
+      </div>
+      <div class="tip-list" style="margin-bottom:12px;">
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Muestra la <strong>disposición real del hardware</strong>: cables, puertos, ubicación de dispositivos.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Incluye: routers, switches, APs, PCs, impresoras, racks y paneles de conexión.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Especifica el tipo de cable: <strong>Cat5e, Cat6</strong>, fibra óptica…</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Identifica los <strong>puertos</strong> de routers y switches para facilitar la gestión.</div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">Componentes clave</div>
+      <div class="cmd-list" style="margin-top:6px;">
+        <div class="cmd-row"><code class="cmd">Router</code><span class="cmd-desc">Conexión con redes externas / internet</span></div>
+        <div class="cmd-row"><code class="cmd">Switch</code><span class="cmd-desc">Distribuye la conexión a múltiples dispositivos</span></div>
+        <div class="cmd-row"><code class="cmd">AP</code><span class="cmd-desc">Punto de acceso inalámbrico</span></div>
+        <div class="cmd-row"><code class="cmd">Dispositivos finales</code><span class="cmd-desc">PCs, impresoras, cámaras…</span></div>
+        <div class="cmd-row"><code class="cmd">Cableado estructurado</code><span class="cmd-desc">Cat5e / Cat6, racks y paneles</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">Herramientas para crearlo</div>
+      <div class="cmd-list" style="margin-top:6px;">
+        <div class="cmd-row"><code class="cmd">Lucidchart</code><span class="cmd-desc">Online, fácil de usar</span></div>
+        <div class="cmd-row"><code class="cmd">Draw.io</code><span class="cmd-desc">Gratuito y versátil</span></div>
+        <div class="cmd-row"><code class="cmd">Microsoft Visio</code><span class="cmd-desc">Profesional, más completo</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">Cómo crearlo</div>
+      <div class="steps" style="margin-top:6px;">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Abre la herramienta y elige iconos de red (router, switch, PC…)</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Representa cada dispositivo con su icono correspondiente</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Conecta los dispositivos con <strong>líneas que representen cables físicos</strong></div></div>
+      </div>
+    </div>
+
+    <!-- Mapa lógico -->
+    <div class="card">
+      <div class="map-header map-logico">
+        <span style="font-size:22px;">🧩</span>
+        <span class="map-label">Mapa lógico</span>
+      </div>
+      <div class="tip-list" style="margin-bottom:12px;">
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Muestra <strong>cómo se comunican los dispositivos</strong>: IPs, subredes, protocolos.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Incluye: direcciones IP (estáticas o DHCP), rangos de subred y VLANs.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Describe cómo se <strong>enrutan los datos</strong> dentro de la red.</div></div>
+        <div class="tip"><div class="tip-dot"></div><div class="tip-text">Configura la seguridad Wi-Fi: <strong>SSID, WPA2, WPA3</strong>.</div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">Componentes clave</div>
+      <div class="cmd-list" style="margin-top:6px;">
+        <div class="cmd-row"><code class="cmd">Direcciones IP</code><span class="cmd-desc">Estáticas o dinámicas (DHCP)</span></div>
+        <div class="cmd-row"><code class="cmd">Subredes</code><span class="cmd-desc">Ej: 192.168.1.0/24</span></div>
+        <div class="cmd-row"><code class="cmd">VLANs</code><span class="cmd-desc">Separan tráfico y mejoran la seguridad</span></div>
+        <div class="cmd-row"><code class="cmd">Protocolos</code><span class="cmd-desc">TCP/IP, ARP, ICMP, DHCP</span></div>
+        <div class="cmd-row"><code class="cmd">Wi-Fi</code><span class="cmd-desc">SSID + seguridad WPA2 / WPA3</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">Herramientas para crearlo</div>
+      <div class="cmd-list" style="margin-top:6px;">
+        <div class="cmd-row"><code class="cmd">Packet Tracer</code><span class="cmd-desc">Simulador de redes de Cisco (gratuito)</span></div>
+        <div class="cmd-row"><code class="cmd">SolarWinds NTM</code><span class="cmd-desc">Network Topology Mapper profesional</span></div>
+        <div class="cmd-row"><code class="cmd">Draw.io</code><span class="cmd-desc">También válido para mapas lógicos</span></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">Cómo crearlo</div>
+      <div class="steps" style="margin-top:6px;">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Representa los dispositivos con sus <strong>direcciones IP asignadas</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Incluye subredes con su rango IP, ej. <code style="font-family:var(--font-mono),monospace;font-size:11px;">192.168.1.0/24</code></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Agrega rutas <strong>estáticas o dinámicas</strong> entre subredes</div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tabla comparativa -->
+  <p class="table-section-title">Comparativa: mapa físico vs mapa lógico</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr><th>Aspecto</th><th>🔌 Mapa físico</th><th>🧩 Mapa lógico</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><strong>¿Qué muestra?</strong></td>
+        <td>Disposición real del hardware</td>
+        <td>Configuración y flujo de datos</td>
+      </tr>
+      <tr>
+        <td><strong>Componentes</strong></td>
+        <td>Routers, switches, cables, racks</td>
+        <td>IPs, protocolos, subredes, VLANs</td>
+      </tr>
+      <tr>
+        <td><strong>Responde a…</strong></td>
+        <td>¿Dónde está cada dispositivo?</td>
+        <td>¿Cómo se comunican los dispositivos?</td>
+      </tr>
+      <tr>
+        <td><strong>Herramientas</strong></td>
+        <td>Visio, Draw.io, Lucidchart</td>
+        <td>Packet Tracer, SolarWinds, Draw.io</td>
+      </tr>
+      <tr>
+        <td><strong>Útil para…</strong></td>
+        <td>Instalación y mantenimiento físico</td>
+        <td>Diagnóstico de red y optimización</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="script-note" style="margin-top:20px;">
+    <strong>💡 Clave:</strong> ambos mapas son <strong>complementarios</strong>, no excluyentes. El físico asegura una infraestructura bien organizada; el lógico permite gestionar eficazmente el flujo de datos.
+  </div>
+
+</div>
+</body>
+</html>

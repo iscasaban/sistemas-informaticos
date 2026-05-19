@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.3 Seguridad de un sistema operativo</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    .section-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+
+    .mechs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .mech { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; }
+    .mech-icon { font-size: 16px; margin-bottom: 4px; }
+    .mech-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+    .mech-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+
+    .block { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 0.5px solid var(--color-border); }
+    .block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .block-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+    .tool-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+
+    .tool-type { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 99px; display: inline-block; margin-bottom: 6px; }
+    .type-gui { background: #E1F5EE; color: #085041; }
+    .type-cli { background: #FAEEDA; color: #633806; }
+
+    .step { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 3px; padding-left: 4px; }
+
+    .cmd-block { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 8px 10px; margin-top: 6px; }
+    .cmd-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+    .cmd-row:last-child { margin-bottom: 0; }
+    .cmd-desc-sm { font-size: 11px; color: var(--color-text-secondary); padding-top: 2px; line-height: 1.4; }
+
+    .note { background: var(--color-bg-secondary); border-left: 3px solid #7F77DD; border-radius: 0; padding: 8px 12px; font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; }
+    .note strong { color: var(--color-text-primary); font-weight: 500; }
+
+    .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .case-card { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; border-left: 3px solid #E24B4A; }
+    .case-year { font-size: 10px; font-weight: 500; color: #A32D2D; margin-bottom: 3px; }
+    .case-name { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+    .case-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">4.3 Seguridad de un sistema operativo</p>
+  <p class="section-sub">Proteger la información, garantizar la estabilidad y evitar accesos no autorizados</p>
+
+  <p class="section-label">Mecanismos clave de seguridad</p>
+  <div class="mechs-grid">
+    <div class="mech"><div class="mech-icon">🔑</div><div class="mech-title">Control de acceso</div><div class="mech-desc">Solo usuarios autorizados acceden a archivos, apps y redes</div></div>
+    <div class="mech"><div class="mech-icon">🔄</div><div class="mech-title">Actualizaciones</div><div class="mech-desc">Parches que corrigen vulnerabilidades conocidas</div></div>
+    <div class="mech"><div class="mech-icon">🛡️</div><div class="mech-title">Antivirus / antimalware</div><div class="mech-desc">Protección contra virus y software malicioso</div></div>
+    <div class="mech"><div class="mech-icon">🔥</div><div class="mech-title">Cortafuegos</div><div class="mech-desc">Filtra el tráfico de red entrante y saliente</div></div>
+    <div class="mech"><div class="mech-icon">🔒</div><div class="mech-title">Encriptación</div><div class="mech-desc">Los archivos son ilegibles sin la clave de acceso</div></div>
+  </div>
+
+  <div class="cols">
+
+    <!-- Windows -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows 10</span>
+        <span class="card-title">Herramientas de seguridad</span>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🛡️ Windows Defender</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Configuración → Actualización y seguridad → Seguridad de Windows</div>
+        <div class="step">→ Protección contra virus y amenazas</div>
+        <div class="note"><strong>Función:</strong> protección en tiempo real contra malware y virus</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔥 Cortafuegos de Windows</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Panel de control → Sistema y seguridad → Cortafuegos de Windows</div>
+        <div class="note"><strong>Función:</strong> permitir o bloquear apps y establecer reglas de red</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔒 BitLocker</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Panel de control → Sistema y seguridad → Cifrado de unidad BitLocker</div>
+        <div class="note"><strong>Función:</strong> cifra el disco completo; sin la clave nadie puede acceder a los datos</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">👤 Cuentas y autenticación</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Configuración → Cuentas</div>
+        <div class="step">→ Contraseña fuerte, PIN o autenticación de dos factores</div>
+        <div class="step">→ Desactivar cuentas de invitado o no usadas</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔄 Windows Update</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Configuración → Actualización y seguridad → Windows Update</div>
+        <div class="note"><strong>Recomendación:</strong> mantener las actualizaciones de seguridad en automático</div>
+      </div>
+    </div>
+
+    <!-- Ubuntu -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Herramientas de seguridad</span>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔄 Actualizar el sistema</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd">sudo apt update && sudo apt upgrade</span></div>
+          <div class="cmd-row"><span class="cmd-desc-sm">→ instala las últimas versiones y parches de seguridad</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔥 UFW — cortafuegos</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd">sudo ufw enable</span><span class="cmd-desc-sm">activa el cortafuegos</span></div>
+          <div class="cmd-row"><span class="cmd">sudo ufw allow ssh</span><span class="cmd-desc-sm">permite conexiones SSH</span></div>
+          <div class="cmd-row"><span class="cmd">sudo ufw status</span><span class="cmd-desc-sm">comprueba el estado</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🛡️ ClamAV — antivirus (opcional)</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <div class="cmd-row"><span class="cmd">sudo apt install clamav</span><span class="cmd-desc-sm">instala el antivirus</span></div>
+          <div class="cmd-row"><span class="cmd">sudo freshclam</span><span class="cmd-desc-sm">actualiza base de datos de virus</span></div>
+          <div class="cmd-row"><span class="cmd">sudo clamscan -r /home</span><span class="cmd-desc-sm">analiza el directorio home</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔒 Encriptación (LUKS / EncFS)</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="step">Durante la instalación: cifrar disco completo con LUKS</div>
+        <div class="cmd-block">
+          <span class="cmd-desc-sm">Cifrar carpetas específicas:</span>
+          <div class="cmd-row"><span class="cmd">sudo apt install gnome-encfs-manager</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🚫 Desactivar servicios innecesarios</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <span class="cmd-desc-sm">Listar servicios activos:</span>
+          <div class="cmd-row"><span class="cmd">sudo systemctl list-units --type=service</span></div>
+          <span class="cmd-desc-sm">Desactivar un servicio innecesario:</span>
+          <div class="cmd-row"><span class="cmd">sudo systemctl disable nombre_servicio</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <p class="table-section-title">Tabla comparativa de herramientas de seguridad</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Función</th>
+        <th>Windows 10</th>
+        <th>Ubuntu</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="tag-cat">Antivirus / antimalware</span></td>
+        <td>Windows Defender (integrado)</td>
+        <td>ClamAV (opcional)</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Cortafuegos</span></td>
+        <td>Cortafuegos de Windows (Panel de control)</td>
+        <td>UFW <span class="cmd">sudo ufw enable</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Cifrado de disco</span></td>
+        <td>BitLocker</td>
+        <td>LUKS (en instalación) / EncFS</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Actualizaciones</span></td>
+        <td>Windows Update (automático)</td>
+        <td><span class="cmd">sudo apt update && sudo apt upgrade</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Autenticación</span></td>
+        <td>Contraseña, PIN, 2FA (Configuración → Cuentas)</td>
+        <td>Contraseña de usuario + grupo sudo</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Servicios innecesarios</span></td>
+        <td>Consola de Servicios <span class="cmd">services.msc</span></td>
+        <td><span class="cmd">sudo systemctl disable servicio</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider" />
+
+  <p class="section-label">Casos reales de ataques destacados</p>
+  <div class="cases-grid">
+    <div class="case-card">
+      <div class="case-year">2017</div>
+      <div class="case-name">WannaCry</div>
+      <div class="case-desc">Ransomware que cifró datos en 200.000 equipos aprovechando sistemas Windows sin actualizar</div>
+    </div>
+    <div class="case-card">
+      <div class="case-year">2017</div>
+      <div class="case-name">Equifax</div>
+      <div class="case-desc">Fallo sin parchear en Apache Struts expuso datos de 147 millones de personas</div>
+    </div>
+    <div class="case-card">
+      <div class="case-year">2020</div>
+      <div class="case-name">SolarWinds</div>
+      <div class="case-desc">Código malicioso inyectado en actualizaciones legítimas del software Orion afectó a 18.000 clientes</div>
+    </div>
+  </div>
+
+
+</div>
+</body>
+</html>

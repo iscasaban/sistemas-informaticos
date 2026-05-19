@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.4 Problemas de Conectividad y Diagnóstico</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .type-gui { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#E6F4EA;color:#1E6B2E; }
+    .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+    .check-list { display:flex;flex-direction:column;gap:7px; }
+    .check-item { display:flex;gap:9px;align-items:flex-start; }
+    .check-icon { font-size:13px;flex-shrink:0;margin-top:2px; }
+    .check-text { font-size:13px;color:var(--color-text-secondary);line-height:1.4; }
+    .check-text strong { color:var(--color-text-primary); }
+    .diag-card { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:10px 12px;margin-bottom:8px; }
+    .diag-card:last-child { margin-bottom:0; }
+    .diag-header { display:flex;align-items:center;gap:8px;margin-bottom:6px; }
+    .diag-cmd { font-family:var(--font-mono),monospace;font-size:13px;font-weight:600;color:var(--color-text-primary); }
+    .diag-use { font-size:12px;color:var(--color-text-secondary);margin-bottom:4px; }
+    .diag-access { font-size:12px;color:var(--color-text-secondary); }
+    .diag-access code { font-family:var(--font-mono),monospace;font-size:11px;background:var(--color-bg);border:0.5px solid var(--color-border);border-radius:3px;padding:1px 5px;color:var(--color-text-primary); }
+    .problem-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px; }
+    .problem-item { background:var(--color-bg-secondary);border:0.5px solid var(--color-border);border-radius:var(--radius-md);padding:8px 10px; }
+    .problem-label { font-size:11px;font-weight:600;color:#C0392B;margin-bottom:2px; }
+    .problem-desc { font-size:12px;color:var(--color-text-secondary); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">5.4 Problemas de conectividad y diagnóstico</p>
+  <p class="section-sub">Pasos y herramientas para identificar y resolver problemas de red de forma sistemática.</p>
+
+  <!-- Qué revisar primero -->
+  <div class="cols" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="card-header"><span class="card-title">¿Qué revisar primero?</span></div>
+      <div class="check-list">
+        <div class="check-item"><div class="check-icon">🔌</div><div class="check-text"><strong>Hardware:</strong> cables, routers, switches, tarjetas de red.</div></div>
+        <div class="check-item"><div class="check-icon">⚙️</div><div class="check-text"><strong>Config de red:</strong> IP, gateway, DNS, proxy. Detecta IPs duplicadas.</div></div>
+        <div class="check-item"><div class="check-icon">🛡️</div><div class="check-text"><strong>Software:</strong> firewall mal configurado, antivirus bloqueando tráfico.</div></div>
+        <div class="check-item"><div class="check-icon">📋</div><div class="check-text"><strong>Logs:</strong> revisar registros del router, switch o servidor.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Problemas comunes</span></div>
+      <div class="problem-grid" style="margin-bottom:0;">
+        <div class="problem-item">
+          <div class="problem-label">❌ DNS fallido</div>
+          <div class="problem-desc">No resuelve nombres de dominio → no carga la web.</div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-label">❌ DHCP sin IP</div>
+          <div class="problem-desc">El dispositivo no obtiene dirección → sin conexión.</div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-label">❌ Latencia alta</div>
+          <div class="problem-desc">Red lenta o inestable, ping elevado.</div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-label">❌ Wi-Fi débil</div>
+          <div class="problem-desc">Interferencias, señal baja o config incorrecta.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Windows Diagnóstico -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-win" style="margin-right:8px;">Windows</span> Herramientas de diagnóstico
+  </p>
+  <div class="cols">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Comandos esenciales</span><span class="type-cli">CLI</span></div>
+      <div class="diag-card">
+        <div class="diag-header"><code class="diag-cmd">ping</code></div>
+        <div class="diag-use">Verifica conectividad enviando paquetes ICMP al destino.</div>
+        <div class="diag-access"><code>ping www.google.com</code></div>
+      </div>
+      <div class="diag-card">
+        <div class="diag-header"><code class="diag-cmd">tracert</code></div>
+        <div class="diag-use">Muestra cada salto hasta el destino. Detecta dónde se interrumpe la conexión.</div>
+        <div class="diag-access"><code>tracert www.google.com</code></div>
+      </div>
+      <div class="diag-card">
+        <div class="diag-header"><code class="diag-cmd">ipconfig</code></div>
+        <div class="diag-use">Ver config de red actual. Renovar dirección IP desde DHCP.</div>
+        <div class="diag-access"><code>ipconfig /all</code> · <code>ipconfig /release</code> · <code>ipconfig /renew</code></div>
+      </div>
+      <div class="diag-card">
+        <div class="diag-header"><code class="diag-cmd">nslookup</code></div>
+        <div class="diag-use">Diagnostica problemas DNS. Consulta si un nombre de dominio se resuelve correctamente.</div>
+        <div class="diag-access"><code>nslookup www.google.com</code></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Herramientas gráficas</span><span class="type-gui">GUI</span></div>
+      <div class="diag-card">
+        <div class="diag-header"><span style="font-size:13px;font-weight:600;">🔧 Solucionador de problemas</span></div>
+        <div class="diag-use">Detecta automáticamente: cables desconectados, IP incorrecta, adaptadores con fallos.</div>
+        <div class="diag-access">Clic derecho en icono de red → <strong>Solucionar problemas</strong></div>
+      </div>
+      <div class="diag-card">
+        <div class="diag-header"><span style="font-size:13px;font-weight:600;">📋 Visor de eventos</span></div>
+        <div class="diag-use">Revisa logs de red: errores de conectividad, DNS, seguridad.</div>
+        <div class="diag-access"><code>Win + X</code> → <strong>Visor de eventos</strong> → Registros de Windows → Sistema</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ubuntu Diagnóstico -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-lin" style="margin-right:8px;">Ubuntu</span> Herramientas de diagnóstico
+  </p>
+  <div class="cols">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Comandos esenciales</span><span class="type-cli">CLI</span></div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">ping www.google.com</code><span class="cmd-desc">Verificar conectividad</span></div>
+        <div class="cmd-row"><code class="cmd">traceroute www.google.com</code><span class="cmd-desc">Trazar ruta hasta destino</span></div>
+        <div class="cmd-row"><code class="cmd">ifconfig</code><span class="cmd-desc">Config de interfaces (clásico)</span></div>
+        <div class="cmd-row"><code class="cmd">ip a</code><span class="cmd-desc">Config de interfaces (moderno)</span></div>
+        <div class="cmd-row"><code class="cmd">nslookup www.google.com</code><span class="cmd-desc">Diagnóstico DNS</span></div>
+        <div class="cmd-row"><code class="cmd">dig www.google.com</code><span class="cmd-desc">Diagnóstico DNS avanzado</span></div>
+        <div class="cmd-row"><code class="cmd">nmcli dev status</code><span class="cmd-desc">Estado de interfaces (NetworkManager)</span></div>
+        <div class="cmd-row"><code class="cmd">tail -f /var/log/syslog</code><span class="cmd-desc">Logs del sistema en tiempo real</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Herramienta gráfica</span><span class="type-gui">GUI</span></div>
+      <div class="diag-card">
+        <div class="diag-header"><span style="font-size:13px;font-weight:600;">🌐 Network Manager</span></div>
+        <div class="diag-use">Revisar config de red, verificar conectividad, reconectar a una red o reconfigurar una conexión existente.</div>
+        <div class="diag-access">Icono de red (barra superior) → <strong>Configuración de red</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tabla comparativa ping/tracert -->
+  <p class="table-section-title">Comparativa: comandos equivalentes Windows vs Ubuntu</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr><th>Función</th><th>Windows</th><th>Ubuntu</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>Verificar conectividad</td><td><code style="font-family:var(--font-mono),monospace,monospace,monospace;font-size:12px;">ping</code></td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">ping</code></td></tr>
+      <tr><td>Trazar ruta</td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">tracert</code></td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">traceroute</code></td></tr>
+      <tr><td>Ver config de red</td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">ipconfig /all</code></td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">ip a</code></td></tr>
+      <tr><td>Renovar IP (DHCP)</td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">ipconfig /release + /renew</code></td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">dhclient</code></td></tr>
+      <tr><td>Diagnóstico DNS</td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">nslookup</code></td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">nslookup</code> / <code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">dig</code></td></tr>
+      <tr><td>Ver logs de red</td><td>Visor de eventos</td><td><code style="font-family:var(--font-mono),monospace,monospace;font-size:12px;">tail -f /var/log/syslog</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

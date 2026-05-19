@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.6 Redes Cableadas e Inalámbricas</title>
+  <link rel="stylesheet" href="../estilos.css">
+  <style>
+    .type-gui { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#E6F4EA;color:#1E6B2E; }
+    .type-cli { font-size:11px;font-weight:500;padding:2px 8px;border-radius:99px;background:#FEF3E2;color:#A05C00; }
+    .net-type-header { display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--color-text-primary);margin-bottom:10px; }
+    .net-icon { font-size:18px; }
+    .steps { display:flex;flex-direction:column;gap:6px; }
+    .step { display:flex;gap:9px;align-items:flex-start; }
+    .step-num { font-size:11px;font-weight:600;min-width:18px;height:18px;border-radius:50%;background:var(--accent-purple);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px; }
+    .step-text { font-size:13px;color:var(--color-text-secondary);line-height:1.4; }
+    .step-text strong { color:var(--color-text-primary); }
+    .sep { border:none;border-top:0.5px dashed var(--color-border);margin:12px 0; }
+    .code-block {
+      background: var(--color-bg-secondary);
+      border: 0.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-family: var(--font-mono),monospace;
+      font-size: 12px;
+      color: var(--color-text-primary);
+      white-space: pre;
+      overflow-x: auto;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">5.6 Redes cableadas e inalámbricas</p>
+  <p class="section-sub">Gestión de conexiones Ethernet (cableadas) y Wi-Fi (inalámbricas) en Windows y Ubuntu.</p>
+
+  <!-- Diferencias clave -->
+  <div class="table-wrap" style="margin-bottom:20px;">
+    <table>
+      <thead>
+      <tr><th></th><th>🔌 Red cableada (Ethernet)</th><th>📶 Red inalámbrica (Wi-Fi)</th></tr>
+      </thead>
+      <tbody>
+      <tr><td><strong>Velocidad</strong></td><td>Mayor y más estable</td><td>Variable según señal</td></tr>
+      <tr><td><strong>Movilidad</strong></td><td>Limitada (requiere cable)</td><td>Alta (sin cables)</td></tr>
+      <tr><td><strong>Config inicial</strong></td><td>Automática por DHCP</td><td>Requiere autenticación</td></tr>
+      <tr><td><strong>Interferencias</strong></td><td>Sin interferencias</td><td>Posibles interferencias de radio</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Windows -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-win" style="margin-right:8px;">Windows</span> Gestión de redes
+  </p>
+
+  <div class="cols">
+    <!-- Cableada Windows -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">🔌 Red cableada</span></div>
+      <div class="net-type-header" style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px;">Configuración manual (si DHCP no funciona)</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Configuración → <strong>Red e Internet → Ethernet</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Selecciona la red → <strong>Editar</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Cambia <em>Automático (DHCP)</em> a <strong>Manual</strong></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Introduce IP, máscara, gateway y DNS</div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">PowerShell — IP estática</div>
+      <div class="cmd-list">
+        <span class="cmd-desc">Listar interfaces:</span>
+        <div class="cmd-row"><code class="cmd">Get-NetAdapter</code></div>
+        <div class="code-block"><code class="cmd" style="white-space:normal;">New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.1.100 -PrefixLength 24 -DefaultGateway 192.168.1.1</code></div>
+      </div>
+    </div>
+
+    <!-- Wi-Fi Windows -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">📶 Red inalámbrica (Wi-Fi)</span></div>
+      <div class="net-type-header" style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px;">Conexión a una red Wi-Fi</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Configuración → <strong>Red e Internet → Wi-Fi</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Selecciona la red deseada → <strong>Conectar</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Introduce la contraseña</div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">Gestión de redes guardadas</div>
+      <div class="step-text" style="font-size:13px;color:var(--color-text-secondary);margin-bottom:8px;">Configuración → Wi-Fi → <strong>Administrar redes conocidas</strong></div>
+      <div class="topic-label">CMD — conectar por nombre</div>
+      <div class="cmd-list">
+        <div class="cmd-row"><code class="cmd">netsh wlan connect name="MiRed"</code></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Ubuntu -->
+  <p class="table-section-title" style="margin-bottom:12px;">
+    <span class="badge badge-lin" style="margin-right:8px;">Ubuntu</span> Gestión de redes
+  </p>
+
+  <div class="cols">
+    <!-- Cableada Ubuntu -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">🔌 Red cableada</span></div>
+      <div class="net-type-header" style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px;">Configuración manual</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Configuración → <strong>Red</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Selecciona Ethernet → icono de <strong>engranaje</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Método: de <em>Automático</em> a <strong>Manual</strong></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">Introduce IP, máscara, gateway y DNS → <strong>Aplicar</strong></div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">nmcli — IP estática</div>
+        <span class="cmd-desc">Ver interfaces:</span>
+      <div class="cmd">nmcli device status</div>
+      <div class="cmd-list">
+        <div class="code-block">sudo nmcli con mod "Ethernet"
+ipv4.addresses 192.168.1.100/24
+ipv4.gateway 192.168.1.1
+ipv4.dns 8.8.8.8 ipv4.method manual</div>
+        <span class="cmd-desc">Activar conexión:</span>
+        <div class="cmd-row"><code class="cmd">sudo nmcli con up "Ethernet"</code></div>
+      </div>
+    </div>
+
+    <!-- Wi-Fi Ubuntu -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">📶 Red inalámbrica (Wi-Fi)</span></div>
+      <div class="net-type-header" style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px;">Conexión desde GUI</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Icono de red → <strong>Wi-Fi</strong></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Elige la red → <strong>Conectar</strong></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Introduce la contraseña</div></div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">nmcli — conexión por terminal</div>
+      <div class="cmd-list">
+        <span class="cmd-desc">Ver redes disponibles:</span>
+        <div class="cmd-row"><code class="cmd">nmcli device wifi list</code></div>
+        <div class="code-block">nmcli device wifi connect "MiRed"
+password "Contraseña"</div>
+      </div>
+      <div class="sep"></div>
+      <div class="topic-label">Redes guardadas</div>
+      <div class="step-text" style="font-size:13px;color:var(--color-text-secondary);">Configuración → Wi-Fi → <strong>Redes conocidas</strong> para editar o eliminar perfiles guardados.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

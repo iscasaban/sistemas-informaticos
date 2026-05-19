@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tema 2.3 – Virtualización</title>
+    <link rel="stylesheet" href="../estilos.css" />
+    <style>
+        :root {
+            --purple:       #7c3aed;
+            --purple-light: #ede9fe;
+            --blue:         #1d4ed8;
+            --blue-light:   #dbeafe;
+            --green:        #15803d;
+            --green-light:  #dcfce7;
+            --orange:       #c2410c;
+            --orange-light: #ffedd5;
+            --teal:         #0f766e;
+            --teal-light:   #ccfbf1;
+            --red:          #b91c1c;
+            --red-light:    #fee2e2;
+            --gray-50:      #f8fafc;
+            --gray-100:     #f1f5f9;
+            --gray-200:     #e2e8f0;
+            --gray-700:     #334155;
+            --gray-900:     #0f172a;
+            --radius:       10px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        .page-header {
+            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 60%, #7c3aed 100%);
+            color: #fff;
+            padding: 2.5rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.06);
+        }
+        .page-header .label {
+            font-size: .75rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #c4b5fd;
+            margin-bottom: .4rem;
+        }
+        .page-header h1 { font-size: 1.6rem; font-weight: 700; }
+        .page-header p  { font-size: .9rem; color: #ddd6fe; margin-top: .4rem; }
+
+        .content { max-width: 860px; margin: 0 auto; padding: 1.8rem 1rem 3rem; }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            margin: 2rem 0 1rem;
+        }
+        .section-title .num {
+            background: var(--purple);
+            color: #fff;
+            font-size: .8rem;
+            font-weight: 700;
+            padding: .25rem .55rem;
+            border-radius: 6px;
+        }
+        .section-title h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .note {
+            border-left: 4px solid var(--purple);
+            background: var(--purple-light);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: .9rem 1.1rem;
+            font-size: .87rem;
+            margin-bottom: 1.2rem;
+        }
+        .note strong { color: var(--purple); }
+
+        .card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 1px 4px rgba(0,0,0,.05);
+        }
+        .card h3 {
+            font-size: .95rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: .8rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media(max-width:600px){ .grid-2{ grid-template-columns:1fr; } }
+
+        /* TIPO DE VIRTUALIZACIÓN cards */
+        .tipo-card {
+            border-radius: var(--radius);
+            padding: 1rem 1.1rem;
+            border: 1px solid var(--gray-200);
+        }
+        .tipo-card h4 {
+            font-size: .9rem;
+            font-weight: 700;
+            margin-bottom: .4rem;
+            color: var(--gray-900);
+        }
+        .tipo-card p {
+            font-size: .82rem;
+            color: #475569;
+            margin-bottom: .5rem;
+        }
+        .tipo-card ul {
+            padding-left: 1rem;
+        }
+        .tipo-card li {
+            font-size: .8rem;
+            color: #475569;
+            margin-bottom: .2rem;
+        }
+        .tc-blue   { background: var(--blue-light);   border-color: #93c5fd; }
+        .tc-green  { background: var(--green-light);  border-color: #86efac; }
+        .tc-teal   { background: var(--teal-light);   border-color: #5eead4; }
+        .tc-orange { background: var(--orange-light); border-color: #fdba74; }
+
+        /* VENTAJAS */
+        .ventaja-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+            gap: .8rem;
+        }
+        .ventaja-item {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: .9rem;
+            text-align: center;
+        }
+        .ventaja-item .vi-icon { font-size: 1.5rem; margin-bottom: .4rem; }
+        .ventaja-item h4 { font-size: .82rem; font-weight: 700; color: var(--gray-900); margin-bottom: .25rem; }
+        .ventaja-item p  { font-size: .75rem; color: #64748b; }
+
+        /* HIPERVISOR diagram */
+        .hv-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+            max-width: 400px;
+            margin: .8rem auto;
+        }
+        .hv-row {
+            display: flex;
+            gap: .4rem;
+        }
+        .hv-box {
+            flex: 1;
+            text-align: center;
+            padding: .5rem .4rem;
+            border-radius: 7px;
+            font-size: .78rem;
+            font-weight: 600;
+        }
+        .hv-vm   { background: #dbeafe; color: #1d4ed8; border: 1px solid #93c5fd; }
+        .hv-hv   { background: #ede9fe; color: #7c3aed; border: 1px solid #c4b5fd; font-weight: 700; }
+        .hv-hw   { background: #1e1b4b; color: #e0e7ff; border: none; }
+        .hv-os   { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .hv-label {
+            text-align: center;
+            font-size: .72rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: .1rem;
+        }
+
+        /* DESAFÍOS */
+        .desafio-item {
+            display: flex;
+            gap: .8rem;
+            align-items: flex-start;
+            padding: .7rem .9rem;
+            border-radius: 8px;
+            margin-bottom: .6rem;
+            background: var(--red-light);
+            border-left: 4px solid var(--red);
+        }
+        .desafio-item .di-icon { font-size: 1.2rem; flex-shrink: 0; }
+        .desafio-item h4 { font-size: .85rem; font-weight: 700; color: var(--red); margin-bottom: .15rem; }
+        .desafio-item p  { font-size: .8rem; color: #7f1d1d; }
+
+        /* BADGE */
+        .badge {
+            display: inline-block;
+            font-size: .7rem;
+            font-weight: 700;
+            padding: .15rem .5rem;
+            border-radius: 999px;
+            margin-right: .25rem;
+            margin-bottom: .2rem;
+            vertical-align: middle;
+        }
+        .badge-blue   { background: var(--blue-light);   color: var(--blue); }
+        .badge-green  { background: var(--green-light);  color: var(--green); }
+        .badge-purple { background: var(--purple-light); color: var(--purple); }
+        .badge-teal   { background: var(--teal-light);   color: var(--teal); }
+
+        /* TABLA */
+        .tabla {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .84rem;
+        }
+        .tabla th {
+            background: var(--gray-100);
+            padding: .5rem .8rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--gray-900);
+            border-bottom: 2px solid var(--gray-200);
+        }
+        .tabla td {
+            padding: .5rem .8rem;
+            border-bottom: 1px solid var(--gray-100);
+            vertical-align: top;
+        }
+        .tabla tr:last-child td { border-bottom: none; }
+        .tabla tr:hover td { background: var(--gray-50); }
+    </style>
+</head>
+<body>
+
+<header class="page-header">
+    <div class="label">Sistemas Informáticos · Tema 2</div>
+    <h1>2.3 Virtualización</h1>
+    <p>Tipos · Ventajas · Componentes clave · Desafíos</p>
+</header>
+
+<div class="content">
+
+    <!-- DEFINICIÓN -->
+    <div class="note">
+        <strong>¿Qué es?</strong> La virtualización consiste en crear una <strong>versión virtual</strong> de algo real (servidor, SO, almacenamiento o red) usando software, de forma que varios sistemas puedan convivir en un único hardware físico.
+    </div>
+
+    <!-- ═══════════════════
+         TIPOS
+    ════════════════════ -->
+    <div class="section-title">
+        <span class="num">TIPOS</span>
+        <h2>Tipos de virtualización</h2>
+    </div>
+
+    <div class="grid-2">
+        <div class="tipo-card tc-blue">
+            <h4>🗄️ De servidores</h4>
+            <p>Múltiples SO en un único servidor físico mediante <strong>Máquinas Virtuales (VM)</strong>.</p>
+            <ul>
+                <li>Mejor uso del hardware.</li>
+                <li>Menos servidores físicos necesarios.</li>
+                <li>Facilita recuperación ante desastres.</li>
+            </ul>
+        </div>
+
+        <div class="tipo-card tc-green">
+            <h4>🖥️ De escritorios</h4>
+            <p>Escritorios virtuales accesibles desde cualquier dispositivo o lugar.</p>
+            <ul>
+                <li>Entorno de trabajo consistente.</li>
+                <li>Datos centralizados → más seguridad.</li>
+                <li>Administración simplificada.</li>
+            </ul>
+        </div>
+
+        <div class="tipo-card tc-teal">
+            <h4>💾 De almacenamiento</h4>
+            <p>Varios dispositivos físicos agrupados en una única unidad virtual.</p>
+            <ul>
+                <li>Mejor gestión del espacio.</li>
+                <li>Escalable y flexible.</li>
+                <li>Administración centralizada.</li>
+            </ul>
+        </div>
+
+        <div class="tipo-card tc-orange">
+            <h4>🌐 De redes</h4>
+            <p>Redes virtuales que se comportan como físicas.</p>
+            <ul>
+                <li>Segmentación y aislamiento de redes.</li>
+                <li>Mejor uso de recursos de red.</li>
+                <li>Configuración más sencilla.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ═══════════════════
+         COMPONENTES CLAVE
+    ════════════════════ -->
+    <div class="section-title">
+        <span class="num">COMPONENTES</span>
+        <h2>Componentes clave</h2>
+    </div>
+
+    <div class="card">
+        <h3>🔧 El Hipervisor (VMM — Virtual Machine Monitor)</h3>
+        <p style="font-size:.87rem;margin-bottom:1rem">Software que <strong>crea y gestiona las máquinas virtuales</strong>. Es la capa de abstracción entre el hardware y los SO virtuales. Hay dos tipos:</p>
+
+        <div class="grid-2" style="margin-bottom:1.2rem">
+            <div style="background:var(--blue-light);border:1px solid #93c5fd;border-radius:8px;padding:.9rem">
+                <h4 style="font-size:.87rem;font-weight:700;color:var(--blue);margin-bottom:.4rem">Tipo 1 — Bare Metal</h4>
+                <p style="font-size:.8rem;color:#1e40af;margin-bottom:.4rem">Se ejecuta <strong>directamente sobre el hardware</strong>. Sin SO anfitrión.</p>
+                <p style="font-size:.78rem;color:#1e40af">
+                    <span class="badge badge-blue">VMware ESXi</span>
+                    <span class="badge badge-blue">Microsoft Hyper-V</span>
+                </p>
+            </div>
+            <div style="background:var(--green-light);border:1px solid #86efac;border-radius:8px;padding:.9rem">
+                <h4 style="font-size:.87rem;font-weight:700;color:var(--green);margin-bottom:.4rem">Tipo 2 — Hosted</h4>
+                <p style="font-size:.8rem;color:#166534;margin-bottom:.4rem">Se ejecuta <strong>sobre un SO anfitrión</strong> ya instalado.</p>
+                <p style="font-size:.78rem;color:#166534">
+                    <span class="badge badge-green">VMware Workstation</span>
+                    <span class="badge badge-green">Oracle VirtualBox</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- diagrama hipervisor -->
+        <p style="font-size:.82rem;font-weight:700;color:var(--gray-900);margin-bottom:.5rem;text-align:center">Esquema visual — Hipervisor Tipo 1 vs Tipo 2</p>
+
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center">
+
+            <!-- tipo 1 -->
+            <div style="flex:1;min-width:160px">
+                <div class="hv-label">Tipo 1 (Bare Metal)</div>
+                <div class="hv-diagram" style="margin:0 auto">
+                    <div class="hv-row">
+                        <div class="hv-box hv-vm">VM 1<br><small>SO invitado</small></div>
+                        <div class="hv-box hv-vm">VM 2<br><small>SO invitado</small></div>
+                    </div>
+                    <div class="hv-box hv-hv">⚡ Hipervisor Tipo 1</div>
+                    <div class="hv-box hv-hw">🖥️ Hardware físico</div>
+                </div>
+            </div>
+
+            <!-- tipo 2 -->
+            <div style="flex:1;min-width:160px">
+                <div class="hv-label">Tipo 2 (Hosted)</div>
+                <div class="hv-diagram" style="margin:0 auto">
+                    <div class="hv-row">
+                        <div class="hv-box hv-vm">VM 1<br><small>SO invitado</small></div>
+                        <div class="hv-box hv-vm">VM 2<br><small>SO invitado</small></div>
+                    </div>
+                    <div class="hv-box hv-hv">⚡ Hipervisor Tipo 2</div>
+                    <div class="hv-box hv-os">SO anfitrión (host)</div>
+                    <div class="hv-box hv-hw">🖥️ Hardware físico</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🗂️ Otros componentes clave</h3>
+        <table class="tabla">
+            <thead>
+            <tr>
+                <th>Componente</th>
+                <th>Descripción</th>
+                <th>Ejemplos</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong>Máquina Virtual (VM)</strong></td>
+                <td>Entorno de ejecución independiente con SO y aplicaciones propias. Simula un ordenador completo.</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td><strong>Administrador de virtualización</strong></td>
+                <td>Herramienta para gestionar, monitorizar y orquestar entornos virtualizados.</td>
+                <td>
+                    <span class="badge badge-blue">VMware vCenter</span>
+                    <span class="badge badge-blue">MS System Center</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ═══════════════════
+         VENTAJAS
+    ════════════════════ -->
+    <div class="section-title">
+        <span class="num">VENTAJAS</span>
+        <h2>Ventajas de la virtualización</h2>
+    </div>
+
+    <div class="card">
+        <div class="ventaja-grid">
+            <div class="ventaja-item">
+                <div class="vi-icon">⚡</div>
+                <h4>Eficiencia de recursos</h4>
+                <p>Más VMs en menos hardware físico.</p>
+            </div>
+            <div class="ventaja-item">
+                <div class="vi-icon">💰</div>
+                <h4>Reducción de costes</h4>
+                <p>Menos hardware y menor consumo energético.</p>
+            </div>
+            <div class="ventaja-item">
+                <div class="vi-icon">📈</div>
+                <h4>Flexibilidad y escalabilidad</h4>
+                <p>Crear o eliminar entornos fácilmente según necesidades.</p>
+            </div>
+            <div class="ventaja-item">
+                <div class="vi-icon">🔄</div>
+                <h4>Recuperación ante desastres</h4>
+                <p>Copia y restauración rápida de VMs completas.</p>
+            </div>
+            <div class="ventaja-item">
+                <div class="vi-icon">🛠️</div>
+                <h4>Gestión simplificada</h4>
+                <p>Administración centralizada de todos los recursos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════
+         DESAFÍOS
+    ════════════════════ -->
+    <div class="section-title">
+        <span class="num">DESAFÍOS</span>
+        <h2>Desafíos de la virtualización</h2>
+    </div>
+
+    <div class="card">
+        <div class="desafio-item">
+            <div class="di-icon">🔓</div>
+            <div>
+                <h4>Seguridad</h4>
+                <p>Mayor superficie de ataque al gestionar múltiples capas de software en un mismo hardware.</p>
+            </div>
+        </div>
+        <div class="desafio-item">
+            <div class="di-icon">📊</div>
+            <div>
+                <h4>Gestión de recursos</h4>
+                <p>Si no se gestionan bien las VMs, pueden sobrecargar el hardware físico y degradar el rendimiento.</p>
+            </div>
+        </div>
+        <div class="desafio-item" style="margin-bottom:0">
+            <div class="di-icon">🔌</div>
+            <div>
+                <h4>Compatibilidad</h4>
+                <p>Algunas aplicaciones antiguas (software heredado) pueden no funcionar correctamente en entornos virtualizados.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESUMEN FINAL -->
+    <div class="note" style="margin-top:1.2rem">
+        <strong>En resumen:</strong> La virtualización mejora la eficiencia, reduce costes y facilita la gestión. Sus ventajas superan con creces los desafíos, convirtiéndola en una tecnología <strong>esencial en cualquier infraestructura moderna</strong>.
+    </div>
+
+</div>
+</body>
+</html>

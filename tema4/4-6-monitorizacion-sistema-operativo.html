@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.6 Monitorización de un sistema operativo</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <style>
+    .section-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+
+    .reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .reason-card { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 10px 12px; }
+    .reason-icon { font-size: 16px; margin-bottom: 4px; }
+    .reason-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+    .reason-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+
+    .metrics-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .metric-pill { background: #EEEDFE; color: #3C3489; font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 99px; }
+
+    .block { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 0.5px solid var(--color-border); }
+    .block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .tool-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+
+    .tool-type { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 99px; display: inline-block; margin-bottom: 6px; }
+    .type-gui { background: #E1F5EE; color: #085041; }
+    .type-cli { background: #FAEEDA; color: #633806; }
+
+    .step { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 3px; padding-left: 4px; }
+
+    .cmd-block { background: var(--color-bg-secondary); border-radius: var(--radius-md); padding: 8px 10px; margin-top: 6px; }
+    .cmd-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; }
+    .cmd-row:last-child { margin-bottom: 0; }
+    .cmd-desc-sm { font-size: 11px; color: var(--color-text-secondary); padding-top: 2px; line-height: 1.4; }
+
+    .note { background: var(--color-bg-secondary); border-left: 3px solid #7F77DD; border-radius: 0; padding: 8px 12px; font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; }
+    .note strong { color: var(--color-text-primary); font-weight: 500; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="section-title">4.6 Monitorización de un sistema operativo</p>
+  <p class="section-sub">Observar y registrar el rendimiento y la actividad del sistema en tiempo real</p>
+
+  <p class="section-label">¿Por qué monitorizar?</p>
+  <div class="reasons-grid">
+    <div class="reason-card"><div class="reason-icon">🚨</div><div class="reason-title">Prevención</div><div class="reason-desc">Detectar anomalías antes de que se conviertan en fallos críticos</div></div>
+    <div class="reason-card"><div class="reason-icon">⚡</div><div class="reason-title">Rendimiento</div><div class="reason-desc">Optimizar el uso de CPU, RAM y disco ajustando configuraciones</div></div>
+    <div class="reason-card"><div class="reason-icon">🛡️</div><div class="reason-title">Seguridad</div><div class="reason-desc">Detectar accesos no autorizados o intentos de ataque</div></div>
+    <div class="reason-card"><div class="reason-icon">✅</div><div class="reason-title">Disponibilidad</div><div class="reason-desc">Garantizar que los servicios estén siempre operativos</div></div>
+    <div class="reason-card"><div class="reason-icon">📊</div><div class="reason-title">Planificación</div><div class="reason-desc">Anticipar necesidades futuras de almacenamiento o hardware</div></div>
+  </div>
+
+  <p class="section-label">Métricas clave a vigilar</p>
+  <div class="metrics-row">
+    <span class="metric-pill">🖥 CPU</span>
+    <span class="metric-pill">🧠 Memoria RAM</span>
+    <span class="metric-pill">💾 Disco</span>
+    <span class="metric-pill">🌐 Red</span>
+    <span class="metric-pill">⚙️ Procesos activos</span>
+  </div>
+
+  <div class="cols">
+
+    <!-- Windows -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-win">Windows 10</span>
+        <span class="card-title">Herramientas de monitorización</span>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">📊 Administrador de tareas</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Acceso: <strong>Ctrl + Shift + Esc</strong></div>
+        <div class="step">Pestaña <em>Rendimiento</em> → CPU, memoria, disco, red y GPU en tiempo real</div>
+        <div class="note"><strong>Uso:</strong> visión rápida del estado general del sistema</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🔬 Monitor de recursos</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Desde Administrador de tareas → Rendimiento → <em>Abrir monitor de recursos</em></div>
+        <div class="step">→ detalla el consumo por proceso individual: CPU, disco, memoria y red</div>
+        <div class="note"><strong>Uso:</strong> identificar qué proceso concreto está causando un problema</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">📈 Monitor de rendimiento</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Acceso: <strong>Win + R</strong> → escribe <strong>perfmon</strong></div>
+        <div class="step">→ gráficos y datos históricos de CPU, disco, red y tiempo de respuesta</div>
+        <div class="note"><strong>Uso:</strong> análisis profundo y detección de patrones a largo plazo</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">📋 Visor de eventos</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Acceso: <strong>Win + X</strong> → Visor de eventos</div>
+        <div class="step">→ errores, advertencias y eventos de auditoría de seguridad</div>
+        <div class="note"><strong>Uso:</strong> detectar fallos, problemas de estabilidad y auditar seguridad</div>
+      </div>
+    </div>
+
+    <!-- Ubuntu -->
+    <div class="card">
+      <div class="card-header">
+        <span class="badge badge-lin">Ubuntu</span>
+        <span class="card-title">Herramientas de monitorización</span>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">⚙️ top / htop</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <span class="cmd-desc-sm">→ CPU, memoria y procesos en tiempo real:</span>
+          <div class="cmd-row"><span class="cmd">top</span></div>
+          <span class="cmd-desc-sm">→ Versión mejorada e interactiva:</span>
+          <div class="cmd-row"><span class="cmd">sudo apt install htop && htop</span></div>
+        </div>
+        <div class="note"><strong>htop</strong> permite matar procesos directamente desde la interfaz</div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">📊 vmstat / iostat / netstat</div>
+        <span class="tool-type type-cli">Terminal</span>
+        <div class="cmd-block">
+          <span class="cmd-desc-sm">→ CPU, memoria, I/O y actividad del sistema</span>
+          <div class="cmd-row"><span class="cmd">vmstat</span></div>
+          <span class="cmd-desc-sm">→ Rendimiento de disco y almacenamiento:</span>
+          <div class="cmd-row"><span class="cmd">iostat</span></div>
+          <span class="cmd-desc-sm">→ Conexiones de red activas y tráfico:</span>
+          <div class="cmd-row"><span class="cmd">netstat</span></div>
+        </div>
+        <div class="note"><strong>iostat</strong> requiere instalar el paquete <span class="cmd">sysstat</span></div>
+      </div>
+
+      <div class="block">
+        <div class="tool-name">🖥 Monitor del sistema (GNOME)</div>
+        <span class="tool-type type-gui">Gráfico</span>
+        <div class="step">Acceso: menú de aplicaciones → Monitor del sistema</div>
+        <div class="step">→ gráficos en tiempo real de CPU, memoria, intercambio y red</div>
+        <div class="step">→ lista de procesos con opción de finalizarlos</div>
+        <div class="note"><strong>Uso:</strong> equivalente al Administrador de tareas de Windows</div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+
+  <p class="table-section-title">Tabla comparativa de herramientas de monitorización</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+      <tr>
+        <th>Necesidad</th>
+        <th>Windows 10</th>
+        <th>Ubuntu</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="tag-cat">Vista rápida general</span></td>
+        <td>Administrador de tareas <span class="cmd">Ctrl+Shift+Esc</span></td>
+        <td><span class="cmd">top</span> / <span class="cmd">htop</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Detalle por proceso</span></td>
+        <td>Monitor de recursos</td>
+        <td><span class="cmd">htop</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Análisis histórico</span></td>
+        <td>Monitor de rendimiento <span class="cmd">perfmon</span></td>
+        <td><span class="cmd">vmstat</span> + logs</td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Rendimiento de disco</span></td>
+        <td>Monitor de recursos → Disco</td>
+        <td><span class="cmd">iostat</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Actividad de red</span></td>
+        <td>Monitor de recursos → Red</td>
+        <td><span class="cmd">netstat</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">Eventos y errores</span></td>
+        <td>Visor de eventos <span class="cmd">Win + X</span></td>
+        <td><span class="cmd">tail -f /var/log/syslog</span></td>
+      </tr>
+      <tr>
+        <td><span class="tag-cat">GUI equivalente</span></td>
+        <td>Administrador de tareas</td>
+        <td>Monitor del sistema (GNOME)</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>
